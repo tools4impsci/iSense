@@ -76,14 +76,15 @@
         .fidelity-component-row .summary-details > div > strong { font-size: 0.75rem; color: var(--brown-dark); display: block; }
         .fidelity-component-row .details-content { padding: 1rem; border: 1px solid var(--brown-light); border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
         
-        .d3-tooltip { position: absolute; text-align: center; padding: 8px; font: 12px sans-serif; background: rgba(0,0,0,0.7); color: white; border: 0px; border-radius: 8px; pointer-events: none; max-width: 200px; word-wrap: break-word; }
+        .d3-tooltip { position: absolute; text-align: left; padding: 8px; font: 12px sans-serif; background: rgba(0,0,0,0.8); color: white; border: 0px; border-radius: 8px; pointer-events: none; max-width: 200px; word-wrap: break-word; }
+        .d3-tooltip .capitalize { text-transform: capitalize; }
 
         /* --- New Ecosystem Map Styles --- */
         #ecosystem-canvas { background-color: white; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; }
-        .actor-node.selected .actor-circle { stroke: var(--red-cardinal); stroke-width: 4px; }
+        .actor-node.selected .actor-circle { stroke-width: 3px; }
         .actor-delete-btn { cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
         .actor-node:hover .actor-delete-btn, .actor-node.selected .actor-delete-btn { opacity: 1; }
-        .actor-list-item.selected { background-color: var(--gold-light) !important; border-left: 4px solid var(--red-cardinal); }
+        .actor-list-item.selected { background-color: var(--gold-light) !important; border-left: 4px solid var(--brown-dark); }
 
     </style>
 </head>
@@ -596,6 +597,7 @@
             container.innerHTML = `
                 ${createBackLink('tools')}
                 <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Ecosystem Map</h1>
+                <p class="text-center text-sm max-w-2xl mx-auto mb-6 -mt-6">Drag nodes to move. Shift-drag from node to node to create a link.</p>
                 <div class="grid lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-4 bg-white p-6 rounded-lg shadow-lg">
                         <div class="flex justify-between items-center mb-4">
@@ -634,8 +636,9 @@
         
         function highlightActorOnMap(actorId) {
             selectedActorId = selectedActorId === actorId ? null : actorId; // Toggle selection
-            renderEcosystemActorList();
-            renderEcosystemMap();
+            renderEcosystemActorList(); 
+            d3.select("#ecosystem-svg-layer").selectAll("g.actor-node")
+                .classed('selected', d => d.id === selectedActorId);
         }
 
         function renderEcosystemMap() {
@@ -664,21 +667,50 @@
 
             const lines = svg.append("g").attr("class", "connections");
             const actors = svg.append("g").attr("class", "actors");
+            let tempLink = null;
 
             const drag = d3.drag()
                 .on("start", function(event, d) {
-                    highlightActorOnMap(d.id);
-                    d3.select(this).raise().style("cursor", "grabbing");
+                    if (event.sourceEvent.shiftKey) {
+                        const startCoords = [x(d.interest), y(d.influence)];
+                        tempLink = lines.append('line')
+                            .attr('class', 'temp-link')
+                            .attr('x1', startCoords[0]).attr('y1', startCoords[1])
+                            .attr('x2', event.x).attr('y2', event.y)
+                            .attr('stroke', 'var(--brown-dark)').attr('stroke-width', 2).attr('stroke-dasharray', '5,5');
+                    } else {
+                        highlightActorOnMap(d.id);
+                        d3.select(this).raise().style("cursor", "grabbing");
+                    }
                 })
                 .on("drag", function(event, d) {
-                    d.interest = Math.max(0, Math.min(100, x.invert(event.x)));
-                    d.influence = Math.max(0, Math.min(100, y.invert(event.y)));
-                    d3.select(this).attr('transform', `translate(${x(d.interest)}, ${y(d.influence)})`);
-                    updateEcosystemLinks();
+                    if (tempLink) {
+                        tempLink.attr('x2', event.x).attr('y2', event.y);
+                    } else {
+                        d.interest = Math.max(0, Math.min(100, x.invert(event.x)));
+                        d.influence = Math.max(0, Math.min(100, y.invert(event.y)));
+                        d3.select(this).attr('transform', `translate(${x(d.interest)}, ${y(d.influence)})`);
+                        updateEcosystemLinks();
+                    }
                 })
-                .on("end", function() {
-                    d3.select(this).style("cursor", "grab");
-                    renderEcosystemActorList();
+                .on("end", function(event, d) {
+                    if (tempLink) {
+                        tempLink.remove(); tempLink = null;
+                        const endNodeEl = event.sourceEvent.target.closest('.actor-node');
+                        if (endNodeEl) {
+                            const endNodeData = d3.select(endNodeEl).datum();
+                            if (endNodeData && endNodeData.id !== d.id) {
+                                const linkExists = projectData.ecosystemConnections.some(l => (l.from === d.id && l.to === endNodeData.id) || (l.from === endNodeData.id && l.to === d.id));
+                                if (!linkExists) {
+                                    projectData.ecosystemConnections.push({ from: d.id, to: endNodeData.id });
+                                    updateEcosystemLinks();
+                                }
+                            }
+                        }
+                    } else {
+                        d3.select(this).style("cursor", "grab");
+                        renderEcosystemActorList();
+                    }
                 });
 
             const actorGroups = actors.selectAll("g.actor-node")
@@ -707,8 +739,14 @@
 
             actorGroups.on("mouseover", (event, d) => {
                 ecosystemTooltip.transition().duration(200).style("opacity", .9);
-                ecosystemTooltip.html(`<strong>${d.text}</strong>`)
-                    .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
+                ecosystemTooltip.html(`
+                    <strong>${d.text}</strong><br/>
+                    Influence: ${Math.round(d.influence)}<br/>
+                    Interest: ${Math.round(d.interest)}<br/>
+                    Familiarity: ${Math.round(d.familiarity)}<br/>
+                    Willingness: <span class="capitalize">${d.willingness}</span>
+                `)
+                .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
             }).on("mouseout", () => {
                 ecosystemTooltip.transition().duration(500).style("opacity", 0);
             }).on("click", (event, d) => {
@@ -732,6 +770,10 @@
                     .each(function(d) {
                         const sourceNode = projectData.ecosystemActors.find(a => a.id === d.from);
                         const targetNode = projectData.ecosystemActors.find(a => a.id === d.to);
+                        if (!sourceNode || !targetNode) {
+                            d3.select(this).remove();
+                            return;
+                        }
                         const sourceCenter = { x: x(sourceNode.interest), y: y(sourceNode.influence) };
                         const targetCenter = { x: x(targetNode.interest), y: y(targetNode.influence) };
                         const sourceRadius = sourceNode.type === 'group' ? sizeScale(sourceNode.groupSize) : 8;
@@ -948,7 +990,7 @@
 
             const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
             const y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
-            const frequencyScale = d3.scaleSqrt().domain([1, 100]).range([4, 30]);
+            const frequencyScale = d3.scaleSqrt().domain([0, 100]).range([2, 35]);
             const equityColorPalette = ["#313695","#34439D","#3850A5","#3B5DAE","#3F6AB6","#4277BF","#4575B4","#4E80B9","#578ABD","#6095C2","#699FC7","#72AACB","#74ADD1","#7EBAD6","#88C2DA","#92C9DE","#9DD1E2","#A7D8E6","#ABD9E9","#B3DDEB","#BCE1EE","#C4E5F0","#CCECF3","#D5F0F6","#DDF2F7","#E0F3F8","#E2F3F6","#E5F3F3","#E8F4F1","#EBF4EE","#EEF5EC","#F1F5E9","#F3F6E7","#F6F7E4","#F8F8E2","#FBF9DF","#FDFADD","#FFFFBF","#FEFDB9","#FEFBB3","#FEF8AD","#FEF6A7","#FEF3A1","#FEF19B","#FEEF95","#FEED8F","#FEE090","#FEDD8C","#FEDB88","#FED884","#FED680","#FED37C","#FED178","#FECD74","#FECA70","#FDC86C","#FDC568","#FDAE61","#FCA95E","#FCA35B","#FB9E58","#FB9955","#FA9452","#FA8E4F","#F9894C","#F88449","#F77E46","#F67944","#F46D43","#F36642","#F15E41","#EF5740","#EE4F3F","#EC483E","#EA403D","#E8393C","#E7313B","#E52A3A","#D73027","#D42C26","#D12825","#CE2424","#CB2023","#C81C22","#C51821","#C21420","#BF101F","#BC0C1E","#B9081D","#A50026","#A40026","#A30026","#A20026","#A10026","#A00026","#9F0026","#9E0026","#9D0026","#9C0026","#A50026"];
             const equityColorScale = d3.scaleQuantile().domain([0, 100]).range(equityColorPalette);
 
@@ -1006,7 +1048,7 @@
             
             if (!barrier) return;
             
-            const createSliderRow = (criterion, label, value, notes) => `<div class="p-3 bg-gray-50 rounded-md"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="${criterion}-value">${value}</span></label><input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('${criterion}-value').textContent = this.value"></div><div><label class="block font-semibold text-sm mb-1">Notes for ${label}</label><textarea name="notes${criterion.charAt(0).toUpperCase() + criterion.slice(1)}" rows="2" class="w-full p-1 border rounded-md text-sm">${notes || ''}</textarea></div></div></div>`;
+            const createSliderRow = (criterion, label, value, notes) => `<div class="p-3 bg-gray-50 rounded-md"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="${criterion}-value">${value}</span></label><input type="range" min="0" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('${criterion}-value').textContent = this.value"></div><div><label class="block font-semibold text-sm mb-1">Notes for ${label}</label><textarea name="notes${criterion.charAt(0).toUpperCase() + criterion.slice(1)}" rows="2" class="w-full p-1 border rounded-md text-sm">${notes || ''}</textarea></div></div></div>`;
 
             const modalHTML = `
             <div id="barrier-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
@@ -1448,7 +1490,7 @@
         function renderAdaptationLogForDashboard() {
             const container = document.getElementById('dashboard-adaptation-log');
             if (!container) return;
-            container.innerHTML = projectData.adaptations.length === 0 ? '<p class="text-gray-500 text-center">No adaptations have been logged yet.</p>' : `<div class="space-y-4">${projectData.adaptations.map(adapt => `<div class="p-4 bg-gray-50 rounded-lg border cursor-pointer hover:bg-gray-100" onclick="viewAdaptation(${adapt.id})"><p class="font-bold text-brown-dark">${adaptationFrameworks[adapt.framework].title} Adaptation on ${new Date(adapt.date).toLocaleDateString()}</p><ul class="mt-2 text-sm list-disc list-outside pl-5 space-y-1 text-gray-600"><li><strong>Modification:</strong> ${adapt.data['Nature of the content modification'] || adapt.data['What was modified for the implementation strategy?'] || 'Details not specified.'}</li><li><strong>Reason:</strong> ${adapt.data['What were the reasons for the modification?'] || adapt.data['What were the reasons for the implementation strategy modification?'] || 'Details not specified.'}</li></ul></div>`).join('')}</div>`;
+            container.innerHTML = projectData.adaptations.length === 0 ? '<p class="text-gray-500 text-center">No adaptations have been logged yet.</p>' : `<div class="space-y-4">${projectData.adaptations.map(adapt => `<div class="p-4 bg-gray-50 rounded-lg border cursor-pointer hover:bg-gray-100" onclick="viewAdaptation(${adapt.id})"><p class="font-bold text-brown-dark">${adaptationFrameworks[adapt.framework].title} Adaptation on ${new Date(adapt.date).toLocaleDateString()}</p><ul class="mt-2 text-sm list-disc list-outside pl-5 space-y-1 text-gray-600"><li><strong>Modification:</strong> ${adapt.data['Nature of the content modification'] || adapt.data['What was modified for the implementation strategy?'] || 'Details not specified.'}</li><li><strong>Reason:</strong> ${adapt.data['What were the reasons for the implementation strategy modification?'] || adapt.data['What were the reasons for the implementation strategy modification?'] || 'Details not specified.'}</li></ul></div>`).join('')}</div>`;
         }
 
         function renderFidelityPlanner() {
