@@ -60,8 +60,8 @@
         .irlm-arrow { color: var(--brown-dark); font-size: 2rem; margin: 0 1rem; }
         .back-link { display: inline-flex; align-items: center; color: var(--red-cardinal); font-weight: 600; text-decoration: none; margin-bottom: 2rem; }
         .back-link:hover { text-decoration: underline; }
-        .timeline-row summary, .journey-map-persona summary { cursor: pointer; list-style: none; }
-        .timeline-row[open] > summary, .journey-map-persona[open] > summary { background-color: var(--gold-light); color: var(--brown-dark); }
+        .timeline-row summary { cursor: pointer; list-style: none; }
+        .timeline-row[open] > summary { background-color: var(--gold-light); color: var(--brown-dark); }
         .journey-map-persona[open] > summary .summary-title, .fidelity-component-row[open] > summary .summary-title { color: var(--brown-dark); }
         .details-caret { transition: transform 0.2s ease-in-out; }
         details[open] > summary .details-caret { transform: rotate(90deg); }
@@ -76,6 +76,34 @@
         .fidelity-component-row .summary-details > div > strong { font-size: 0.75rem; color: var(--brown-dark); display: block; }
         .fidelity-component-row .details-content { padding: 1rem; border: 1px solid var(--brown-light); border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
         
+        /* --- Journey Map Persona Styling (NEW) --- */
+        .journey-map-persona > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+        .journey-map-persona > summary:hover {
+            background-color: #f3f4f6;
+        }
+        .journey-map-persona[open] > summary {
+            background-color: var(--gold-light);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: var(--brown-light);
+        }
+        .journey-map-persona > div { /* This targets the direct child div content area */
+            padding: 1rem;
+            border: 1px solid var(--brown-light);
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: #fff;
+        }
+
         .d3-tooltip { position: absolute; text-align: left; padding: 8px; font: 12px sans-serif; background: rgba(0,0,0,0.8); color: white; border: 0px; border-radius: 8px; pointer-events: none; max-width: 200px; word-wrap: break-word; }
         .d3-tooltip .capitalize { text-transform: capitalize; }
 
@@ -166,7 +194,7 @@
                 { date: "2027-10-01", desc: "Complete MRT Data Collection", planning: "Monitor participants throughout the 8-week trial. Ensure data quality and completeness.", evaluation: "MRT data collection complete for all 50 participants." },
                 { date: "2028-03-01", desc: "Analyze MRT & Qualitative Data", planning: "Conduct primary quantitative analysis (Bayesian hierarchical modeling) and qualitative analysis of post-trial interviews.", evaluation: "Preliminary analysis report of MRT findings." },
                 { date: "2028-09-01", desc: "Optimize JITAI with Reinforcement Learning", planning: "Use MRT findings to inform RL algorithms to optimize the JITAI delivery protocol.", evaluation: "Optimized JITAI protocol finalized for larger-scale testing." },
-                { date: "2029-06-01", desc: "Disseminate Findings", planning: "Prepare manuscripts for publication and presentations for scientific conferences. Share findings with CAB and local stakeholders.", evaluation: "First manuscript submitted. Community dissemination event held." }
+                { date: "2029-06-01", desc: "Disseminate Findings", planning: "Prepare manuscripts for publication and presentations for scientific conferences. Share findings with CAB and local partners.", evaluation: "First manuscript submitted. Community dissemination event held." }
             ],
             barriers: [
                 { id: 1, text: "Low digital literacy among adolescents", importance: 85, addressability: 70, frequency: 30, equityImpact: 50, notesImportance: "Crucial for engagement.", notesAddressability: "Can be addressed with good onboarding.", notesFrequency: "Very common issue.", notesEquityImpact: "Affects marginalized youth most." },
@@ -451,7 +479,7 @@
                 <div class="mt-4">
                     <h4 class="text-lg font-semibold text-brown-dark mb-2">Core Components</h4>
                     <p class="text-sm text-gray-600 mb-2">The essential, non-negotiable elements of the EBP. Add and define these in the <a href="#" onclick="event.preventDefault(); showPage('page-fidelity-planner')" class="text-red-cardinal hover:underline font-semibold">Fidelity Plan tool</a>.</p>
-                    <div id="core-components-list" class="space-y-2"></div>
+                    <div id="core-components-list" class="space-y-3"></div>
                 </div>
             `;
             renderCoreComponentsList();
@@ -466,10 +494,16 @@
                 return;
             }
 
+            // MODIFIED: Show preview instead of links
             listContainer.innerHTML = projectData.ebp.coreComponents.map(c => `
-                <a href="#" onclick="event.preventDefault(); showCoreComponentDetails(${c.id})" class="block p-2 bg-gray-50 rounded-md hover:bg-gray-100 text-brown-dark font-medium">
-                    ${c.name}
-                </a>
+                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                     <p class="text-md font-semibold text-brown-dark">${c.name}</p>
+                     <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-1 text-sm text-gray-600">
+                         <div class="truncate"><strong>Function:</strong> ${c.func || 'Not set'}</div>
+                         <div class="truncate"><strong>Dimension:</strong> ${c.dimension || 'Not set'}</div>
+                         <div class="truncate"><strong>Target:</strong> ${c.target || 'Not set'}</div>
+                     </div>
+                </div>
             `).join('');
         }
 
@@ -588,7 +622,7 @@
                 <div class="grid lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-4 bg-white p-6 rounded-lg shadow-lg">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-bold text-red-cardinal">Actors & Stakeholders</h3>
+                            <h3 class="text-xl font-bold text-red-cardinal">Key Actors</h3>
                             <button onclick="openActorModal(null)" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm hover:bg-brown-light transition-colors">Add New</button>
                         </div>
                         <div id="ecosystem-actor-list" class="space-y-2 h-[550px] overflow-y-auto pr-2"></div>
@@ -770,7 +804,7 @@
                         const targetPoint = getLinkEdgePoint(targetCenter, sourceCenter, targetRadius);
 
                         d3.select(this).attr("x1", sourcePoint.x).attr("y1", sourcePoint.y)
-                                       .attr("x2", targetPoint.x).attr("y2", targetPoint.y);
+                                        .attr("x2", targetPoint.x).attr("y2", targetPoint.y);
                     })
                     .attr("stroke", "#aaa").attr("stroke-width", 2);
             }
@@ -863,16 +897,17 @@
                 container.innerHTML = '<p class="text-gray-500 text-center">No people added yet. Click the button above to add one.</p>';
                 return;
             }
+            // MODIFIED: Removed inline styling classes to use new CSS rules
             container.innerHTML = projectData.personas.map(persona => `
-                <details class="bg-white rounded-lg shadow journey-map-persona" open>
-                    <summary class="p-4 hover:bg-gray-50 flex justify-between items-center">
+                <details class="journey-map-persona" open>
+                    <summary class="flex justify-between items-center">
                         <div>
                             <p class="font-bold text-lg text-brown-dark summary-title">${persona.name}</p>
                             <p class="text-sm text-gray-600">${persona.summary}</p>
                         </div>
                         <svg class="details-caret h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                     </summary>
-                    <div class="p-4 border-t border-gray-200">
+                    <div>
                         <div class="flex justify-end mb-4">
                              <button onclick="addJourneyStage(${persona.id})" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm">Add Stage</button>
                         </div>
