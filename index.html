@@ -45,6 +45,1622 @@
         #cpd-canvas-svg { width: 100%; height: 700px; cursor: grab; }
         .cpd-node { cursor: move; } .cpd-node:active { cursor: grabbing; }
         .cpd-node-shape { stroke-width: 2px; stroke: var(--brown-dark); fill: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); transition: stroke 0.2s ease, stroke-width 0.2s ease, fill 0.2s ease; }
+        
+        /* --- NEW Text Wrapping Styles --- */
+        .cpd-node-text-wrapper {
+            pointer-events: none; /* Allows clicks to pass through to the shape */
+        }
+        .cpd-node-text-div {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--brown-dark);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8px; /* Padding inside the shape */
+            box-sizing: border-box;
+            line-height: 1.3;
+        }
+        .cpd-node-text-div p {
+            margin: 0;
+            word-break: break-word; /* Force long words to wrap */
+        }
+        
+        .cpd-link { stroke: var(--brown-dark); stroke-width: 2px; marker-end: url(#arrow); transition: stroke 0.2s ease; fill: none; }
+        .cpd-link-hitbox { stroke: transparent; stroke-width: 12px; cursor: pointer; fill: none; }
+        .cpd-link-group:hover .cpd-link { stroke: var(--red-cardinal); marker-end: url(#arrow-hover); }
+        .cpd-node.selected .cpd-node-shape { stroke: var(--brown-dark); stroke-width: 4px; }
+        .cpd-link-group.selected .cpd-link { stroke: var(--red-cardinal); stroke-width: 3.5px; marker-end: url(#arrow-selected); }
+        .cpd-delete-btn { cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
+        .cpd-node:hover .cpd-delete-btn, .cpd-node.selected .cpd-delete-btn { opacity: 1; }
+        
+        .canvas-container .zoom-controls { position: absolute; bottom: 1rem; right: 1rem; z-index: 20; display: flex; gap: 0.5rem; }
+        .canvas-container .clear-btn { position: absolute; top: 1rem; right: 1rem; z-index: 20; }
+        
+        .irlm-arrow { color: var(--brown-dark); font-size: 2rem; margin: 0 1rem; }
+        .back-link { display: inline-flex; align-items: center; color: var(--red-cardinal); font-weight: 600; text-decoration: none; margin-bottom: 2rem; }
+        .back-link:hover { text-decoration: underline; }
+        .timeline-row summary { cursor: pointer; list-style: none; }
+        .timeline-row[open] > summary { background-color: var(--gold-light); color: var(--brown-dark); }
+        .journey-map-persona[open] > summary .summary-title, .fidelity-component-row[open] > summary .summary-title { color: var(--brown-dark); }
+        .details-caret { transition: transform 0.2s ease-in-out; }
+        details[open] > summary .details-caret { transform: rotate(90deg); }
+
+        #eric-table th { cursor: pointer; } #eric-table th:hover { background-color: #f0f0f0; }
+
+        .fidelity-component-row summary { list-style: none; cursor: pointer; padding: 0.75rem; background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; transition: background-color 0.2s; }
+        .fidelity-component-row summary:hover { background-color: #f3f4f6; }
+        .fidelity-component-row[open] > summary { background-color: var(--gold-light); border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: var(--brown-light); }
+        .fidelity-component-row .summary-grid { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
+        .fidelity-component-row .summary-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem 1rem; font-size: 0.8rem; color: var(--gray-text); }
+        .fidelity-component-row .summary-details > div > strong { font-size: 0.75rem; color: var(--brown-dark); display: block; }
+        .fidelity-component-row .details-content { padding: 1rem; border: 1px solid var(--brown-light); border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+        
+        /* --- Journey Map Persona Styling (NEW) --- */
+        .journey-map-persona > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+        .journey-map-persona > summary:hover {
+            background-color: #f3f4f6;
+        }
+        .journey-map-persona[open] > summary {
+            background-color: var(--gold-light);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: var(--brown-light);
+        }
+        .journey-map-persona > div { /* This targets the direct child div content area */
+            padding: 1rem;
+            border: 1px solid var(--brown-light);
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: #fff;
+        }
+
+        .d3-tooltip { position: absolute; text-align: left; padding: 8px; font: 12px sans-serif; background: rgba(0,0,0,0.8); color: white; border: 0px; border-radius: 8px; pointer-events: none; max-width: 200px; word-wrap: break-word; }
+        .d3-tooltip .capitalize { text-transform: capitalize; }
+
+        /* --- New Ecosystem Map Styles --- */
+        #ecosystem-canvas { background-color: white; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; }
+        .actor-node.selected .actor-circle { stroke-width: 3px; }
+        .actor-delete-btn { cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
+        .actor-node:hover .actor-delete-btn, .actor-node.selected .actor-delete-btn { opacity: 1; }
+        .actor-list-item.selected { background-color: var(--gold-light) !important; border-left: 4px solid var(--brown-dark); }
+
+    </style>
+</head>
+<body class="bg-off-white text-gray-text">
+
+    <header class="bg-brown-dark shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div id="project-title-header" class="text-2xl font-bold text-white">New Project</div>
+            <ul class="flex items-center space-x-2 sm:space-x-6">
+                <li><a class="nav-link text-white hover-text-gold-light font-medium" onclick="showPage('overview')">Overview</a></li>
+                <li><a class="nav-link text-white hover-text-gold-light font-medium" onclick="showPage('tools')">Tools</a></li>
+                <li><a class="nav-link text-white hover-text-gold-light font-medium" onclick="showPage('learn')">Learn</a></li>
+                <li><a class="nav-link text-white hover-text-gold-light font-medium" onclick="showPage('dashboard')">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="app" class="container mx-auto p-4 sm:p-6 md:p-12">
+        <!-- Main content pages will be injected here -->
+        <div id="overview" class="fade-in"></div>
+        <div id="tools" class="hidden fade-in"></div>
+        <div id="learn" class="hidden fade-in"></div>
+        <div id="dashboard" class="hidden fade-in"></div>
+        
+        <!-- Individual Tool & Learn Module Pages -->
+        <div id="page-problem-identifier" class="hidden fade-in"></div>
+        <div id="page-tmf-generator" class="hidden fade-in"></div>
+        <div id="page-ecosystem-mapper" class="hidden fade-in"></div>
+        <div id="page-empathy-mapper" class="hidden fade-in"></div>
+        <div id="page-journey-mapper" class="hidden fade-in"></div>
+        <div id="page-barrier-prioritizer" class="hidden fade-in"></div>
+        <div id="page-strategy-selector" class="hidden fade-in"></div>
+        <div id="page-causal-pathway-diagrammer" class="hidden fade-in"></div>
+        <div id="page-adaptations-tracker" class="hidden fade-in"></div>
+        <div id="page-outcome-repository" class="hidden fade-in"></div>
+        <div id="page-eric-strategies" class="hidden fade-in"></div>
+        <div id="page-proctor-module" class="hidden fade-in"></div>
+        <div id="page-tmf-module" class="hidden fade-in"></div>
+        <div id="page-cfir-module" class="hidden fade-in"></div>
+        <div id="page-epis-module" class="hidden fade-in"></div>
+        <div id="page-parihs-module" class="hidden fade-in"></div>
+        <div id="page-irlm-module" class="hidden fade-in"></div>
+        <div id="page-core-component-details" class="hidden fade-in"></div>
+        <div id="page-fidelity-planner" class="hidden fade-in"></div>
+    </main>
+    
+    <!-- Modals -->
+    <div id="modal-container"></div>
+
+
+    <script>
+        // --- DATA & STATE MANAGEMENT (POPULATED) ---
+        let projectData = {
+            name: "Co-Design and Micro-randomized Trial of a WhatsApp-based JITAI to Promote Adolescent Mental Health in Sierra Leone",
+            description: "This project aims to develop, adapt, and evaluate a culturally-relevant, WhatsApp-based Just-In-Time Adaptive Intervention (JITAI) for early adolescents (ages 10-15) in Sierra Leone. The intervention is an adaptation of the WHO's Early Adolescent Skills for Emotions (EASE) program, designed to promote emotional regulation and stress management skills. The project will use a human-centered design process and a micro-randomized trial (MRT) to assess the intervention's efficacy, feasibility, and acceptability, with the ultimate goal of creating a scalable and accessible mental health solution for an underserved population.",
+            ebp: {
+                name: "Early Adolescent Skills for Emotions (EASE) via WhatsApp JITAI",
+                coreComponents: [
+                    { id: 1, name: "Understanding Emotions (Psychoeducation)", func: "To increase adolescents' emotional literacy and ability to identify and label their feelings.", dimension: "Adherence", measurement: "Review of JITAI message logs for delivery of psychoeducation modules; user quiz completion rates.", target: "95% of psychoeducation messages delivered; 80% quiz completion." },
+                    { id: 2, name: "Stress Management (Grounding Techniques)", func: "To provide adolescents with immediate, actionable skills to manage acute stress and anxiety.", dimension: "Dose", measurement: "Tracking user activation of 'Help Me Now' grounding exercise feature within the JITAI.", target: "Users activate grounding exercises at least once per week on average." },
+                    { id: 3, name: "Problem Solving (Skill Building)", func: "To teach a structured approach to identifying problems, brainstorming solutions, and making decisions.", dimension: "Quality", measurement: "Qualitative analysis of user responses to interactive problem-solving scenarios within the JITAI.", target: "75% of user responses demonstrate application of the taught problem-solving steps." },
+                    { id: 4, name: "Engaging Social Support", func: "To encourage help-seeking behavior and connection with trusted adults or peers.", dimension: "Participant Responsiveness", measurement: "Monitoring use of features that prompt sharing with a friend or suggest talking to a parent/teacher.", target: "25% of users utilize the 'Share with a Friend' feature." }
+                ]
+            },
+            team: [
+                { name: "Cara Antonaccio, PhD", role: "Principal Investigator (PD/PI)" },
+                { name: "Alethea Desrosiers, PhD", role: "Primary Mentor" },
+                { name: "Ruben Martinez, PhD", role: "Co-Mentor" },
+                { name: "Sunand Bhattacharya, MDes, MFA", role: "Co-Mentor" },
+                { name: "Rising Academies Consultant", role: "In-Country Logistics & Coordination" }
+            ],
+            timeline: [
+                { date: "2026-01-01", desc: "Project Kick-off & CAB Formation", planning: "Establish Community Advisory Board (CAB). Finalize recruitment protocols for formative research.", evaluation: "Meeting minutes and finalized protocols." },
+                { date: "2026-03-01", desc: "Begin Formative Research", planning: "Conduct semi-structured interviews and focus groups with adolescents, caregivers, and teachers.", evaluation: "Complete 50% of planned interviews. Initial thematic analysis begins." },
+                { date: "2026-06-01", desc: "Co-Design Workshops", planning: "Facilitate three iterative co-design workshops with adolescent participants to inform JITAI features and content.", evaluation: "Workshop outputs (storyboards, prototypes); summary of prioritized features." },
+                { date: "2026-09-01", desc: "JITAI Platform Development", planning: "Develop initial WhatsApp-based JITAI prototype based on co-design outputs. Adapt EASE content.", evaluation: "Functional prototype ready for user testing." },
+                { date: "2027-01-01", desc: "User Testing & Refinement", planning: "Conduct pilot testing of the JITAI with a small cohort of adolescents. Gather feedback and iterate on the design.", evaluation: "User testing report with key findings and platform revisions." },
+                { date: "2027-07-01", desc: "Begin Micro-Randomized Trial (MRT)", planning: "Obtain final IRB approvals. Recruit and enroll 50 adolescents into the 8-week MRT.", evaluation: "100% of participants enrolled and baseline data collected." },
+                { date: "2027-10-01", desc: "Complete MRT Data Collection", planning: "Monitor participants throughout the 8-week trial. Ensure data quality and completeness.", evaluation: "MRT data collection complete for all 50 participants." },
+                { date: "2028-03-01", desc: "Analyze MRT & Qualitative Data", planning: "Conduct primary quantitative analysis (Bayesian hierarchical modeling) and qualitative analysis of post-trial interviews.", evaluation: "Preliminary analysis report of MRT findings." },
+                { date: "2028-09-01", desc: "Optimize JITAI with Reinforcement Learning", planning: "Use MRT findings to inform RL algorithms to optimize the JITAI delivery protocol.", evaluation: "Optimized JITAI protocol finalized for larger-scale testing." },
+                { date: "2029-06-01", desc: "Disseminate Findings", planning: "Prepare manuscripts for publication and presentations for scientific conferences. Share findings with CAB and local partners.", evaluation: "First manuscript submitted. Community dissemination event held." }
+            ],
+            barriers: [
+                { id: 1, text: "Low digital literacy among adolescents", importance: 85, addressability: 70, frequency: 30, equityImpact: 50, notesImportance: "Crucial for engagement.", notesAddressability: "Can be addressed with good onboarding.", notesFrequency: "Very common issue.", notesEquityImpact: "Affects marginalized youth most." },
+                { id: 2, text: "Intermittent internet connectivity in rural areas", importance: 95, addressability: 40, frequency: 90, equityImpact: 90, notesImportance: "Fundamental to the intervention.", notesAddressability: "Hard to solve, need offline-first features.", notesFrequency: "Constant problem outside cities.", notesEquityImpact: "Excludes rural populations." },
+                { id: 3, text: "Stigma around mental health discouraging participation", importance: 90, addressability: 60, frequency: 80, equityImpact: 70, notesImportance: "Core challenge in mental health.", notesAddressability: "Community engagement is key.", notesFrequency: "Widespread cultural issue.", notesEquityImpact: "Affects boys more due to cultural norms." },
+                { id: 4, text: "Caregiver concerns about screen time and data privacy", importance: 70, addressability: 80, frequency: 10, equityImpact: 10, notesImportance: "Can be a gatekeeper issue.", notesAddressability: "Clear communication can help.", notesFrequency: "Growing concern globally.", notesEquityImpact: "Less of an equity issue, more universal." },
+                { id: 5, text: "Cost of mobile data for participants", importance: 88, addressability: 95, frequency: 85, equityImpact: 95, notesImportance: "Direct barrier to access.", notesAddressability: "Can be solved with data stipends.", notesFrequency: "Affects most families.", notesEquityImpact: "Huge impact on low-income families." }
+            ],
+            personas: [
+                { id: 1, name: "Fatu, 13-year-old student", summary: "Lives in a rural community, shares a phone with her family, feels pressure from school.", journeyStages: [
+                    { title: "Awareness", actions: "Hears about the program from a teacher at school.", mindsets: "Curious but a little skeptical. 'Is this another boring school thing?'", emotions: "Neutral, slightly interested.", opportunities: "Use peer champions to promote the program." },
+                    { title: "Onboarding", actions: "Talks to her parents, gets help installing and setting up the app.", mindsets: "'This seems easy enough. I hope my parents say yes.'", emotions: "Hopeful, a bit anxious about asking parents.", opportunities: "Provide clear, simple instructions for both students and parents." },
+                    { title: "First Use", actions: "Receives first few messages. Tries a simple breathing exercise.", mindsets: "'Okay, this is not so bad. The little cartoon is cute.'", emotions: "Engaged, pleasantly surprised.", opportunities: "Make the first interactions fun and immediately rewarding." },
+                    { title: "Sustained Engagement", actions: "Uses the mood tracker daily. Responds to prompts about stress.", mindsets: "'It's nice to have a space to think about my feelings.'", emotions: "Comfortable, feeling supported.", opportunities: "Introduce variety in content to maintain interest." },
+                    { title: "Impact", actions: "Uses a problem-solving skill she learned when having a disagreement with a friend.", mindsets: "'Wow, that actually worked. I didn't yell.'", emotions: "Proud, empowered.", opportunities: "Reinforce progress and celebrate small wins." }
+                ]}
+            ],
+            cpdNodes: [
+                { id: 1, type: "implementation_strategy", text: "Conduct Educational Meetings with Teachers & Parents", width: 160, height: 80, x: 100, y: 200 },
+                { id: 2, type: "determinant", text: "Low knowledge & stigma about mental health", width: 150, height: 150, x: 350, y: 200 },
+                { id: 3, type: "mechanism", text: "Increased buy-in and perceived appropriateness of JITAI", width: 170, height: 170, x: 600, y: 200 },
+                { id: 4, type: "proximal_outcome", text: "Higher caregiver consent rates & adolescent enrollment", width: 150, height: 150, x: 850, y: 200 },
+                { id: 5, type: "implementation_strategy", text: "Provide data stipends to participants", width: 160, height: 80, x: 100, y: 450 },
+                { id: 6, type: "determinant", text: "Financial barriers (cost of data)", width: 150, height: 150, x: 350, y: 450 },
+                { id: 7, type: "mechanism", text: "Reduced financial burden and increased feasibility", width: 170, height: 170, x: 600, y: 450 },
+                { id: 8, type: "proximal_outcome", text: "Improved engagement & retention in MRT", width: 150, height: 150, x: 850, y: 450 },
+                { id: 9, type: "distal_outcome", text: "Successful evaluation of JITAI efficacy", width: 150, height: 150, x: 1100, y: 325 }
+            ],
+            cpdConnections: [
+                { source: 1, target: 2, id: "link-1-2" }, { source: 2, target: 3, id: "link-2-3" }, { source: 3, target: 4, id: "link-3-4" },
+                { source: 5, target: 6, id: "link-5-6" }, { source: 6, target: 7, id: "link-6-7" }, { source: 7, target: 8, id: "link-7-8" },
+                { source: 4, target: 9, id: "link-4-9" }, { source: 8, target: 9, id: "link-8-9" }
+            ],
+            adaptations: [
+                { id: 1, framework: "frame", date: "2026-07-15", data: { "Date of Modification": "2026-07-15", "Was the modification planned or unplanned?": "Unplanned", "What was modified?": "Intervention Content", "Nature of the content modification": "Changed the term 'stress' to 'heavy feelings' in many prompts, as co-design feedback indicated 'stress' was too clinical and less understood by adolescents.", "Who participated in the decision to modify?": "PI (Dr. Antonaccio), In-country team, Adolescent co-design group.", "What were the reasons for the modification?": "To improve cultural relevance and comprehension of the core concepts." } },
+                { id: 2, framework: "frame", date: "2027-02-10", data: { "Date of Modification": "2027-02-10", "Was the modification planned or unplanned?": "Planned", "What was modified?": "Intervention Context (delivery format)", "Nature of the content modification": "Added short, locally-produced audio clips for all psychoeducation messages as an alternative to text, based on user testing feedback about reading fatigue.", "Who participated in the decision to modify?": "PI, Mentorship team, based on pilot testing data.", "What were the reasons for the modification?": "To increase accessibility for adolescents with lower literacy and to improve engagement." } }
+            ],
+            ecosystemActors: [
+                { id: 1, text: "Adolescents (10-15)", type: 'group', groupSize: 150, influence: 30, interest: 95, willingness: 'high', familiarity: 20 },
+                { id: 2, text: "Parents/Caregivers", type: 'group', groupSize: 100, influence: 80, interest: 70, willingness: 'medium', familiarity: 10 },
+                { id: 3, text: "Teachers (Rising Academies)", type: 'group', groupSize: 40, influence: 65, interest: 80, willingness: 'high', familiarity: 30 },
+                { id: 4, text: "Ministry of Health & Sanitation", type: 'group', groupSize: 15, influence: 95, interest: 60, willingness: 'medium', familiarity: 5 },
+                { id: 5, text: "Local Community Leaders", type: 'group', groupSize: 25, influence: 75, interest: 50, willingness: 'low', familiarity: 15 },
+                { id: 6, text: "Local Mental Health NGOs", type: 'group', groupSize: 10, influence: 50, interest: 90, willingness: 'high', familiarity: 60 },
+                { id: 7, text: "Mobile Telecom Companies", type: 'group', groupSize: 3, influence: 85, interest: 20, willingness: 'low', familiarity: 5 }
+            ],
+            ecosystemConnections: [
+                { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 3 }, { from: 3, to: 4 }, { from: 2, to: 5 }, { from: 6, to: 4 }
+            ],
+        };
+        
+        // --- GLOBAL VARIABLES for tools ---
+        let cpdSvg, cpdZoom, cpdG;
+        let selectedCpdNodeId = null;
+        let selectedCpdLinkId = null;
+        let ecosystemTooltip = null;
+        let barrierTooltip = null;
+        let activeLineStart = null;
+        let tempLine = null;
+        let selectedActorId = null;
+
+        const toolModules = [
+            { id: 'problem-identifier', title: 'Define Problem(s)', description: 'Use an equity-focused framework to define, analyze, and articulate complex problems.', phase: 'Explore & Plan' },
+            { id: 'barrier-prioritizer', title: 'Prioritize Barrier(s)', description: 'Systematically identify and prioritize implementation barriers to focus your efforts.', phase: 'Explore & Plan' },
+            { id: 'tmf-generator', title: 'Generate TMF / Logic Model', description: 'Select and generate Theory, Model, Framework, or Logic Model diagrams for your project.', phase: 'Explore & Plan' },
+            { id: 'ecosystem-mapper', title: 'Ecosystem Map', description: 'Map the relationships and influence of different actors in your project environment.', phase: 'Explore & Plan' },
+            { id: 'empathy-mapper', title: 'Empathy Map', description: 'Visually map participant experiences to build empathy and inform design.', phase: 'Explore & Plan' },
+            { id: 'journey-mapper', title: 'Journey Map', description: 'Visualize the end-to-end experience of a participant to identify pain points and opportunities.', phase: 'Explore & Plan' },
+            { id: 'strategy-selector', title: 'Select Strategy', description: 'Select evidence-based strategies from the ERIC taxonomy to address prioritized barriers.', phase: 'Implement & Monitor' },
+            { id: 'fidelity-planner', title: 'Fidelity Plan', description: 'Define the core components of your EBP and plan how to measure fidelity.', phase: 'Implement & Monitor' },
+            { id: 'causal-pathway-diagrammer', title: 'Causal Pathway Diagram', description: 'Map the causal links between strategies, mechanisms, and outcomes.', phase: 'Implement & Monitor' },
+            { id: 'adaptations-tracker', title: 'Adaptations Log', description: 'Document modifications to programs and strategies using established frameworks.', phase: 'Implement & Monitor' },
+            { id: 'outcome-repository', title: 'Instruments', description: 'Find and review quantitative instruments to measure implementation success.', phase: 'Evaluate & Sustain' },
+        ];
+        
+        const problemsData=[{id:1,title:"Absence of a solution",description:"The problem is stated as the absence of a solution you wish to implement.",rubric:{needsWork:"There is a solution in our problem statement.",gettingThere:"Our problem doesn't include a specific solution but indicates a general approach.",closeToGoal:"There is no solution embedded in our problem. When we read this problem statement, it is not clear what the next steps to take are."},thoughtRoutine:"Ask 'Why is that a problem?' repeatedly to get to the core issue, separating it from a proposed solution.",example:"Instead of 'The problem is we don't have a mentorship program for new teachers,' ask why. The real problem might be 'New teachers feel isolated and lack pedagogical support during their first year, leading to high burnout rates.'"},{id:2,title:"Missing specific people",description:"The problem is articulated without referencing any people—those experiencing it or those creating/perpetuating it.",rubric:{needsWork:"There are no people included in our problem articulation.",gettingThere:"Our problem statement includes people but is incomplete.",closeToGoal:"Multiple specific sub-groups of individuals are named in our articulation, including both those affected and those causing or complicit in it."},thoughtRoutine:"Use 'Needs Statements' to frame the problem from the perspective of a specific co-designer (user).",example:"Instead of 'Patient adherence to medication is low,' specify the people: 'Newly diagnosed elderly patients with multiple comorbidities need a way to integrate a complex medication schedule into their daily routine because they feel overwhelmed and confused by the instructions.'"},{id:3,title:"Implicitly or explicitly blaming",description:"The problem blames those experiencing the issue for its existence, often by framing it as deficiencies.",rubric:{needsWork:"Our problem statement blames those closest to the problem for some part of its cause or existence.",gettingThere:"There is no explicit blame, but the language is from a deficit, dominant perspective.",closeToGoal:"Our problem statement is free from judgmental language describing those experiencing the problem."},thoughtRoutine:"Interrogate your language. Rewrite the statement to remove blame and focus on systemic factors.",example:"Change 'Low-income families fail to attend preventative care appointments' to 'Low-income families face significant barriers, such as lack of transportation and inflexible work schedules, that prevent them from attending preventative care appointments.'"},{id:4,title:"Symptom as a root cause",description:"The problem identified is just a symptom but is treated as a root cause.",rubric:{needsWork:"Our problem articulation is all about symptoms when we really care about addressing the root cause.",gettingThere:"It is unclear if our problem statement describes a symptom or a root cause. It may describe both without clear articulation of their relationship.",closeToGoal:"Our problem statement names the root cause and only references symptoms in relationship to it, if at all."},thoughtRoutine:"Use the '5 Whys' and '5 Hows' to dig deeper. 'Why' focuses on people, 'How' on systems and structures.",example:"The symptom is 'High employee turnover.' Why? 'Employees are dissatisfied.' Why? 'They feel undervalued.' How? 'The performance review system is perceived as arbitrary and lacks opportunities for meaningful feedback.' The root cause is systemic, not just a feeling."}, {id:5,title:"Individual focus, missing systemic aspects",description:"The problem is described at the individual level, absent institutional, systemic, or ideological factors.",rubric:{needsWork:"Our problem is only written from the point of view of an individual's experience.",gettingThere:"Some levels of oppression are addressed, but the relationship between them is not clear.",closeToGoal:"It is clear how the problem manifests at all 5 Levels of Oppression & Liberation and how those manifestations are related."},thoughtRoutine:"Use the 'Full Needs Statement' to connect interpersonal experiences to institutional, systemic, and ideological forces.",example:"A student's individual problem is 'difficulty focusing in class.' A systemic view reveals the school is under-resourced, class sizes are too large, and the curriculum isn't culturally relevant, all contributing to student disengagement."}, {id:6,title:"Forgetting historical context",description:"The problem is described absent the history of how it came to be.",rubric:{needsWork:"There is no historical context embedded in our problem statement.",gettingThere:"There are hints of history, but it is not clear from our problem statement.",closeToGoal:"The appropriate historical context of the problem is embedded in our problem articulation."},thoughtRoutine:"Draw a timeline of the problem's genesis. How has it evolved? Who has tried to solve it before?",example:"Addressing health disparities in a city requires understanding its history of redlining and segregation, which created lasting inequalities in access to healthcare, healthy food, and clean environments."}, {id:7,title:"Solving for everyone (or all at once)",description:"Trying to solve the problem for everyone and ending up solving it for no one.",rubric:{needsWork:"Our problem is defined in a way that tries to capture all possible manifestations for the average person, making it seem impossible to solve.",gettingThere:"The problem is articulated with some limitation on who it is addressing, but it is difficult to think of potential paths forward.",closeToGoal:"Our problem includes a clearly articulated and bounded subgroup, the nuances of that group's experience are clearly captured, and there is a clear path towards solving it."},thoughtRoutine:"Use 'Designing at the Margins'. Define the boundaries of your problem and identify who is most proximate to it.",example:"Instead of a generic 'mental health app for all students,' design for the most marginalized group, such as first-generation students of color. The solutions created for them (e.g., addressing impostor syndrome, cultural stigma) will likely benefit many other students as well."}];
+        const tmfData={irlm:{title:"Implementation Research Logic Model (IRLM)",description:"A logic model to specify the hypothesized causal pathways from implementation strategies to implementation and clinical outcomes.",type:'logic-model',components:{determinants:"What barriers and facilitators are you addressing? (e.g., from CFIR)",strategies:"What specific actions will you take to address determinants? (e.g., from ERIC)",mechanisms:"How do you expect the strategies to work? What processes are targeted?",outcomes:"What are the expected changes in implementation (e.g., adoption, fidelity) and clinical outcomes?"}},cfir:{title:"CFIR - Consolidated Framework for Implementation Research",description:"A comprehensive determinant framework to systematically assess contextual factors that influence implementation.",type:'worksheet',domains:[{name:"Innovation Characteristics",constructs:{"Evidence Strength & Quality":"Assess the credibility and quality of the evidence for the innovation.","Relative Advantage":"To what extent is the innovation perceived as better than the alternative?","Adaptability":"How can the innovation be adapted to fit the local context?","Complexity":"How difficult is the innovation to understand and use?","Cost":"What are the costs of the innovation and its implementation?"}},{name:"Outer Setting",constructs:{"Patient Needs & Resources":"How well does the innovation fit the needs of the target population?","Cosmopolitanism":"How networked is the organization with external organizations?","Peer Pressure":"What is the extent of pressure for the organization to implement the innovation?","External Policies & Incentives":"Are there external policies, regulations, or financial incentives that support implementation?"}},{name:"Inner Setting",constructs:{"Structural Characteristics":"Describe the organization's structure, age, size, and specialization.","Networks & Communications":"How do people and groups communicate and relate to each other?","Culture":"What are the norms, values, and basic assumptions of the organization?","Implementation Climate":"What is the shared receptivity of individuals to implementation?","Readiness for Implementation":"What tangible and immediate indicators show the organization is ready for implementation?"}},{name:"Characteristics of Individuals",constructs:{"Knowledge & Beliefs":"What are individuals' attitudes toward and knowledge about the innovation?","Self-Efficacy":"How confident are individuals in their ability to implement the innovation?","Individual Stage of Change":"Where are individuals in their personal process of change?","Individual Identification with Organization":"How much do individuals identify with the organization?"}},{name:"Process",constructs:{"Planning":"How well was the implementation planned?","Engaging":"How were key stakeholders engaged in the process?","Executing":"How effectively was the implementation plan carried out?","Reflecting & Evaluating":"To what extent is there feedback and reflection on the implementation process?"}}]},epis:{title:"EPIS - Exploration, Preparation, Implementation, Sustainment",description:"A process model that emphasizes four distinct phases of implementation and the contextual factors that influence them.",type:'worksheet',domains:[{name:"Exploration Phase",constructs:{"Problem Identification":"What is the problem and who is affected?","Evidence-Based Practice Search":"What interventions exist to address this problem?","Assessing Fit":"How well does the intervention fit the outer and inner context?","Adoption Decision":"What is the formal decision to adopt the intervention?"}},{name:"Preparation Phase",constructs:{"Identifying Barriers & Facilitators":"What factors will help or hinder implementation?","Adaptation Planning":"How will the intervention be adapted to fit the local context?","Staff Training":"What training is needed for the implementation team?","Developing Implementation Plan":"What is the detailed plan for implementation?"}},{name:"Implementation Phase",constructs:{"Initiating the EBP":"How is the intervention launched?","Monitoring Fidelity":"How is adherence to the intervention's core components tracked?","Problem Solving":"How are challenges during implementation addressed?","Supporting Staff":"What support is provided to the implementation team?"}},{name:"Sustainment Phase",constructs:{"Maintaining Structures":"How are institutional structures and processes maintained?","Ongoing Coaching & Training":"What ongoing support is provided to staff?","Securing Stable Funding":"How is long-term funding secured?","Adapting to New Challenges":"How does the organization adapt to future changes?"}}]},parins:{title:"PARIHS - Promoting Action on Research Implementation in Health Services",description:"Posits that successful implementation is a function of Evidence, Context, and Facilitation.",type:'worksheet',domains:[{name:"Evidence",constructs:{"Research":"What is the strength and nature of the research evidence?","Clinical Experience":"What is the professional wisdom and expertise of practitioners?","Patient Experience":"What are the values, preferences, and experiences of patients?","Local Data/Information":"What does local data say about the issue and current practice?"}},{name:"Context",constructs:{"Culture":"What is the prevailing culture of the setting (e.g., collaborative, hierarchical)?","Leadership":"What is the quality of leadership and their support for implementation?","Evaluation":"How does the setting use data for feedback and monitoring?"}},{name:"Facilitation",constructs:{"Purpose":"What is the overall goal of the facilitation (e.g., to achieve a specific task, enable the team)?","Role":"What is the role of the facilitator (e.g., expert, coach, guide)?","Skills & Attributes":"What skills and personal attributes does the facilitator need?"}}]}};
+        const adaptationFrameworks={frame:{title:"FRAME",description:"Framework for Reporting Adaptations and Modifications-Enhanced",sections:[{name:"When and How",fields:[{label:"Date of Modification",type:"date",id:"date"},{label:"Was the modification planned or unplanned?",type:"select",options:["Planned","Unplanned","Emerged without planning"],id:"planned"}]},{name:"What was Modified",fields:[{label:"What was modified?",type:"select",options:["Intervention Content","Intervention Context (delivery format)","Implementation Strategy"],id:"what"},{label:"Nature of the content modification",type:"textarea",placeholder:"e.g., tailoring, adding/removing components, changing order...",id:"nature"}]},{name:"Who Participated",fields:[{label:"Who participated in the decision to modify?",type:"textarea",placeholder:"e.g., clinicians, patients, researchers...",id:"who"}]},{name:"Reasons for Modification",fields:[{label:"What were the reasons for the modification?",type:"textarea",placeholder:"e.g., to address barriers, improve fit, respond to feedback...",id:"reason"}]}]},'frame-is':{title:"FRAME-IS",description:"Framework for Reporting Adaptations and Modifications to Implementation Strategies",sections:[{name:"Core Modules",fields:[{label:"Implementation strategy that was modified",type:"select",options:[],id:"strategy"},{label:"Target of the implementation strategy",type:"text",placeholder:"e.g., clinician behavior, organizational policy",id:"target"},{label:"What was modified for the implementation strategy?",type:"textarea",placeholder:"Describe the change in detail.",id:"what"}]},{name:"Optional Modules",fields:[{label:"What were the reasons for the implementation strategy modification?",type:"textarea",id:"reason"},{label:"What contextual factors influenced the modification?",type:"textarea",id:"context"},{label:"What was the impact of the modification on implementation or clinical outcomes?",type:"textarea",id:"impact"}]}]},'adapt-itt':{title:"ADAPT-ITT",description:"An eight-step model for adapting evidence-based interventions.",sections:[{name:"Phase 1: Assessment",fields:[{label:"Step 1: Assess needs, risks, and community resources",type:"textarea",id:"step1"},{label:"Step 2: Assess staff capabilities",type:"textarea",id:"step2"}]},{name:"Phase 2: Preparation",fields:[{label:"Step 3: Select intervention to be adapted",type:"textarea",id:"step3"},{label:"Step 4: Prepare for adaptation by consulting with experts",type:"textarea",id:"step4"}]},{name:"Phase 3: Adaptation",fields:[{label:"Step 5: Adapt the intervention",type:"textarea",id:"step5"},{label:"Step 6: Select and train staff",type:"textarea",id:"step6"}]},{name:"Phase 4: Production & Evaluation",fields:[{label:"Step 7: Pilot test the adapted intervention",type:"textarea",id:"step7"},{label:"Step 8: Refine and produce the adapted intervention",type:"textarea",id:"step8"}]}]}};
+        const cpdNodeTypes={
+            implementation_strategy:{label:"Strategy", width: 160, height: 80, shape: 'rectangle'},
+            mechanism:{label:"Mechanism", width: 180, height: 100, shape: 'diamond'},
+            determinant:{label:"Determinant", width: 150, height: 150, shape: 'octagon'},
+            proximal_outcome:{label:"Proximal Outcome", width: 150, height: 150, shape: 'ellipse'},
+            distal_outcome:{label:"Distal Outcome", width: 150, height: 150, shape: 'ellipse'},
+            moderator:{label:"Moderator", width: 120, height: 120, shape: 'square'},
+            precondition:{label:"Precondition", width: 180, height: 70, shape: 'trapezoid'}
+        };
+        const cpdLearningModules = {
+            implementation_strategy: { title: "Implementation Strategy", definition: "Methods used to improve the adoption, fidelity, or sustained use of an evidence-based treatment, practice, or service." },
+            mechanism: { title: "Mechanism", definition: "The process through which an implementation strategy operates to affect an implementation outcome." },
+            determinant: { title: "Determinant", definition: "Commonly referred to as barriers or facilitators, a factor that has an enabling or hindering influence on an implementation outcome. Determinants are often the targets that implementation strategies are intended to affect." },
+            proximal_outcome: { title: "Proximal Outcome", definition: "The most immediate, observable outcome of an implementation strategy. This can include mechanistic outcomes (direct results of the mechanism) and other early effects." },
+            distal_outcome: { title: "Distal Implementation Outcome", definition: "The downstream implementation outcome that the implementation strategy is ultimately intended to achieve." },
+            precondition: { title: "Precondition", definition: "A factor that is necessary for an implementation strategy to exert its influence on an implementation outcome." },
+            moderator: { title: "Moderator", definition: "A factor that can strengthen or weaken the influence of an implementation strategy." }
+        };
+        const ericStrategiesData = [
+            { domain: "Develop Stakeholder Interrelationships", name: "Identify and prepare champions", definition: "Identify and prepare individuals who are respected by their peers and who will champion the implementation.", example: "A senior, respected nurse is selected and trained to advocate for a new hand hygiene protocol among her colleagues." },
+            { domain: "Develop Stakeholder Interrelationships", name: "Use an advisory board", definition: "Form a group of stakeholders to provide guidance and feedback on the implementation.", example: "A community advisory board is created to guide the adaptation of a parenting program for a specific cultural group." },
+            { domain: "Train and Educate Stakeholders", name: "Develop educational materials", definition: "Create and distribute materials (e.g., manuals, toolkits, videos) to teach stakeholders about the innovation.", example: "Developing a one-page infographic that explains a new clinical workflow for nurses." },
+            { domain: "Train and Educate Stakeholders", name: "Conduct educational meetings", definition: "Hold meetings (in-person or virtual) to teach stakeholders about the innovation.", example: "A hospital holds a grand rounds presentation on a new evidence-based treatment for sepsis." },
+            { domain: "Support Clinicians", name: "Provide clinical supervision", definition: "Provide ongoing supervision to clinicians to monitor their use of the innovation and provide feedback.", example: "A senior psychologist provides weekly supervision to therapists learning a new form of psychotherapy." },
+            { domain: "Support Clinicians", name: "Use audit and feedback", definition: "Collect clinical performance data and provide it back to clinicians and staff.", example: "A clinic dashboard shows each physician their antibiotic prescribing rates compared to their peers." },
+            { domain: "Engage Consumers", name: "Involve patients/consumers and family members", definition: "Include consumers in the implementation process, from planning to evaluation.", example: "Patients are invited to co-design a new mobile app for managing their chronic disease." },
+            { domain: "Use Evaluative and Iterative Strategies", name: "Purposefully reexamine the implementation", definition: "Periodically step back to assess progress, identify emerging issues, and adjust the implementation plan.", example: "The implementation team holds a 'pause and learn' session six months after launch to review what's working and what's not." },
+            { domain: "Adapt and Tailor to the Context", name: "Tailor strategies", definition: "Adapt implementation strategies to fit the specific context, barriers, and resources of the setting.", example: "Changing the schedule of educational outreach visits to better align with clinic hours." },
+            { domain: "Develop and Organize Resources", name: "Create new clinical teams", definition: "Form new teams or redesign existing ones to support the implementation.", example: "A 'diabetes care team' consisting of a nurse, dietitian, and social worker is formed to provide comprehensive patient support." },
+            { domain: "Use Financial Strategies", name: "Use billing codes", definition: "Identify and use existing or new billing codes to support the delivery of the innovation.", example: "Training administrative staff to use a new reimbursement code for mental health screenings in primary care." }
+        ];
+        const outcomeMeasures=[{name:"Acceptability of Intervention Measure (AIM)",outcome:"Acceptability",description:"A 3-item measure of intervention acceptability."}, {name:"Intervention Appropriateness Measure (IAM)",outcome:"Appropriateness",description:"A 3-item measure of perceived appropriateness."}, {name:"Feasibility of Intervention Measure (FIM)",outcome:"Feasibility",description:"A 3-item measure of perceived feasibility of an intervention."}, {name:"Evidence-Based Practice Attitudes Scale (EBPAS)",outcome:"Adoption",description:"A 15-item scale assessing provider attitudes toward adoption of EBPs."}, {name:"Organizational Readiness for Implementing Change (ORIC)",outcome:"Adoption",description:"A 12-item measure of organizational readiness for change."}, {name:"No-Code Fidelity Checklist",outcome:"Fidelity",description:"A template for creating intervention-specific fidelity checklists."}, {name: "Implementation Leadership Scale (ILS)", outcome: "Leadership", description: "A 12-item scale assessing leadership behaviors that support implementation." }, {name:"Cost of Implementing New Strategies (COINS)",outcome:"Implementation Cost",description:"A method for estimating the marginal costs of new implementation strategies."}];
+
+        // --- UI & PAGE MANAGEMENT ---
+        function showPage(pageId, fromPage = null) {
+            // Cleanup listeners from previous page if it was the CPD tool
+            if (document.getElementById('page-causal-pathway-diagrammer').classList.contains('hidden') === false) {
+                cleanupCpdListeners();
+            }
+
+            document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.remove('hidden');
+                window.scrollTo(0, 0);
+                renderPageContent(pageId, fromPage);
+            }
+        }
+
+        function createBackLink(targetPage) {
+            return `<a href="#" onclick="event.preventDefault(); showPage('${targetPage}')" class="back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        Back
+                    </a>`;
+        }
+
+        // --- INITIALIZATION & RENDERING ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create tooltip once and for all
+            if (!ecosystemTooltip) {
+                ecosystemTooltip = d3.select("body").append("div")
+                    .attr("class", "d3-tooltip")
+                    .style("opacity", 0);
+            }
+             if (!barrierTooltip) {
+                barrierTooltip = d3.select("body").append("div")
+                    .attr("class", "d3-tooltip")
+                    .style("opacity", 0);
+            }
+            
+            showPage('overview');
+        });
+        
+        function renderPageContent(pageId, fromPage) {
+            const container = document.getElementById(pageId);
+            if (!container) return;
+
+            // Clear previous content
+            container.innerHTML = '';
+
+            switch(pageId) {
+                case 'overview': renderOverview(); break;
+                case 'tools': renderToolkit(); break;
+                case 'learn': renderLearnContent(); break;
+                case 'dashboard': updateDashboard(); break;
+                case 'page-problem-identifier': renderProblemIdentifier(); break;
+                case 'page-tmf-generator': renderTmfGenerator(); break;
+                case 'page-ecosystem-mapper': renderEcosystemMapper(); break;
+                case 'page-empathy-mapper': renderEmpathyMapper(); break;
+                case 'page-journey-mapper': renderJourneyMapper(); break;
+                case 'page-barrier-prioritizer': renderBarrierPrioritizer(); break;
+                case 'page-strategy-selector': renderStrategySelector(); break;
+                case 'page-causal-pathway-diagrammer': renderCpdDiagrammer(); break;
+                case 'page-adaptations-tracker': renderAdaptationsTracker(); break;
+                case 'page-outcome-repository': renderOutcomeRepository(); break;
+                case 'page-eric-strategies': renderEricStrategiesPage(fromPage); break;
+                case 'page-proctor-module': renderProctorModule(fromPage); break;
+                case 'page-tmf-module': renderTmfModule(fromPage); break;
+                case 'page-cfir-module': renderCfirModule(fromPage); break;
+                case 'page-epis-module': renderEpisModule(fromPage); break;
+                case 'page-parihs-module': renderParihsModule(fromPage); break;
+                case 'page-irlm-module': renderIrlmModule(fromPage); break;
+                case 'page-core-component-details': renderCoreComponentDetailsForm(); break;
+                case 'page-fidelity-planner': renderFidelityPlanner(); break;
+            }
+        }
+        
+        function renderOverview() {
+            const container = document.getElementById('overview');
+            container.innerHTML = `
+            <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Overview</h1>
+            <div class="space-y-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Project Details</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div><label for="project-name-input" class="block font-medium text-brown-dark">Project Name</label><input type="text" id="project-name-input" class="w-full mt-1 p-2 border rounded-md"></div>
+                        <div><label for="project-description" class="block font-medium text-brown-dark">Project Description</label><textarea id="project-description" rows="5" class="w-full mt-1 p-2 border rounded-md" placeholder="Briefly describe the project's aim and scope."></textarea></div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Evidence-Based Practice (EBP) Details</h2>
+                    <div id="ebp-section" class="space-y-4"></div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Team & Responsibilities</h2>
+                    <div id="team-list" class="space-y-2"></div>
+                    <div class="flex space-x-2 mt-4"><input type="text" id="new-member-name" placeholder="Team Member Name" class="p-2 border rounded-md flex-grow"><input type="text" id="new-member-role" placeholder="Role" class="p-2 border rounded-md flex-grow"><button id="add-member-btn" class="bg-brown-dark text-white font-bold px-4 rounded-md">Add</button></div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Timeline & Goals</h2>
+                    <div id="timeline-list" class="space-y-2"></div>
+                    <div class="flex space-x-2 mt-4"><input type="date" id="new-milestone-date" class="p-2 border rounded-md"><input type="text" id="new-milestone-desc" placeholder="Milestone or Goal" class="p-2 border rounded-md flex-grow"><button id="add-milestone-btn" class="bg-brown-dark text-white font-bold px-4 rounded-md">Add</button></div>
+                </div>
+            </div>`;
+            
+            const projectNameInput = document.getElementById('project-name-input');
+            projectNameInput.value = projectData.name;
+            document.getElementById('project-title-header').textContent = projectData.name || "New Project";
+            
+            projectNameInput.addEventListener('input', (e) => {
+                projectData.name = e.target.value;
+                document.getElementById('project-title-header').textContent = projectData.name || "New Project";
+            });
+            document.getElementById('project-description').value = projectData.description;
+
+            const addMemberBtn = document.getElementById('add-member-btn');
+            const memberNameInput = document.getElementById('new-member-name');
+            const memberRoleInput = document.getElementById('new-member-role');
+            addMemberBtn.onclick = () => {
+                if(memberNameInput.value.trim() && memberRoleInput.value.trim()){
+                    projectData.team.push({name: memberNameInput.value, role: memberRoleInput.value});
+                    memberNameInput.value = ''; memberRoleInput.value = '';
+                    renderTeamList();
+                }
+            };
+            const addMilestoneBtn = document.getElementById('add-milestone-btn');
+            const milestoneDateInput = document.getElementById('new-milestone-date');
+            const milestoneDescInput = document.getElementById('new-milestone-desc');
+            addMilestoneBtn.onclick = () => {
+                if(milestoneDateInput.value && milestoneDescInput.value.trim()){
+                    projectData.timeline.push({date: milestoneDateInput.value, desc: milestoneDescInput.value, planning: '', evaluation: ''});
+                    milestoneDateInput.value = ''; milestoneDescInput.value = '';
+                    projectData.timeline.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    renderTimeline();
+                }
+            };
+            renderEbpSection();
+            renderTeamList();
+            renderTimeline();
+        }
+
+        function renderToolkit() {
+            const container = document.getElementById('tools');
+            const phases = ['Explore & Plan', 'Implement & Monitor', 'Evaluate & Sustain'];
+            container.innerHTML = `
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Implementation Toolkit</h1>
+                <div id="tools-by-phase" class="space-y-8">
+                ${phases.map(phase => `
+                    <div>
+                        <h2 class="text-2xl font-bold text-red-cardinal mb-4 border-b-2 border-red-cardinal pb-2">${phase}</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${toolModules.filter(t => t.phase === phase).map(tool => `
+                                <button class="tool-card-button" onclick="showPage('page-${tool.id}', 'tools')">
+                                    <div>
+                                        <h3 class="tool-title">${tool.title}</h3>
+                                        <p class="tool-description">${tool.description}</p>
+                                    </div>
+                                    <span class="text-red-cardinal font-semibold mt-4 self-start">Open &rarr;</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+                </div>`;
+        }
+        
+        function renderEbpSection() {
+            const container = document.getElementById('ebp-section');
+            container.innerHTML = `
+                <div>
+                    <label class="block font-medium text-brown-dark">EBP Name</label>
+                    <input type="text" onchange="projectData.ebp.name = this.value" class="w-full mt-1 p-2 border rounded-md" value="${projectData.ebp.name}">
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-lg font-semibold text-brown-dark mb-2">Core Components</h4>
+                    <p class="text-sm text-gray-600 mb-2">The essential, non-negotiable elements of the EBP. Add and define these in the <a href="#" onclick="event.preventDefault(); showPage('page-fidelity-planner')" class="text-red-cardinal hover:underline font-semibold">Fidelity Plan tool</a>.</p>
+                    <div id="core-components-list" class="space-y-3"></div>
+                </div>
+            `;
+            renderCoreComponentsList();
+        }
+
+        function renderCoreComponentsList() {
+            const listContainer = document.getElementById('core-components-list');
+            if (!listContainer) return;
+
+            if (!projectData.ebp.coreComponents || projectData.ebp.coreComponents.length === 0) {
+                listContainer.innerHTML = `<p class="text-gray-500 text-sm">No core components defined.</p>`;
+                return;
+            }
+
+            // MODIFIED: Show preview instead of links
+            listContainer.innerHTML = projectData.ebp.coreComponents.map(c => `
+                <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                     <p class="text-md font-semibold text-brown-dark">${c.name}</p>
+                     <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-1 text-sm text-gray-600">
+                         <div class="truncate"><strong>Function:</strong> ${c.func || 'Not set'}</div>
+                         <div class="truncate"><strong>Dimension:</strong> ${c.dimension || 'Not set'}</div>
+                         <div class="truncate"><strong>Target:</strong> ${c.target || 'Not set'}</div>
+                     </div>
+                </div>
+            `).join('');
+        }
+
+        function addNewCoreComponent() {
+            const newId = Date.now();
+            const newComponent = {
+                id: newId,
+                name: "New Core Component",
+                func: "",
+                dimension: "",
+                measurement: "",
+                target: ""
+            };
+            projectData.ebp.coreComponents.push(newComponent);
+            renderFidelityPlanner(); // Re-render the tool page to show the new empty row
+        }
+
+        function showCoreComponentDetails(componentId) {
+            const component = projectData.ebp.coreComponents.find(c => c.id === componentId);
+            if (!component) return;
+
+            const container = document.getElementById('page-core-component-details');
+            container.innerHTML = `
+                ${createBackLink('overview')}
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-3xl font-bold text-brown-dark mb-6">Core Component Details</h3>
+                    <div class="space-y-4" id="core-component-form" data-id="${componentId}">
+                        <div>
+                            <label for="core-component-name" class="block font-semibold text-brown-dark">Component Name</label>
+                            <input type="text" id="core-component-name" class="w-full mt-1 p-2 border rounded-md" value="${component.name}">
+                        </div>
+                        <div>
+                            <label for="core-component-func" class="block font-semibold text-brown-dark">Core Function</label>
+                            <textarea id="core-component-func" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="Describe the purpose or 'active ingredient' of this component.">${component.func}</textarea>
+                        </div>
+                        <div>
+                            <label for="core-component-measurement" class="block font-semibold text-brown-dark">How to Measure Fidelity</label>
+                            <textarea id="core-component-measurement" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="e.g., Direct observation checklist, review of session notes, user-reported completion.">${component.measurement}</textarea>
+                        </div>
+                        <div>
+                            <label for="core-component-target" class="block font-semibold text-brown-dark">Fidelity Target</label>
+                            <input type="text" id="core-component-target" class="w-full mt-1 p-2 border rounded-md" placeholder="e.g., >90% of steps completed, 100% of sessions include this component." value="${component.target}">
+                        </div>
+                        <div class="flex justify-end space-x-2 pt-4">
+                            <button onclick="deleteCoreComponent(${componentId}, 'overview')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Delete</button>
+                            <button onclick="saveCoreComponentDetails(${componentId})" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Save & Return to Overview</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showPage('page-core-component-details');
+        }
+
+        function saveCoreComponentDetails(componentId) {
+            const component = projectData.ebp.coreComponents.find(c => c.id === componentId);
+            if (!component) return;
+
+            component.name = document.getElementById('core-component-name').value;
+            component.func = document.getElementById('core-component-func').value;
+            component.measurement = document.getElementById('core-component-measurement').value;
+            component.target = document.getElementById('core-component-target').value;
+
+            showPage('overview');
+        }
+        
+        function deleteCoreComponent(componentId, returnPage) {
+            projectData.ebp.coreComponents = projectData.ebp.coreComponents.filter(c => c.id !== componentId);
+            showPage(returnPage);
+        }
+
+
+        function renderTeamList() {
+            const list = document.getElementById('team-list');
+            list.innerHTML = projectData.team.map(m => `<div class="flex justify-between items-center p-2 bg-gray-50 rounded-md"><span><strong>${m.name}</strong> - ${m.role}</span></div>`).join('') || '<p class="text-gray-500">No team members added yet.</p>';
+        }
+
+        function renderTimeline() {
+            const list = document.getElementById('timeline-list');
+            list.innerHTML = projectData.timeline.map((item, index) => `
+                <details class="timeline-row bg-gray-50 rounded-md">
+                    <summary class="p-3">
+                        <div class="flex justify-between items-center">
+                            <span><strong>${new Date(item.date).toLocaleDateString()}:</strong> ${item.desc}</span>
+                            <svg class="details-caret h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 border-t border-gray-200 bg-white">
+                        <h4 class="font-bold text-brown-dark mb-2">Implementation Research Details</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block font-semibold text-sm mb-1">Planning Information</label>
+                                <textarea rows="3" class="w-full p-2 border rounded-md" onchange="projectData.timeline[${index}].planning = this.value;" placeholder="Describe planning activities for this phase...">${item.planning}</textarea>
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-sm mb-1">Evaluation Information</label>
+                                <textarea rows="3" class="w-full p-2 border rounded-md" onchange="projectData.timeline[${index}].evaluation = this.value;" placeholder="Describe evaluation metrics and methods for this phase...">${item.evaluation}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            `).join('') || '<p class="text-gray-500">No milestones added yet.</p>';
+        }
+        
+        // --- Individual Tool Rendering ---
+        function renderProblemIdentifier(){ const container = document.getElementById('page-problem-identifier'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Define Problem</h1><div class="grid lg:grid-cols-3 gap-8"><div class="lg:col-span-1 bg-gray-50 p-4 rounded-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Problem Rubric</h3><p class="mb-4 text-sm text-gray-600">Assess your problem statement.</p><ul id="rubric-container" class="space-y-6"></ul></div><div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Problem Definition Tracker</h3><div class="mb-6"><label class="block font-medium text-brown-dark mb-2">1. Initial Problem Articulation</label><textarea rows="3" class="w-full p-2 border rounded-md" placeholder="Start by writing your initial problem statement here...">Adolescents in Sierra Leone need a WhatsApp-based mental health program.</textarea></div><div id="tracker-container" class="space-y-6"></div></div></div>`; const r=document.getElementById("rubric-container"),t=document.getElementById("tracker-container");r&&t&&(r.innerHTML=problemsData.map(e=>`<li class="list-none"><div><h3 class="font-bold text-brown-dark">${e.id}. ${e.title}</h3><p class="text-sm text-gray-500 mb-2">${e.description}</p><div class="space-y-1 text-sm"><label class="flex items-start p-2 rounded-md hover:bg-red-cardinal/10"><input type="radio" name="rubric-${e.id}" class="mt-1 mr-2 accent-red-cardinal" ${e.id === 1 ? 'checked' : ''}><div><strong>Needs Work:</strong> ${e.rubric.needsWork}</div></label><label class="flex items-start p-2 rounded-md hover:bg-yellow-bright/20"><input type="radio" name="rubric-${e.id}" class="mt-1 mr-2 accent-red-cardinal"><div><strong>Getting There:</strong> ${e.rubric.gettingThere}</div></label><label class="flex items-start p-2 rounded-md hover:bg-green-500/10"><input type="radio" name="rubric-${e.id}" class="mt-1 mr-2 accent-red-cardinal"><div><strong>Close to Goal:</strong> ${e.rubric.closeToGoal}</div></label></div></div></li>`).join(""),t.innerHTML=problemsData.map(e=>`<div><label class="block font-medium text-brown-dark mb-2">${e.id+1}. Refined Problem (after considering "${e.title}")</label><div class="p-3 bg-gold-light/10 rounded-md mb-2"><p class="text-sm text-gray-700"><strong>Guidance:</strong> ${e.thoughtRoutine}</p></div><textarea rows="3" class="w-full p-2 border rounded-md" placeholder="Refine your problem statement here...">${e.id === 1 ? "Adolescents in Sierra Leone experience significant distress and lack accessible, culturally-relevant skills to manage their emotions and stress due to a profound scarcity of mental health resources." : ""}</textarea></div>`).join(""))}
+        function renderTmfGenerator(){ const container = document.getElementById('page-tmf-generator'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Generate TMF & Logic Model</h1><div class="max-w-5xl mx-auto"><div class="flex justify-center space-x-4 mb-8"><label class="block"><span class="text-lg font-medium text-brown-dark">Select a Model:</span><select id="tmf-select" class="mt-1 block w-full pl-3 pr-10 py-2 border rounded-md"></select></label></div><div id="tmf-output" class="p-1 bg-white rounded-lg shadow-lg"></div></div>`; const e=document.getElementById("tmf-select");e&&(e.innerHTML=Object.keys(tmfData).map(t=>`<option value="${t}" ${t === 'irlm' ? 'selected' : ''}>${tmfData[t].title}</option>`).join(""),e.addEventListener("change",generateTmfContent),generateTmfContent())}
+        function generateTmfContent(){const e=document.getElementById("tmf-select"),t=document.getElementById("tmf-output");if(e&&t){const n=tmfData[e.value];let o=`<div class="p-6"><h2 class="text-2xl font-bold text-red-cardinal mb-2">${n.title}</h2><p class="text-gray-600 mb-6">${n.description}</p>`;"logic-model"===n.type?(o+='<div class="overflow-x-auto"><div class="flex items-center justify-center flex-nowrap min-w-max">',o+=Object.entries(n.components).map(([key,val])=>`<div class="bg-gold-light/10 p-4 rounded-lg m-2 flex-grow text-center w-64"><h3 class="font-bold text-brown-dark capitalize mb-2">${key}</h3><textarea class="w-full h-48 p-2 border rounded-md" placeholder="${val}"></textarea></div>`).join('<div class="irlm-arrow">&rightarrow;</div>'),o+="</div></div>"):(o+='<div class="space-y-6">',n.domains.forEach(domain=>{o+=`<div><h3 class="text-xl font-bold text-brown-dark mb-3 pb-2 border-b-2 border-gray-200">${domain.name}</h3><ul class="space-y-4 list-none">`,Object.entries(domain.constructs).forEach(([constructName,constructDesc])=>{o+=`<li class="construct-box border-gold-light p-4 rounded-r-md bg-gray-50"><label class="block text-md font-semibold text-gray-700 mb-2">${constructName}</label><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><textarea rows="4" class="w-full p-2 border rounded-md" placeholder="${constructDesc}"></textarea><div><label class="block text-sm font-medium text-gray-700">Rating</label><div class="flex justify-between items-center mt-1 text-sm"><span class="text-red-cardinal/70">Barrier</span><span class="text-green-600/70">Facilitator</span></div><div class="flex justify-around mt-1">${[-2,-1,0,1,2].map(val => `<label class="text-center"><input type="radio" name="cfir-${constructName.replace(/\s/g,'')}" value="${val}" class="accent-red-cardinal"><br>${val}</label>`).join('')}</div></div></div></li>`}),o+="</ul></div>"}),o+="</div>"),o+="</div>",t.innerHTML=o}}
+        
+        // --- ECOSYSTEM MAPPER (REBUILT) ---
+        function renderEcosystemMapper() {
+            const container = document.getElementById('page-ecosystem-mapper');
+            container.innerHTML = `
+                ${createBackLink('tools')}
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Ecosystem Map</h1>
+                <p class="text-center text-sm max-w-2xl mx-auto mb-6 -mt-6">Drag nodes to move. Shift-drag from node to node to create a link.</p>
+                <div class="grid lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-4 bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-red-cardinal">Key Actors</h3>
+                            <button onclick="openActorModal(null)" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm hover:bg-brown-light transition-colors">Add New</button>
+                        </div>
+                        <div id="ecosystem-actor-list" class="space-y-2 h-[550px] overflow-y-auto pr-2"></div>
+                    </div>
+                    <div class="lg:col-span-8 bg-white p-2 rounded-lg shadow-lg relative">
+                        <div id="ecosystem-canvas" class="w-full h-[600px]">
+                            <svg id="ecosystem-svg-layer" class="w-full h-full"></svg>
+                        </div>
+                    </div>
+                </div>`;
+            renderEcosystemActorList();
+            requestAnimationFrame(renderEcosystemMap);
+        }
+
+        function renderEcosystemActorList() {
+            const listContainer = document.getElementById('ecosystem-actor-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = projectData.ecosystemActors.length === 0 
+                ? '<p class="text-sm text-gray-500 text-center mt-4">No actors added yet. Click "Add New" to start.</p>'
+                : projectData.ecosystemActors.map(actor => `
+                    <div id="actor-list-item-${actor.id}" class="actor-list-item p-3 rounded-md border border-gray-200 hover:bg-gold-light/20 flex justify-between items-center cursor-pointer ${actor.id === selectedActorId ? 'selected' : ''}" onclick="highlightActorOnMap(${actor.id})">
+                        <div>
+                            <p class="font-semibold text-brown-dark">${actor.text}</p>
+                            <p class="text-xs text-gray-500">Influence: ${Math.round(actor.influence)} | Interest: ${Math.round(actor.interest)}</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); openActorModal(${actor.id})" class="text-gray-400 hover:text-red-cardinal p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z" /></svg>
+                        </button>
+                    </div>
+                `).join('');
+        }
+        
+        function highlightActorOnMap(actorId) {
+            selectedActorId = selectedActorId === actorId ? null : actorId; // Toggle selection
+            renderEcosystemActorList(); 
+            d3.select("#ecosystem-svg-layer").selectAll("g.actor-node")
+                .classed('selected', d => d.id === selectedActorId);
+        }
+
+        function renderEcosystemMap() {
+            const canvas = d3.select("#ecosystem-canvas");
+            if (canvas.node() === null) return;
+            const svg = d3.select("#ecosystem-svg-layer");
+            svg.selectAll("*").remove();
+
+            const bounds = canvas.node().getBoundingClientRect();
+            if (bounds.width === 0) { requestAnimationFrame(renderEcosystemMap); return; }
+
+            const width = bounds.width;
+            const height = bounds.height;
+            const margin = {top: 40, right: 40, bottom: 50, left: 60};
+
+            const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
+            const y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
+            const sizeScale = d3.scaleSqrt().domain([1, 200]).range([8, 40]);
+            const opacityScale = d3.scaleLinear().domain([0, 100]).range([0.4, 1.0]);
+            const color = d3.scaleOrdinal().domain(["high", "medium", "low"]).range(["#4CAF50", "#FFC107", "#F44336"]);
+            
+            svg.append("g").attr("transform", `translate(0, ${height - margin.bottom})`).call(d3.axisBottom(x).ticks(5));
+            svg.append("g").attr("transform", `translate(${margin.left}, 0)`).call(d3.axisLeft(y).ticks(5));
+            svg.append("text").attr("text-anchor", "middle").attr("x", width / 2).attr("y", height - 10).text("Interest / Stake in Project →");
+            svg.append("text").attr("text-anchor", "middle").attr("transform", "rotate(-90)").attr("y", 20).attr("x", -height / 2).text("Influence / Power →");
+
+            const lines = svg.append("g").attr("class", "connections");
+            const actors = svg.append("g").attr("class", "actors");
+            let tempLink = null;
+
+            const drag = d3.drag()
+                .on("start", function(event, d) {
+                    if (event.sourceEvent.shiftKey) {
+                        const startCoords = [x(d.interest), y(d.influence)];
+                        tempLink = lines.append('line')
+                            .attr('class', 'temp-link')
+                            .attr('x1', startCoords[0]).attr('y1', startCoords[1])
+                            .attr('x2', event.x).attr('y2', event.y)
+                            .attr('stroke', 'var(--brown-dark)').attr('stroke-width', 2).attr('stroke-dasharray', '5,5');
+                    } else {
+                        highlightActorOnMap(d.id);
+                        d3.select(this).raise().style("cursor", "grabbing");
+                    }
+                })
+                .on("drag", function(event, d) {
+                    if (tempLink) {
+                        tempLink.attr('x2', event.x).attr('y2', event.y);
+                    } else {
+                        d.interest = Math.max(0, Math.min(100, x.invert(event.x)));
+                        d.influence = Math.max(0, Math.min(100, y.invert(event.y)));
+                        d3.select(this).attr('transform', `translate(${x(d.interest)}, ${y(d.influence)})`);
+                        updateEcosystemLinks();
+                    }
+                })
+                .on("end", function(event, d) {
+                    if (tempLink) {
+                        tempLink.remove(); tempLink = null;
+                        const endNodeEl = event.sourceEvent.target.closest('.actor-node');
+                        if (endNodeEl) {
+                            const endNodeData = d3.select(endNodeEl).datum();
+                            if (endNodeData && endNodeData.id !== d.id) {
+                                const linkExists = projectData.ecosystemConnections.some(l => (l.from === d.id && l.to === endNodeData.id) || (l.from === endNodeData.id && l.to === d.id));
+                                if (!linkExists) {
+                                    projectData.ecosystemConnections.push({ from: d.id, to: endNodeData.id });
+                                    updateEcosystemLinks();
+                                }
+                            }
+                        }
+                    } else {
+                        d3.select(this).style("cursor", "grab");
+                        renderEcosystemActorList();
+                    }
+                });
+
+            const actorGroups = actors.selectAll("g.actor-node")
+                .data(projectData.ecosystemActors, d => d.id).join("g")
+                .attr("class", d => `actor-node ${d.id === selectedActorId ? 'selected' : ''}`)
+                .attr("transform", d => `translate(${x(d.interest)}, ${y(d.influence)})`)
+                .style("opacity", d => opacityScale(d.familiarity))
+                .call(drag);
+
+            actorGroups.append("circle")
+                .attr("class", "actor-circle")
+                .attr("r", d => d.type === 'group' ? sizeScale(d.groupSize) : 8)
+                .attr("fill", d => d.type === 'individual' ? d3.color(color(d.willingness)).darker(0.7) : color(d.willingness))
+                .attr("stroke", d => d3.color(color(d.willingness)).darker(0.7))
+                .attr("stroke-width", 2).style("cursor", "grab");
+            
+            const deleteBtn = actorGroups.append('g')
+                .attr('class', 'actor-delete-btn')
+                .on('click', (event, d) => { event.stopPropagation(); deleteActor(d.id); });
+            deleteBtn.append('circle').attr('r', 9).attr('fill', 'var(--red-cardinal)').attr('stroke', 'white').attr('stroke-width', 1.5);
+            deleteBtn.append('text').attr('fill', 'white').attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('font-size', '12px').attr('font-weight', 'bold').text('×');
+            deleteBtn.attr('transform', d => {
+                const radius = (d.type === 'group' ? sizeScale(d.groupSize) : 8) + 2;
+                return `translate(${radius * 0.707}, ${-radius * 0.707})`;
+            });
+
+            actorGroups.on("mouseover", (event, d) => {
+                ecosystemTooltip.transition().duration(200).style("opacity", .9);
+                ecosystemTooltip.html(`
+                    <strong>${d.text}</strong><br/>
+                    Influence: ${Math.round(d.influence)}<br/>
+                    Interest: ${Math.round(d.interest)}<br/>
+                    Familiarity: ${Math.round(d.familiarity)}<br/>
+                    Willingness: <span class="capitalize">${d.willingness}</span>
+                `)
+                .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
+            }).on("mouseout", () => {
+                ecosystemTooltip.transition().duration(500).style("opacity", 0);
+            }).on("click", (event, d) => {
+                highlightActorOnMap(d.id);
+            });
+            
+            function getLinkEdgePoint(sourceCenter, targetCenter, sourceRadius) {
+                const dx = targetCenter.x - sourceCenter.x;
+                const dy = targetCenter.y - sourceCenter.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist === 0) return sourceCenter;
+                return { x: sourceCenter.x + (dx * sourceRadius) / dist, y: sourceCenter.y + (dy * sourceRadius) / dist };
+            }
+
+            function updateEcosystemLinks() {
+                const linksData = projectData.ecosystemConnections.filter(c => 
+                    projectData.ecosystemActors.some(a => a.id === c.from) && projectData.ecosystemActors.some(a => a.id === c.to)
+                );
+                lines.selectAll("line.connection-line").data(linksData).join("line")
+                    .attr("class", "connection-line")
+                    .each(function(d) {
+                        const sourceNode = projectData.ecosystemActors.find(a => a.id === d.from);
+                        const targetNode = projectData.ecosystemActors.find(a => a.id === d.to);
+                        if (!sourceNode || !targetNode) {
+                            d3.select(this).remove();
+                            return;
+                        }
+                        const sourceCenter = { x: x(sourceNode.interest), y: y(sourceNode.influence) };
+                        const targetCenter = { x: x(targetNode.interest), y: y(targetNode.influence) };
+                        const sourceRadius = sourceNode.type === 'group' ? sizeScale(sourceNode.groupSize) : 8;
+                        const targetRadius = targetNode.type === 'group' ? sizeScale(targetNode.groupSize) : 8;
+                        
+                        const sourcePoint = getLinkEdgePoint(sourceCenter, targetCenter, sourceRadius);
+                        const targetPoint = getLinkEdgePoint(targetCenter, sourceCenter, targetRadius);
+
+                        d3.select(this).attr("x1", sourcePoint.x).attr("y1", sourcePoint.y)
+                                        .attr("x2", targetPoint.x).attr("y2", targetPoint.y);
+                    })
+                    .attr("stroke", "#aaa").attr("stroke-width", 2);
+            }
+            updateEcosystemLinks();
+        }
+
+        function openActorModal(actorId) {
+            const isNew = actorId === null;
+            const actor = isNew 
+                ? { id: null, text: "", type: 'group', groupSize: 10, influence: 50, interest: 50, willingness: 'medium', familiarity: 50 }
+                : projectData.ecosystemActors.find(a => a.id === actorId);
+
+            if (!actor && !isNew) return;
+            
+            const createSliderRow = (criterion, label, value) => `<div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="actor-${criterion}-value">${value}</span></label><input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('actor-${criterion}-value').textContent = this.value"></div>`;
+
+            const modalHTML = `
+            <div id="actor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto">
+                     <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${isNew ? 'Add New Actor' : 'Edit Actor'}</h2></div>
+                     <div class="p-6 space-y-4">
+                         <input type="hidden" id="current-actor-id" value="${actorId || ''}">
+                         <div><label class="block font-semibold">Actor Name</label><input type="text" id="actor-text-input" class="w-full p-2 border rounded-md" value="${actor.text}"></div>
+                         <div><label>Actor Type</label><select id="edit-actor-type" class="w-full p-2 border rounded-md"><option value="group" ${actor.type === 'group' ? 'selected' : ''}>Group</option><option value="individual" ${actor.type === 'individual' ? 'selected' : ''}>Individual</option></select></div>
+                         <div id="edit-group-size-container" class="${actor.type === 'group' ? '' : 'hidden'}"><label>Group Size</label><input type="number" id="edit-actor-group-size" value="${actor.groupSize}" class="w-full p-2 border rounded-md"></div>
+                         ${createSliderRow('influence', 'Influence (Power)', Math.round(actor.influence))}
+                         ${createSliderRow('interest', 'Interest (Stake)', Math.round(actor.interest))}
+                         ${createSliderRow('familiarity', 'Familiarity', Math.round(actor.familiarity))}
+                         <div><label>Willingness to Engage</label><select id="edit-actor-willingness" class="w-full p-2 border rounded-md"><option value="high" ${actor.willingness === 'high' ? 'selected' : ''}>High</option><option value="medium" ${actor.willingness === 'medium' ? 'selected' : ''}>Medium</option><option value="low" ${actor.willingness === 'low' ? 'selected' : ''}>Low</option></select></div>
+                     </div>
+                     <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
+                         <button onclick="closeModal('actor-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
+                         <button onclick="saveActorDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">${isNew ? 'Add Actor' : 'Save Changes'}</button>
+                     </div>
+                </div>
+            </div>`;
+            document.getElementById('modal-container').innerHTML = modalHTML;
+            document.getElementById('edit-actor-type').addEventListener('change', (e) => {
+                document.getElementById('edit-group-size-container').style.display = e.target.value === 'group' ? 'block' : 'none';
+            });
+        }
+
+        function saveActorDetails() {
+            const actorId = document.getElementById('current-actor-id').value;
+            const isNew = actorId === '';
+            let actor = isNew ? { id: Date.now() } : projectData.ecosystemActors.find(a => a.id == actorId);
+            if (!actor) return;
+
+            actor.text = document.getElementById('actor-text-input').value;
+            if (!actor.text.trim()) { alert("Please enter a name for the actor."); return; }
+            actor.type = document.getElementById('edit-actor-type').value;
+            actor.groupSize = parseInt(document.getElementById('edit-actor-group-size').value) || 1;
+            actor.influence = parseInt(document.querySelector('input[name="influence"]').value);
+            actor.interest = parseInt(document.querySelector('input[name="interest"]').value);
+            actor.familiarity = parseInt(document.querySelector('input[name="familiarity"]').value);
+            actor.willingness = document.getElementById('edit-actor-willingness').value;
+
+            if (isNew) projectData.ecosystemActors.push(actor);
+            closeModal('actor-modal');
+            renderEcosystemActorList();
+            renderEcosystemMap();
+        }
+        
+        function deleteActor(actorId) {
+            projectData.ecosystemActors = projectData.ecosystemActors.filter(a => a.id !== actorId);
+            projectData.ecosystemConnections = projectData.ecosystemConnections.filter(c => c.from !== actorId && c.to !== actorId);
+            selectedActorId = null;
+            renderEcosystemActorList();
+            renderEcosystemMap();
+        }
+
+        function renderEmpathyMapper(){ const container = document.getElementById('page-empathy-mapper'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Empathy Map</h1><div class="mb-6"><label class="block text-lg font-medium text-brown-dark mb-2">Participant / Persona:</label><input type="text" class="w-full p-2 border rounded-md" placeholder="e.g., Primary Care Physicians, Patients with Type 2 Diabetes" value="Adolescent (10-15) in Sierra Leone"></div><div class="grid md:grid-cols-2 gap-4"><div class="bg-gold-light/20 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">SAYS</h3><p class="text-sm text-gray-600 mb-3">What are common things they say?</p><textarea class="w-full h-40 p-2 border rounded-md">"School is so much pressure."\n"My parents don't understand."\n"I just want to hang out with my friends."\n"Sometimes I feel so heavy inside."</textarea></div><div class="bg-red-cardinal/10 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">THINKS</h3><p class="text-sm text-gray-600 mb-3">What might they be thinking?</p><textarea class="w-full h-40 p-2 border rounded-md">"I'm worried about exams."\n"I wish I could talk to someone about this."\n"No one else feels this way."\n"Will I ever be good enough?"</textarea></div><div class="bg-brown-light/20 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">DOES</h3><p class="text-sm text-gray-600 mb-3">What actions do you observe?</p><textarea class="w-full h-40 p-2 border rounded-md">Spends a lot of time on WhatsApp.\nHelps with family chores.\nSometimes withdraws and is quiet.\nLaughs and jokes with friends.</textarea></div><div class="bg-gray-200 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">FEELS</h3><p class="text-sm text-gray-600 mb-3">What is their emotional state?</p><textarea class="w-full h-40 p-2 border rounded-md">Anxious, stressed, overwhelmed.\nHappy and connected when with friends.\nSometimes lonely or sad.\nHopeful for the future.</textarea></div></div>`; }
+        
+        function renderJourneyMapper() {
+            const container = document.getElementById('page-journey-mapper');
+            container.innerHTML = `
+                ${createBackLink('tools')}
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Journey Maps</h1>
+                <div class="mb-6">
+                    <button onclick="addNewPersona()" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add New Person</button>
+                </div>
+                <div id="persona-journey-list" class="space-y-4"></div>`;
+            renderPersonaList();
+        }
+
+        function renderPersonaList() {
+            const container = document.getElementById('persona-journey-list');
+            if (!container) return;
+            if (!projectData.personas || projectData.personas.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No people added yet. Click the button above to add one.</p>';
+                return;
+            }
+            // MODIFIED: Removed inline styling classes to use new CSS rules
+            container.innerHTML = projectData.personas.map(persona => `
+                <details class="journey-map-persona" open>
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-lg text-brown-dark summary-title">${persona.name}</p>
+                            <p class="text-sm text-gray-600">${persona.summary}</p>
+                        </div>
+                        <svg class="details-caret h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </summary>
+                    <div>
+                        <div class="flex justify-end mb-4">
+                             <button onclick="addJourneyStage(${persona.id})" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm">Add Stage</button>
+                        </div>
+                        <div class="overflow-x-auto pb-4">
+                            <div id="journey-stages-container-${persona.id}" class="flex space-x-4">
+                                ${renderJourneyStages(persona.journeyStages, persona.id)}
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            `).join('');
+        }
+        
+        function addNewPersona() {
+            const name = prompt("Enter the new person's name:");
+            if (!name || name.trim() === '') return;
+            const summary = prompt("Enter a brief summary for this person (e.g., role, key characteristic):");
+            const newPersona = { id: Date.now(), name: name, summary: summary || "", journeyStages: [] };
+            projectData.personas.push(newPersona);
+            renderPersonaList();
+        }
+
+        function addJourneyStage(personaId) {
+            const title = prompt("Enter new stage title (e.g., 'Awareness', 'First Use'):");
+            if (title && title.trim() !== '') {
+                const persona = projectData.personas.find(p => p.id === personaId);
+                if (persona) {
+                    persona.journeyStages.push({ title: title, actions: "", mindsets: "", emotions: "", opportunities: "" });
+                    renderPersonaList();
+                }
+            }
+        }
+
+        function renderJourneyStages(stages, personaId){
+            if(!stages || stages.length === 0) return '<p class="text-gray-500 w-full text-center">No journey stages defined for this person yet. Click "Add Stage" to begin.</p>';
+            return stages.map((stage, index) =>`
+                <div class="journey-stage bg-gray-50 p-4 rounded-lg border flex-shrink-0 w-72">
+                    <input class="text-lg font-bold text-brown-dark bg-transparent w-full mb-4" value="${stage.title}" onchange="updateJourneyStage(${personaId}, ${index}, 'title', this.value)">
+                    <div class="space-y-3">
+                        <div><label class="font-semibold text-sm">Actions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'actions', this.value)">${stage.actions}</textarea></div>
+                        <div><label class="font-semibold text-sm">Mindsets:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'mindsets', this.value)">${stage.mindsets}</textarea></div>
+                        <div><label class="font-semibold text-sm">Emotions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'emotions', this.value)">${stage.emotions}</textarea></div>
+                        <div><label class="font-semibold text-sm">Opportunities:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'opportunities', this.value)">${stage.opportunities}</textarea></div>
+                    </div>
+                </div>`).join("");
+        }
+        
+        window.updateJourneyStage = (personaId, stageIndex, field, value) => {
+            const persona = projectData.personas.find(p => p.id === personaId);
+            if (persona && persona.journeyStages[stageIndex]) {
+                persona.journeyStages[stageIndex][field] = value;
+            }
+        };
+        
+        function renderBarrierPrioritizer() {
+            const container = document.getElementById('page-barrier-prioritizer');
+            container.innerHTML = `${createBackLink('tools')}
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Barrier Prioritization Tool</h1>
+                <div class="grid lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-red-cardinal mb-4">1. List & Rate Barriers</h3>
+                        <div class="mb-4">
+                           <button id="add-barrier-btn" class="w-full bg-brown-dark text-white font-bold p-2 rounded-md">Add Barrier</button>
+                        </div>
+                        <div id="barrier-list" class="space-y-2 h-96 overflow-y-auto p-2 bg-gray-50 rounded"></div>
+                    </div>
+                    <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-red-cardinal mb-4">2. Prioritization Matrix</h3>
+                        <div id="barrier-plot-container" class="w-full h-[500px] relative">
+                            <svg id="barrier-plot-svg" class="w-full h-full"></svg>
+                        </div>
+                    </div>
+                </div>`;
+            
+            document.getElementById("add-barrier-btn").addEventListener("click", () => { openBarrierModal(null); });
+            renderBarrierList();
+            requestAnimationFrame(renderBarrierPlot);
+        }
+
+        function renderBarrierList() {
+            const list = document.getElementById("barrier-list");
+            if (!list) return;
+            list.innerHTML = projectData.barriers.map(b => `
+                <a href="#" class="block p-3 border-b border-gray-200 bg-white cursor-pointer hover:bg-gold-light/20" onclick="event.preventDefault(); openBarrierModal(${b.id})">
+                    ${b.text}
+                </a>`).join('');
+        }
+
+        function renderBarrierPlot() {
+            const container = d3.select("#barrier-plot-container");
+            if (container.empty()) return;
+            
+            const bounds = container.node().getBoundingClientRect();
+            if (bounds.width === 0) { requestAnimationFrame(renderBarrierPlot); return; } 
+
+            const svg = container.select("svg");
+            svg.selectAll("*").remove();
+
+            const width = bounds.width;
+            const height = bounds.height;
+            const margin = {top: 40, right: 40, bottom: 60, left: 60};
+
+            const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
+            const y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
+            const frequencyScale = d3.scaleSqrt().domain([1, 100]).range([4, 30]);
+            const equityColorPalette = ["#313695","#34439D","#3850A5","#3B5DAE","#3F6AB6","#4277BF","#4575B4","#4E80B9","#578ABD","#6095C2","#699FC7","#72AACB","#74ADD1","#7EBAD6","#88C2DA","#92C9DE","#9DD1E2","#A7D8E6","#ABD9E9","#B3DDEB","#BCE1EE","#C4E5F0","#CCECF3","#D5F0F6","#DDF2F7","#E0F3F8","#E2F3F6","#E5F3F3","#E8F4F1","#EBF4EE","#EEF5EC","#F1F5E9","#F3F6E7","#F6F7E4","#F8F8E2","#FBF9DF","#FDFADD","#FFFFBF","#FEFDB9","#FEFBB3","#FEF8AD","#FEF6A7","#FEF3A1","#FEF19B","#FEEF95","#FEED8F","#FEE090","#FEDD8C","#FEDB88","#FED884","#FED680","#FED37C","#FED178","#FECD74","#FECA70","#FDC86C","#FDC568","#FDAE61","#FCA95E","#FCA35B","#FB9E58","#FB9955","#FA9452","#FA8E4F","#F9894C","#F88449","#F77E46","#F67944","#F46D43","#F36642","#F15E41","#EF5740","#EE4F3F","#EC483E","#EA403D","#E8393C","#E7313B","#E52A3A","#D73027","#D42C26","#D12825","#CE2424","#CB2023","#C81C22","#C51821","#C21420","#BF101F","#BC0C1E","#B9081D","#A50026","#A40026","#A30026","#A20026","#A10026","#A00026","#9F0026","#9E0026","#9D0026","#9C0026","#A50026"];
+            const equityColorScale = d3.scaleQuantile().domain([0, 100]).range(equityColorPalette);
+
+            const quadrants = [
+                { x: x(50), y: y(100), width: x(100) - x(50), height: y(50) - y(100), color: 'rgba(46, 204, 113, 0.1)', label: 'High Priority', textColor: '#166534' },
+                { x: x(0), y: y(100), width: x(50) - x(0), height: y(50) - y(100), color: 'rgba(255, 193, 7, 0.1)', label: 'Strategic Priority', textColor: '#854d0e' },
+                { x: x(0), y: y(50), width: x(50) - x(0), height: y(0) - y(50), color: 'rgba(108, 117, 125, 0.05)', label: 'Low Priority', textColor: '#475569' },
+                { x: x(50), y: y(50), width: x(100) - x(50), height: y(0) - y(50), color: 'rgba(244, 67, 54, 0.1)', label: 'Target for Innovation', textColor: '#9f1239' }
+            ];
+            svg.selectAll('.quadrant-bg').data(quadrants).enter().append('rect').attr('class', 'quadrant-bg').attr('x', d => d.x).attr('y', d => d.y).attr('width', d => d.width).attr('height', d => d.height).attr('fill', d => d.color);
+            svg.selectAll('.quadrant-label').data(quadrants).enter().append('text').attr('class', 'quadrant-label').attr('x', d => d.x + 10).attr('y', d => d.y + 20).text(d => d.label).attr('fill', d=> d.textColor).style('font-weight', '600');
+
+            const xAxis = d3.axisBottom(x).ticks(5);
+            const yAxis = d3.axisLeft(y).ticks(5);
+            svg.append("g").attr("transform", `translate(0, ${height - margin.bottom})`).call(xAxis);
+            svg.append("g").attr("transform", `translate(${margin.left}, 0)`).call(yAxis);
+            svg.append("text").attr("text-anchor", "middle").attr("x", width / 2).attr("y", height - 15).text("Importance");
+            svg.append("text").attr("text-anchor", "middle").attr("transform", "rotate(-90)").attr("y", 20).attr("x", -height/2).text("Addressability");
+
+            const ratedBarriers = projectData.barriers.filter(b => b.importance !== null && b.addressability !== null);
+            
+            const drag = d3.drag()
+                .on("start", function(event) { d3.select(this).raise().style('cursor', 'grabbing'); })
+                .on("drag", function(event, d) {
+                    d.importance = Math.max(0, Math.min(100, x.invert(event.x)));
+                    d.addressability = Math.max(0, Math.min(100, y.invert(event.y)));
+                    d3.select(this).attr("transform", `translate(${x(d.importance)}, ${y(d.addressability)})`);
+                })
+                .on("end", function(event, d) {
+                    d3.select(this).style('cursor', 'grab');
+                    renderBarrierList(); updateDashboard();
+                });
+
+            const nodes = svg.selectAll(".barrier-node").data(ratedBarriers, d => d.id).enter().append("g")
+                .attr("class", "barrier-node").attr("transform", d => `translate(${x(d.importance)}, ${y(d.addressability)})`)
+                .style('cursor', 'grab').call(drag);
+            
+            nodes.append("circle").attr("r", d => frequencyScale(d.frequency)).attr("fill", d => equityColorScale(d.equityImpact)).attr("stroke", d => d3.color(equityColorScale(d.equityImpact)).darker(0.7)).attr("stroke-width", 1.5).attr("fill-opacity", 0.7);
+            nodes.on("mouseover", (event, d) => {
+                barrierTooltip.transition().duration(200).style("opacity", .9);
+                barrierTooltip.html(`<strong>${d.text}</strong><br/>Equity Impact: ${d.equityImpact}<br/>Frequency: ${d.frequency}`)
+                    .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
+            }).on("mouseout", () => {
+                barrierTooltip.transition().duration(500).style("opacity", 0);
+            }).on("click", (event, d) => {
+                if (!event.defaultPrevented) { openBarrierModal(d.id); }
+            });
+        }
+
+        function openBarrierModal(barrierId) {
+            const isNew = barrierId === null;
+            const barrier = isNew 
+                ? { id: null, text: "", importance: 50, addressability: 50, frequency: 50, equityImpact: 50, notesImportance: "", notesAddressability: "", notesFrequency: "", notesEquityImpact: "" }
+                : projectData.barriers.find(b => b.id === barrierId);
+            
+            if (!barrier) return;
+            
+            const createSliderRow = (criterion, label, value, notes) => `<div class="p-3 bg-gray-50 rounded-md"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="${criterion}-value">${value}</span></label><input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('${criterion}-value').textContent = this.value"></div><div><label class="block font-semibold text-sm mb-1">Notes for ${label}</label><textarea name="notes${criterion.charAt(0).toUpperCase() + criterion.slice(1)}" rows="2" class="w-full p-1 border rounded-md text-sm">${notes || ''}</textarea></div></div></div>`;
+
+            const modalHTML = `
+            <div id="barrier-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-full overflow-y-auto">
+                     <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${isNew ? 'Add New' : 'Edit'} Barrier</h2></div>
+                     <div class="p-6 space-y-4">
+                         <input type="hidden" id="current-barrier-id" value="${barrierId || ''}">
+                         <div><label class="block font-semibold">Barrier</label><textarea id="barrier-text-input" rows="2" class="w-full p-2 border rounded-md" placeholder="Describe the barrier...">${barrier.text}</textarea></div>
+                         ${createSliderRow('importance', 'Importance', barrier.importance, barrier.notesImportance)}
+                         ${createSliderRow('addressability', 'Addressability', barrier.addressability, barrier.notesAddressability)}
+                         ${createSliderRow('frequency', 'Frequency', barrier.frequency, barrier.notesFrequency)}
+                         ${createSliderRow('equityImpact', 'Equity Impact', barrier.equityImpact, barrier.notesEquityImpact)}
+                     </div>
+                     <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
+                         <button onclick="closeModal('barrier-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
+                         <button onclick="saveBarrierDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">Save Details</button>
+                     </div>
+                </div>
+            </div>`;
+            document.getElementById('modal-container').innerHTML = modalHTML;
+        }
+
+        function saveBarrierDetails() {
+            const barrierId = document.getElementById('current-barrier-id').value;
+            const isNew = barrierId === '';
+            let barrier = isNew ? { id: Date.now() } : projectData.barriers.find(b => b.id == barrierId);
+            if (!barrier) return;
+            barrier.text = document.getElementById('barrier-text-input').value;
+            if (!barrier.text.trim()) { alert("Please enter a description for the barrier."); return; }
+            const criteria = ['importance', 'addressability', 'frequency', 'equityImpact'];
+            criteria.forEach(c => {
+                const slider = document.querySelector(`input[name="${c}"]`);
+                barrier[c] = slider ? parseInt(slider.value) : 50;
+                const noteKey = `notes${c.charAt(0).toUpperCase() + c.slice(1)}`;
+                const noteInput = document.querySelector(`textarea[name="${noteKey}"]`);
+                if (noteInput) { barrier[noteKey] = noteInput.value; }
+            });
+            if (isNew) projectData.barriers.push(barrier);
+            closeModal('barrier-modal');
+            renderBarrierList();
+            renderBarrierPlot();
+            updateDashboard();
+        }
+
+        function renderStrategySelector(){ const container = document.getElementById('page-strategy-selector'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Strategy Selector</h1><div class="grid lg:grid-cols-3 gap-8"><div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Prioritized Barriers</h3><p class="text-sm text-gray-600 mb-4">Barriers from the 'High Priority' quadrant appear here. Select one to see relevant strategies.</p><div id="selector-barrier-list" class="space-y-2"></div></div><div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Suggested Strategies (ERIC)</h3><div id="strategy-list" class="space-y-4"></div></div></div>`; const e=document.getElementById("selector-barrier-list"); const highPriorityBarriers = projectData.barriers.filter(b => b.importance >= 50 && b.addressability >= 50); if(e){ if(highPriorityBarriers.length === 0){e.innerHTML='<p class="text-sm text-gray-500">No high-priority barriers identified. Use the Barrier Prioritizer tool first.</p>',document.getElementById("strategy-list").innerHTML=""}else{e.innerHTML=highPriorityBarriers.map(b=>`<div class="p-2 border rounded-md cursor-pointer hover:bg-gold-light/20" onclick="selectBarrierForStrategies(this, '${b.text}')">${b.text}</div>`).join(""),selectBarrierForStrategies(e.querySelector('div'), highPriorityBarriers[0].text)}} }
+        window.selectBarrierForStrategies=(e,t)=>{document.querySelectorAll("#selector-barrier-list > div").forEach(e=>e.classList.remove("bg-gold-light/50","border-red-cardinal")),e.classList.add("bg-gold-light/50","border-red-cardinal");const n=document.getElementById("strategy-list");let o=[];const a=ericStrategiesData.reduce((e,t)=>(e[t.domain]?e[t.domain].push(t.name):e[t.domain]=[t.name],e),{});t.toLowerCase().includes("cultur")||t.toLowerCase().includes("content")?o=a["Adapt and Tailor to the Context"].concat(a["Engage Consumers"]):t.toLowerCase().includes("engag")||t.toLowerCase().includes("fatigue")?o=a["Use Evaluative and Iterative Strategies"].concat(a["Support Clinicians"]):t.toLowerCase().includes("knowledg")||t.toLowerCase().includes("train")?o=a["Train and Educate Stakeholders"]:t.toLowerCase().includes("resourc")||t.toLowerCase().includes("cost")?o=a["Develop and Organize Resources"]:o=[...a["Develop Stakeholder Interrelationships"],...a["Use Financial Strategies"]],n.innerHTML=o.map(e=>`<div class="p-3 bg-gray-50 rounded-md border">${e}</div>`).join("")};
+        
+        function renderCpdDiagrammer() {
+            const container = document.getElementById('page-causal-pathway-diagrammer');
+            container.innerHTML = `${createBackLink('tools')}
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Causal Pathway Diagrammer</h1>
+                <p class="text-center text-sm max-w-2xl mx-auto mb-6 -mt-6">Drag background to pan. Drag nodes to move. Shift-drag from node to node to link. Double-click to edit text.</p>
+                <div id="cpd-container">
+                    <div id="cpd-toolbar">
+                        <h3>Elements</h3>
+                        <div id="cpd-palette"></div>
+                    </div>
+                    <div id="cpd-canvas-wrapper" class="canvas-container">
+                        <svg id="cpd-canvas-svg"></svg>
+                        <div class="zoom-controls">
+                             <button onclick="fitCpdView()" title="Fit to View" class="bg-gray-200 w-8 h-8 rounded-full font-bold flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"/></svg></button>
+                            <button onclick="cpdZoom.scaleBy(cpdSvg.transition().duration(250), 1.2)" title="Zoom In" class="bg-gray-200 w-8 h-8 rounded-full font-bold text-lg">+</button>
+                            <button onclick="cpdZoom.scaleBy(cpdSvg.transition().duration(250), 0.8)" title="Zoom Out" class="bg-gray-200 w-8 h-8 rounded-full font-bold text-lg">-</button>
+                        </div>
+                        <button onclick="clearCpdCanvas()" class="clear-btn bg-gray-200 text-gray-700 font-bold py-1 px-3 rounded-lg text-sm">Clear</button>
+                    </div>
+                </div>`;
+            renderCpdPalette();
+            initializeCpdCanvas();
+            document.addEventListener('keydown', handleCpdKeyDown);
+        }
+
+        function cleanupCpdListeners() { document.removeEventListener('keydown', handleCpdKeyDown); }
+        
+        function deleteCpdNode(nodeId) {
+            projectData.cpdNodes = projectData.cpdNodes.filter(n => n.id !== nodeId);
+            projectData.cpdConnections = projectData.cpdConnections.filter(l => l.source !== nodeId && l.target !== nodeId);
+            selectedCpdNodeId = null;
+            updateCpdDiagram();
+        }
+
+        function handleCpdKeyDown(event) {
+            if (document.getElementById('page-causal-pathway-diagrammer').classList.contains('hidden')) return;
+            if (event.key === 'Delete' || event.key === 'Backspace') {
+                event.preventDefault();
+                if (selectedCpdNodeId) { deleteCpdNode(selectedCpdNodeId); } 
+                else if (selectedCpdLinkId) {
+                    projectData.cpdConnections = projectData.cpdConnections.filter(l => l.id !== selectedCpdLinkId);
+                    selectedCpdLinkId = null;
+                    updateCpdDiagram();
+                }
+            }
+        }
+        
+        function renderCpdPalette() {
+            const palette = document.getElementById('cpd-palette');
+            palette.innerHTML = Object.entries(cpdNodeTypes).map(([type, {label}]) => `<button class="cpd-tool-btn" onclick="addCpdNode('${type}')" title="${cpdLearningModules[type]?.definition || ''}">${label}</button>`).join('');
+        }
+
+        function addCpdNode(type) {
+            const { label, width, height } = cpdNodeTypes[type];
+            const svgEl = document.getElementById('cpd-canvas-svg');
+            const currentTransform = d3.zoomTransform(svgEl);
+            const centerX = (svgEl.clientWidth / 2 - currentTransform.x) / currentTransform.k;
+            const centerY = (svgEl.clientHeight / 2 - currentTransform.y) / currentTransform.k;
+            const newNode = { id: Date.now(), type, text: `New ${label}`, width, height, x: centerX, y: centerY };
+            projectData.cpdNodes.push(newNode);
+            updateCpdDiagram();
+        }
+
+        function clearCpdCanvas() {
+            if (window.confirm("Are you sure you want to clear the entire canvas? This cannot be undone.")) {
+                projectData.cpdNodes = [];
+                projectData.cpdConnections = [];
+                updateCpdDiagram();
+            }
+        }
+        
+        function fitCpdView() {
+            if (projectData.cpdNodes.length === 0) return;
+            const svgNode = cpdSvg.node();
+            const svgWidth = svgNode.clientWidth;
+            const svgHeight = svgNode.clientHeight;
+            
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            projectData.cpdNodes.forEach(d => {
+                const halfWidth = (d.width || cpdNodeTypes[d.type].width) / 2;
+                const halfHeight = (d.height || cpdNodeTypes[d.type].height) / 2;
+                minX = Math.min(minX, d.x - halfWidth); minY = Math.min(minY, d.y - halfHeight);
+                maxX = Math.max(maxX, d.x + halfWidth); maxY = Math.max(maxY, d.y + halfHeight);
+            });
+
+            if (!isFinite(minX)) return;
+            const padding = 80;
+            const viewBoxWidth = (maxX - minX) + padding;
+            const viewBoxHeight = (maxY - minY) + padding;
+            const scale = Math.min(svgWidth / viewBoxWidth, svgHeight / viewBoxHeight, 1.5);
+            const transform = d3.zoomIdentity.translate(svgWidth / 2, svgHeight / 2).scale(scale).translate(-(minX + (maxX - minX) / 2), -(minY + (maxY - minY) / 2));
+            cpdSvg.transition().duration(750).call(cpdZoom.transform, transform);
+        }
+
+        function initializeCpdCanvas() {
+            cpdSvg = d3.select("#cpd-canvas-svg");
+            cpdSvg.html(`<defs><marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--brown-dark)"></path></marker><marker id="arrow-hover" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker><marker id="arrow-selected" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker></defs>`);
+            cpdG = cpdSvg.append("g");
+            cpdG.append("g").attr("class", "links");
+            cpdG.append("g").attr("class", "nodes");
+            cpdZoom = d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => cpdG.attr("transform", event.transform));
+            cpdSvg.call(cpdZoom).on("dblclick.zoom", null);
+            cpdSvg.on('click', (event) => { if (event.target === cpdSvg.node()) { deselectAllCpdElements(); } });
+            updateCpdDiagram();
+            setTimeout(fitCpdView, 100);
+        }
+
+        function deselectAllCpdElements() {
+            selectedCpdNodeId = null;
+            selectedCpdLinkId = null;
+            cpdG.selectAll('.selected').classed('selected', false);
+        }
+
+        function updateCpdDiagram() {
+            if (!cpdG) return;
+            projectData.cpdConnections.forEach(l => { if (!l.id) l.id = `link-${l.source}-${l.target}-${Math.random()}`; });
+            const link = cpdG.select(".links").selectAll(".cpd-link-group").data(projectData.cpdConnections, d => d.id);
+            link.exit().remove();
+            const linkEnter = link.enter().append("g").attr("class", "cpd-link-group");
+            linkEnter.append("path").attr("class", "cpd-link");
+            linkEnter.append("path").attr("class", "cpd-link-hitbox");
+            const linkUpdate = link.merge(linkEnter);
+            linkUpdate.on("click", function (event, d) { event.stopPropagation(); deselectAllCpdElements(); selectedCpdLinkId = d.id; d3.select(this).classed('selected', true); });
+            const node = cpdG.select(".nodes").selectAll(".cpd-node").data(projectData.cpdNodes, d => d.id);
+            node.exit().remove();
+            const nodeEnter = node.enter().append("g").attr("class", "cpd-node")
+                .on('click', function(event, d) { event.stopPropagation(); deselectAllCpdElements(); selectedCpdNodeId = d.id; d3.select(this).classed('selected', true); })
+                .on('dblclick', (event, d) => { event.stopPropagation(); const newText = prompt("Edit element text:", d.text); if (newText !== null) { d.text = newText; updateCpdDiagram(); } });
+            
+            nodeEnter.append("path").attr("class", "cpd-node-shape");
+            
+            // Use foreignObject for robust text wrapping
+            nodeEnter.append("foreignObject")
+                .attr('class', 'cpd-node-text-wrapper')
+                .append("xhtml:div")
+                .attr("xmlns", "http://www.w3.org/1999/xhtml")
+                .attr("class", "cpd-node-text-div")
+                .append("xhtml:p");
+
+            const deleteBtn = nodeEnter.append('g').attr('class', 'cpd-delete-btn').on('click', (event, d) => { event.stopPropagation(); deleteCpdNode(d.id); });
+            deleteBtn.append('circle').attr('r', 9).attr('fill', 'var(--red-cardinal)').attr('stroke', 'white');
+            deleteBtn.append('text').attr('x', 0).attr('y', 0.5).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('fill', 'white').style('font-size', '14px').style('font-weight', 'bold').text('×');
+            
+            const allNodes = node.merge(nodeEnter);
+            allNodes.attr('transform', d => `translate(${d.x},${d.y})`);
+            allNodes.select(".cpd-node-shape").attr("d", d => getNodePath(d));
+            allNodes.select(".cpd-delete-btn").attr('transform', d => `translate(${d.width/2}, ${-d.height/2})`);
+            
+            // Update foreignObject content and position
+            allNodes.select(".cpd-node-text-wrapper")
+                .attr("x", d => -d.width / 2)
+                .attr("y", d => -d.height / 2)
+                .attr("width", d => d.width)
+                .attr("height", d => d.height)
+                .select(".cpd-node-text-div p")
+                .html(d => d.text);
+
+            let dragStartNode = null;
+            let tempLinkPath = null;
+            allNodes.call(d3.drag()
+                .on("start", function(event, d) {
+                    d3.select(this).raise();
+                    if (event.sourceEvent.shiftKey) {
+                        dragStartNode = d;
+                        const startPoint = getAnchorPoint(d, 'right');
+                        tempLinkPath = cpdG.select(".links").append("path").attr("class", "cpd-link").style("stroke-dasharray", "5, 5").attr("marker-end", "url(#arrow)").attr("d", `M${startPoint.x},${startPoint.y}L${startPoint.x},${startPoint.y}`);
+                    }
+                })
+                .on("drag", function(event, d) {
+                    if (tempLinkPath) {
+                        const startPoint = getAnchorPoint(dragStartNode, 'right');
+                        tempLinkPath.attr("d", `M${startPoint.x},${startPoint.y}L${event.x},${event.y}`);
+                    } else {
+                        d.x = event.x; d.y = event.y;
+                        updateCpdDiagram();
+                    }
+                })
+                .on("end", function(event, d) {
+                    if (tempLinkPath) {
+                        tempLinkPath.remove(); tempLinkPath = null;
+                        const endNodeEl = event.sourceEvent.target.closest('.cpd-node');
+                        if (endNodeEl) {
+                            const endNode = d3.select(endNodeEl).datum();
+                            if (endNode && endNode.id !== dragStartNode.id) {
+                                const linkExists = projectData.cpdConnections.some(l => (l.source === dragStartNode.id && l.target === endNode.id));
+                                if (!linkExists) { projectData.cpdConnections.push({ source: dragStartNode.id, target: endNode.id }); updateCpdDiagram(); }
+                            }
+                        }
+                    }
+                    dragStartNode = null;
+                }));
+            linkUpdate.selectAll('.cpd-link, .cpd-link-hitbox').attr('d', d => {
+                const sourceNode = projectData.cpdNodes.find(n => n.id === d.source);
+                const targetNode = projectData.cpdNodes.find(n => n.id === d.target);
+                if (!sourceNode || !targetNode) return "";
+                const { start, end } = getLinkEndPoints(sourceNode, targetNode);
+                return `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
+            });
+        }
+        
+        function getNodePath(node) {
+            const w = node.width, h = node.height; const x = -w / 2, y = -h / 2; const r = 12;
+            switch(cpdNodeTypes[node.type].shape) {
+                case 'rectangle': return `M${x+r},${y} h${w-2*r} a${r},${r} 0 0 1 ${r},${r} v${h-2*r} a${r},${r} 0 0 1 -${r},${r} h-${w-2*r} a${r},${r} 0 0 1 -${r},-${r} v-${h-2*r} a${r},${r} 0 0 1 ${r},-${r} z`;
+                case 'diamond': return `M0,${y} L${x+w},0 L0,${y+h} L${x},0 Z`;
+                case 'octagon': const octSideRatio = 0.4142; const cornerX = w / 2 * octSideRatio; const cornerY = h / 2 * octSideRatio; return `M ${x+cornerX},${y} L ${x+w-cornerX},${y} L ${x+w},${y+cornerY} L ${x+w},${y+h-cornerY} L ${x+w-cornerX},${y+h} L ${x+cornerX},${y+h} L ${x},${y+h-cornerY} L ${x},${y+cornerY} Z`;
+                case 'ellipse': return `M${x},0 a${w/2},${h/2} 0 1,0 ${w},0 a${w/2},${h/2} 0 1,0 -${w},0`;
+                case 'square': return `M${x},${y} h${w} v${h} h-${w} z`;
+                case 'trapezoid': return `M${x},${y+h} l${w*0.15},-${h} h${w*0.7} l${w*0.15},${h} z`;
+                default: return `M${x},${y} h${w} v${h} h-${w} z`;
+            }
+        }
+        
+        function getAnchorPoint(node, direction) {
+            switch(direction) {
+                case 'top': return { x: node.x, y: node.y - node.height / 2 };
+                case 'bottom': return { x: node.x, y: node.y + node.height / 2 };
+                case 'left': return { x: node.x - node.width / 2, y: node.y };
+                case 'right': return { x: node.x + node.width / 2, y: node.y };
+                default: return { x: node.x, y: node.y };
+            }
+        }
+
+        function getLinkEndPoints(source, target) {
+            let startDir = 'right', endDir = 'left';
+            if (source.type === 'moderator' || source.type === 'precondition') { startDir = 'bottom'; }
+            if (target.type === 'moderator' || target.type === 'precondition') { endDir = 'top'; }
+            if ((source.type === 'implementation_strategy' && target.type === 'moderator') || (source.type === 'moderator' && target.type === 'implementation_strategy')) { startDir = 'top'; endDir = 'bottom'; }
+            if (source.x > target.x) { [startDir, endDir] = ['left', 'right']; }
+            const verticalThreshold = 50;
+            if (Math.abs(source.x - target.x) < verticalThreshold) { if (source.y < target.y) { [startDir, endDir] = ['bottom', 'top']; } else { [startDir, endDir] = ['top', 'bottom']; } }
+            return { start: getAnchorPoint(source, startDir), end: getAnchorPoint(target, endDir) };
+        }
+
+        function renderAdaptationsTracker(){ 
+            const container = document.getElementById('page-adaptations-tracker'); 
+            container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Adaptations Tracker</h1><div class="mb-6"><button id="add-adaptation-btn" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg" onclick="openAdaptationModal()">Log New Adaptation</button></div><div id="adaptation-log" class="space-y-4"></div>`; 
+            renderAdaptationLog();
+        }
+
+        function renderAdaptationLog() {
+            const logContainer = document.getElementById("adaptation-log");
+            if(!logContainer) return;
+            if(projectData.adaptations.length === 0) { logContainer.innerHTML = '<p class="text-gray-500 text-center">No adaptations logged yet.</p>'; } 
+            else {
+                logContainer.innerHTML = projectData.adaptations.map(e => `
+                    <div class="p-4 bg-white rounded-lg shadow cursor-pointer hover:shadow-md" onclick="viewAdaptation(${e.id})">
+                        <div class="flex justify-between items-start">
+                            <div><p class="font-bold text-brown-dark">${adaptationFrameworks[e.framework].title}</p><p class="text-sm text-gray-500">Logged on: ${new Date(e.data['Date of Modification']).toLocaleDateString()}</p></div>
+                            <span class="text-sm text-red-cardinal">View Details</span>
+                        </div>
+                    </div>`).join('');
+            }
+        }
+
+        function viewAdaptation(adaptationId) { openAdaptationModal(adaptationId); }
+
+        function openAdaptationModal(adaptationId = null){
+            let adaptation = adaptationId ? projectData.adaptations.find(a => a.id === adaptationId) : null;
+            const frameworkKey = adaptation ? adaptation.framework : 'frame';
+            const framework = adaptationFrameworks[frameworkKey];
+            const data = adaptation ? adaptation.data : {};
+            let formHTML = framework.sections.map(section => `<div class="mb-4"><h3 class="text-lg font-semibold text-brown-dark border-b mb-2 pb-1">${section.name}</h3><div class="space-y-3">${section.fields.map(field => {
+                let value = data[field.label] || (field.type === 'date' ? new Date().toISOString().split('T')[0] : '');
+                let inputHtml = "";
+                if (field.id === 'what' || field.id === 'strategy') {
+                    const coreComponentOptions = projectData.ebp.coreComponents.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+                    const strategyOptions = (projectData.cpdNodes.filter(n => n.type === 'implementation_strategy').map(n => n.text) || []).map(s => `<option value="${s}">${s}</option>`).join('');
+                    const staticOptions = field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("");
+                    let finalOptions = field.id === 'what' ? `<optgroup label="General">${staticOptions}</optgroup><optgroup label="Core Components">${coreComponentOptions}</optgroup>` : `<optgroup label="Defined Strategies">${strategyOptions}</optgroup>`;
+                    inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${finalOptions}</select>`;
+                } else {
+                    switch(field.type){
+                        case "date": inputHtml = `<input type="date" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" value="${value}">`; break;
+                        case "select": inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("")}</select>`; break;
+                        case "textarea": inputHtml = `<textarea name="${field.label}" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}">${value}</textarea>`; break;
+                        default: inputHtml = `<input type="text" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}" value="${value}">`;
+                    }
+                }
+                return`<label class="block"><span class="text-sm font-medium">${field.label}</span>${inputHtml}</label>`
+            }).join("")}</div></div>`).join("");
+
+            const modalHTML = `
+            <div id="adaptation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-full overflow-y-auto">
+                    <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${adaptationId ? 'View/Edit' : 'Log'} Adaptation</h2></div>
+                    <div class="p-6">
+                        <input type="hidden" id="current-adaptation-id" value="${adaptationId || ''}">
+                        <label class="block mb-4"><span class="font-semibold">Framework:</span><select id="adaptation-framework-select" class="w-full mt-1 p-2 border rounded-md"><option value="frame" ${frameworkKey === 'frame' ? 'selected': ''}>FRAME</option><option value="frame-is" ${frameworkKey === 'frame-is' ? 'selected': ''}>FRAME-IS</option><option value="adapt-itt" ${frameworkKey === 'adapt-itt' ? 'selected': ''}>ADAPT-ITT</option></select></label>
+                        <div id="adaptation-form-container"><form id="adaptation-form">${formHTML}</form></div>
+                    </div>
+                    <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
+                        <button onclick="closeModal('adaptation-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
+                        <button id="adaptation-save-btn" onclick="saveAdaptation()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">${adaptationId ? 'Update' : 'Save'}</button>
+                    </div>
+                </div>
+            </div>`;
+            document.getElementById('modal-container').innerHTML = modalHTML;
+            document.getElementById('adaptation-framework-select').onchange = (e) => {
+                const newFramework = e.target.value;
+                const currentData = adaptation ? adaptation.data : {};
+                const newAdaptation = { id: adaptationId, framework: newFramework, data: currentData };
+                openAdaptationModalWithData(newAdaptation);
+            };
+        }
+        
+        function openAdaptationModalWithData(adaptation) {
+            // This is a helper to reopen the modal with existing data when framework changes
+            const adaptationId = adaptation.id;
+            const frameworkKey = adaptation.framework;
+            const framework = adaptationFrameworks[frameworkKey];
+            const data = adaptation.data;
+            let formHTML = framework.sections.map(section => `<div class="mb-4"><h3 class="text-lg font-semibold text-brown-dark border-b mb-2 pb-1">${section.name}</h3><div class="space-y-3">${section.fields.map(field => {
+                let value = data[field.label] || (field.type === 'date' ? new Date().toISOString().split('T')[0] : '');
+                let inputHtml = "";
+                 if (field.id === 'what' || field.id === 'strategy') {
+                    const coreComponentOptions = projectData.ebp.coreComponents.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+                    const strategyOptions = (projectData.cpdNodes.filter(n => n.type === 'implementation_strategy').map(n => n.text) || []).map(s => `<option value="${s}">${s}</option>`).join('');
+                    const staticOptions = field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("");
+                    let finalOptions = field.id === 'what' ? `<optgroup label="General">${staticOptions}</optgroup><optgroup label="Core Components">${coreComponentOptions}</optgroup>` : `<optgroup label="Defined Strategies">${strategyOptions}</optgroup>`;
+                    inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${finalOptions}</select>`;
+                } else {
+                    switch(field.type){
+                        case "date": inputHtml = `<input type="date" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" value="${value}">`; break;
+                        case "select": inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("")}</select>`; break;
+                        case "textarea": inputHtml = `<textarea name="${field.label}" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}">${value}</textarea>`; break;
+                        default: inputHtml = `<input type="text" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}" value="${value}">`;
+                    }
+                }
+                return`<label class="block"><span class="text-sm font-medium">${field.label}</span>${inputHtml}</label>`
+            }).join("")}</div></div>`).join("");
+            
+            document.getElementById('adaptation-form-container').innerHTML = `<form id="adaptation-form">${formHTML}</form>`;
+        }
+
+
+        function saveAdaptation(){
+            const form = document.getElementById('adaptation-form');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const adaptationId = document.getElementById('current-adaptation-id').value;
+            const frameworkKey = document.getElementById('adaptation-framework-select').value;
+            if (adaptationId) {
+                const index = projectData.adaptations.findIndex(a => a.id == adaptationId);
+                projectData.adaptations[index].framework = frameworkKey;
+                projectData.adaptations[index].data = data;
+            } else {
+                projectData.adaptations.push({ id: Date.now(), framework: frameworkKey, date: new Date().toISOString(), data: data });
+            }
+            if (!document.getElementById('page-adaptations-tracker').classList.contains('hidden')) { renderAdaptationLog(); }
+            if (!document.getElementById('dashboard').classList.contains('hidden')) { updateDashboard(); }
+            closeModal('adaptation-modal');
+        }
+        
+        function closeModal(modalId) { const modal = document.getElementById(modalId); if (modal) modal.remove(); }
+
+        function renderOutcomeRepository(){ const container = document.getElementById('page-outcome-repository'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Outcome Measures Repository</h1><div class="mb-6"><label class="font-semibold">Filter by Outcome (Proctor et al.):</label><select id="outcome-filter" class="w-full mt-1 p-2 border rounded-md"><option value="all">All Outcomes</option></select></div><div id="outcome-measures-list" class="space-y-4"></div>`; const e=document.getElementById("outcome-filter"),t=[...new Set(outcomeMeasures.map(e=>e.outcome))];e.innerHTML+='<option value="all">All Outcomes</option>'+t.map(e=>`<option value="${e}">${e}</option>`).join(""),e.addEventListener("change",renderOutcomeMeasures),renderOutcomeMeasures()}
+        function renderOutcomeMeasures(){const e=document.getElementById("outcome-filter").value,t=document.getElementById("outcome-measures-list"),n="all"===e?outcomeMeasures:outcomeMeasures.filter(t=>t.outcome===e);t.innerHTML=n.length===0?'<p class="text-gray-500">No measures found for this outcome.</p>':n.map(e=>`<div class="p-4 border rounded-md bg-gray-50"><h3 class="font-bold text-brown-dark">${e.name}</h3><p class="text-sm text-red-cardinal">Outcome: ${e.outcome}</p><p class="text-sm mt-2">${e.description}</p></div>`).join("")}
+        
+        function renderLearnContent(){
+            const container = document.getElementById("learn");
+            container.innerHTML = `<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Learn Implementation Science</h1><div class="max-w-4xl mx-auto space-y-6"><div class="bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-brown-dark mb-4">What is Implementation Science?</h2><p class="text-gray-600">Implementation Science (IS) is the scientific study of methods to promote the systematic uptake of research findings and other evidence-based practices into routine practice to improve the quality and effectiveness of services. This field aims to close the "know-do gap."</p></div><div class="bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-brown-dark mb-4">Core IS Concepts</h2><div class="space-y-2"><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Theories, Models, and Frameworks (TMFs)</summary><p class="mt-2 text-sm">TMFs provide structure for understanding implementation. <strong>Determinant Frameworks</strong> (like CFIR) help identify barriers. <strong>Process Models</strong> (like EPIS) guide the process. <strong>Evaluation Frameworks</strong> (like RE-AIM) help assess impact.</p><a onclick="showPage('page-tmf-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore TMFs &rarr;</a></details><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Implementation Strategies</summary><p class="mt-2 text-sm">These are the specific actions taken to enhance adoption and sustainment. The Expert Recommendations for Implementing Change (ERIC) project compiled 73 discrete strategies.</p><a onclick="showPage('page-eric-strategies', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore ERIC Strategies &rarr;</a></details><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Proctor's Research Outcomes</summary><p class="mt-2 text-sm">Implementation success is measured by a hierarchy of outcomes: Acceptability, Adoption, Appropriateness, Feasibility, Fidelity, Cost, Penetration, and Sustainability.</p><a onclick="showPage('page-proctor-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore Proctor's Framework &rarr;</a></details></div></div></div>`;
+        }
+
+        function renderEricStrategiesPage(fromPage) {
+            const container = document.getElementById('page-eric-strategies');
+            container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">ERIC Implementation Strategies</h1><div class="bg-white p-6 rounded-lg shadow-lg"><input type="text" id="eric-search" class="w-full p-2 border rounded-md mb-4" placeholder="Search strategies..."><div class="overflow-x-auto"><table id="eric-table" class="w-full text-left"><thead><tr class="border-b-2 border-gray-200"><th class="p-2" onclick="sortTable('eric-table', 0)">Strategy Name</th><th class="p-2" onclick="sortTable('eric-table', 1)">Domain</th><th class="p-2" onclick="sortTable('eric-table', 2)">Definition</th><th class="p-2">Example</th></tr></thead><tbody id="eric-table-body"></tbody></table></div></div>`;
+            const searchInput = document.getElementById('eric-search');
+            searchInput.addEventListener('keyup', () => filterEricTable(searchInput.value));
+            renderEricTable(ericStrategiesData);
+        }
+        
+        function filterEricTable(searchTerm) {
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            const filteredData = ericStrategiesData.filter(s => s.name.toLowerCase().includes(lowerCaseSearchTerm) || s.domain.toLowerCase().includes(lowerCaseSearchTerm) || s.definition.toLowerCase().includes(lowerCaseSearchTerm) || s.example.toLowerCase().includes(lowerCaseSearchTerm));
+            renderEricTable(filteredData);
+        }
+
+        function renderEricTable(data) {
+            const tableBody = document.getElementById('eric-table-body');
+            tableBody.innerHTML = data.map(s => `<tr class="border-b border-gray-100 hover:bg-gray-50"><td class="p-2 font-semibold text-brown-dark">${s.name}</td><td class="p-2 text-sm">${s.domain}</td><td class="p-2 text-sm">${s.definition}</td><td class="p-2 text-sm text-gray-500">${s.example}</td></tr>`).join('');
+        }
+
+        function sortTable(tableId, colIndex) {
+            const table = document.getElementById(tableId);
+            let switching = true, dir = "asc", switchcount = 0;
+            while (switching) {
+                switching = false; const rows = table.rows;
+                for (let i = 1; i < (rows.length - 1); i++) {
+                    let shouldSwitch = false;
+                    const x = rows[i].getElementsByTagName("TD")[colIndex];
+                    const y = rows[i + 1].getElementsByTagName("TD")[colIndex];
+                    if (dir == "asc") { if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) { shouldSwitch = true; break; } } 
+                    else if (dir == "desc") { if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) { shouldSwitch = true; break; } }
+                }
+                if (shouldSwitch) { rows[i].parentNode.insertBefore(rows[i + 1], rows[i]); switching = true; switchcount++; } 
+                else { if (switchcount == 0 && dir == "asc") { dir = "desc"; switching = true; } }
+            }
+        }
+
+        function renderProctorModule(fromPage) { const container = document.getElementById('page-proctor-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: Proctor's Implementation Outcomes</h1><div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Introduction</h2><p>In implementation science, it's critical to distinguish between the success of the <strong>implementation strategies</strong> and the effectiveness of the <strong>clinical or educational intervention</strong> itself. A brilliant intervention might fail if implemented poorly, and conversely, excellent implementation cannot save a flawed intervention. Dr. Enola Proctor's taxonomy provides a framework for conceptualizing and measuring these different facets of success. It encourages researchers and practitioners to measure outcomes at three levels: implementation, service, and client. This prevents the common mistake of conflating implementation failure with intervention failure and allows for a more precise understanding of what works, for whom, and under what conditions.</p></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">1. Implementation Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are the direct effects of the implementation strategies. They tell us how well the implementation process itself is going.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Acceptability:</strong> The perception among stakeholders that an intervention is agreeable, palatable, or satisfactory.</li><li><strong>Adoption:</strong> The intention, initial decision, or action to try or employ an innovation or evidence-based practice.</li><li><strong>Appropriateness:</strong> The perceived fit, relevance, or compatibility of the innovation for a given practice setting, provider, or consumer.</li><li><strong>Feasibility:</strong> The extent to which an evidence-based practice can be successfully used or carried out within a given agency or setting.</li><li><strong>Fidelity:</strong> The degree to which an intervention was implemented as it was prescribed in the original protocol or program model.</li><li><strong>Implementation Cost:</strong> The incremental costs incurred by the service system to implement an evidence-based practice.</li><li><strong>Penetration:</strong> The extent to which a practice or innovation is integrated within a service setting and its subsystems.</li><li><strong>Sustainability:</strong> The extent to which a newly implemented treatment is maintained or institutionalized within a service setting's ongoing, stable operations.</li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">2. Service Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are indicators of the quality of the service being delivered.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Efficiency, Safety, Effectiveness, Equity, Patient-Centeredness, Timeliness</strong></li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">3. Client Outcomes</h2><p class="text-sm text-gray-600 mb-3">These are the ultimate outcomes for individuals receiving the intervention.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Satisfaction, Function, Health Status</strong></li></ul></div></div>`; }
+        function renderTmfModule(fromPage) { const container = document.getElementById('page-tmf-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: TMFs</h1><div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Why use TMFs?</h2><p>TMFs are the intellectual scaffolding of implementation science, providing a common language and conceptual roadmap to describe, understand, and evaluate the process of translating research into practice.</p></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">Types of TMFs</h2><div class="space-y-4"><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Determinant Frameworks</h3><p class="text-sm">Describe factors that influence implementation outcomes. (e.g., <strong>CFIR</strong>)</p><a onclick="showPage('page-cfir-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore CFIR &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Process Models</h3><p class="text-sm">Describe and guide the implementation process through stages. (e.g., <strong>EPIS</strong>)</p><a onclick="showPage('page-epis-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore EPIS &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Logic Models</h3><p class="text-sm">Visually represent the hypothesized causal pathway. (e.g., <strong>IRLM</strong>)</p><a onclick="showPage('page-irlm-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore IRLM &rarr;</a></div></div></div></div>`; }
+        function renderCfirModule(fromPage) { const container = document.getElementById('page-cfir-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: CFIR</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Consolidated Framework for Implementation Research (CFIR)</strong> is a determinant framework that offers a comprehensive taxonomy of constructs likely to influence implementation. It's a "menu" of factors to consider when planning for implementation or explaining why an implementation was or was not successful.</p><p><strong>Key Use Case:</strong> Systematically identifying potential barriers and facilitators before a project begins.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open CFIR Worksheet Tool &rarr;</a></div>`; }
+        function renderEpisModule(fromPage) { const container = document.getElementById('page-epis-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: EPIS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Exploration, Preparation, Implementation, Sustainment (EPIS)</strong> framework is a process model that describes the four common phases of an implementation project. It highlights how factors in the outer (system) and inner (organizational) contexts interact across these phases to influence outcomes.</p><p><strong>Key Use Case:</strong> Guiding the overall lifecycle of an implementation project.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open EPIS Worksheet Tool &rarr;</a></div>`; }
+        function renderParihsModule(fromPage) { const container = document.getElementById('page-parihs-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: PARIHS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Promoting Action on Research Implementation in Health Services (PARIHS)</strong> framework posits that successful implementation (SI) is a function of the interplay between <strong>Evidence (E)</strong>, <strong>Context (C)</strong>, and <strong>Facilitation (F)</strong>. It emphasizes that evidence alone is not enough; it must be considered in relation to the context and actively facilitated.</p><p><strong>Key Use Case:</strong> Diagnosing implementation challenges by assessing the E, C, and F components.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open PARIHS Worksheet Tool &rarr;</a></div>`; }
+        function renderIrlmModule(fromPage) { const container = document.getElementById('page-irlm-module'); container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: IRLM</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Implementation Research Logic Model (IRLM)</strong> helps researchers specify the hypothesized causal pathways in their projects. It links strategies to mechanisms to outcomes, articulating the "how" and "why" of an implementation effort.</p><p><strong>Key Use Case:</strong> Planning an implementation study and articulating the theory of change.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open IRLM Tool &rarr;</a></div>`; }
+
+        function updateDashboard(){
+            const container = document.getElementById('dashboard');
+            const highPriorityBarriers = projectData.barriers.filter(b => b.importance >= 50 && b.addressability >= 50).length;
+            container.innerHTML = `<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Project Dashboard</h1><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Actors Mapped</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.ecosystemActors.length}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Barriers Identified</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.barriers.length}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">High-Priority Barriers</h3><p class="text-3xl font-bold text-red-cardinal">${highPriorityBarriers}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Adaptations Logged</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.adaptations.length}</p></div></div><div class="mt-8 bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-red-cardinal mb-4">Barrier Prioritization Overview</h2><div id="dashboard-barrier-chart" class="w-full h-64"></div></div><div class="mt-8 bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-red-cardinal mb-4">Adaptation Log Summary</h2><div id="dashboard-adaptation-log"></div></div>`;
+            const barrierChartContainer = document.getElementById("dashboard-barrier-chart");
+            if(barrierChartContainer) {
+                const chartData = [{ quadrant: "High Priority", count: highPriorityBarriers }, { quadrant: "Target for Innovation", count: projectData.barriers.filter(b => b.importance >= 50 && b.addressability < 50).length }, { quadrant: "Strategic Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability >= 50).length }, { quadrant: "Low Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability < 50).length }];
+                const {width, height} = barrierChartContainer.getBoundingClientRect();
+                const radius = Math.min(width, height) / 2 - 20;
+                const svg = d3.select(barrierChartContainer).append("svg").attr("width", width).attr("height", height).append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
+                const color = d3.scaleOrdinal().domain(chartData.map(d => d.quadrant)).range(["#166534", "#9f1239", "#854d0e", "#475569"]);
+                const pie = d3.pie().value(d => d.count).sort(null);
+                const data_ready = pie(chartData);
+                svg.selectAll('path').data(data_ready).enter().append('path').attr('d', d3.arc().innerRadius(radius * 0.5).outerRadius(radius)).attr('fill', d => color(d.data.quadrant)).attr("stroke", "white").style("stroke-width", "2px");
+                svg.selectAll('text').data(data_ready).enter().append('text').text(d => d.data.count > 0 ? `${d.data.count}` : "").attr("transform", d => `translate(${d3.arc().innerRadius(radius).outerRadius(radius).centroid(d)})`).style("text-anchor", "middle").style("font-size", "12px").style("fill", "white").style("font-weight", "bold");
+            }
+            renderAdaptationLogForDashboard();
+        }
+        
+        function renderAdaptationLogForDashboard() {
+            const container = document.getElementById('dashboard-adaptation-log');
+            if (!container) return;
+            container.innerHTML = projectData.adaptations.length === 0 ? '<p class="text-gray-500 text-center">No adaptations have been logged yet.</p>' : `<div class="space-y-4">${projectData.adaptations.map(adapt => `<div class="p-4 bg-gray-50 rounded-lg border cursor-pointer hover:bg-gray-100" onclick="viewAdaptation(${adapt.id})"><p class="font-bold text-brown-dark">${adaptationFrameworks[adapt.framework].title} Adaptation on ${new Date(adapt.data['Date of Modification']).toLocaleDateString()}</p><ul class="mt-2 text-sm list-disc list-outside pl-5 space-y-1 text-gray-600"><li><strong>Modification:</strong> ${adapt.data['Nature of the content modification'] || adapt.data['What was modified for the implementation strategy?'] || 'Details not specified.'}</li><li><strong>Reason:</strong> ${adapt.data['What were the reasons for the modification?'] || adapt.data['What were the reasons for the implementation strategy modification?'] || 'Details not specified.'}</li></ul></div>`).join('')}</div>`;
+        }
+
+        function renderFidelityPlanner() {
+            const container = document.getElementById('page-fidelity-planner');
+            if (!container) return;
+            container.innerHTML = `${createBackLink('tools')}<div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-3xl font-bold text-brown-dark mb-2">Fidelity Plan</h3><p class="text-gray-600 mb-6">Specify the core components of the EBP and plan how to measure if they are delivered as intended.</p><div id="fidelity-plan-container" class="space-y-4"></div><div class="mt-6"><button onclick="addNewCoreComponent()" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add Core Component</button></div></div>`;
+            renderFidelityComponentRows();
+        }
+
+        function renderFidelityComponentRows() {
+            const container = document.getElementById('fidelity-plan-container');
+            if (!container) return;
+            container.innerHTML = ''; 
+            if (!projectData.ebp.coreComponents || projectData.ebp.coreComponents.length === 0) { container.innerHTML = `<p class="text-gray-500 text-center py-4">No core components defined yet. Click "Add Core Component" to start.</p>`; return; }
+            const fidelityDimensions = ["Adherence", "Dose", "Quality", "Participant Responsiveness", "Program Differentiation"];
+            projectData.ebp.coreComponents.forEach(component => {
+                const componentEl = document.createElement('details');
+                componentEl.className = 'fidelity-component-row';
+                componentEl.innerHTML = `<summary><div class="summary-grid"><div><input type="text" class="text-lg font-semibold text-brown-dark bg-transparent w-full focus:outline-none summary-title" value="${component.name}" data-id="${component.id}" data-field="name" placeholder="Core Component Name"><div class="summary-details"><div><strong>Function:</strong> <span class="func-display">${component.func || 'Not set'}</span></div><div><strong>Dimension:</strong> <span class="dim-display">${component.dimension || 'Not set'}</span></div><div><strong>Target:</strong> <span class="target-display">${component.target || 'Not set'}</span></div></div></div><button onclick="event.stopPropagation(); deleteCoreComponent(${component.id}, 'page-fidelity-planner')" class="text-red-cardinal hover:text-red-800 font-bold text-xl">&times;</button></div></summary><div class="details-content"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block text-sm font-medium text-gray-700">Core Function</label><textarea rows="3" class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="func" placeholder="The purpose or 'active ingredient' of this component.">${component.func}</textarea></div><div><label class="block text-sm font-medium text-gray-700">Fidelity Dimension</label><select class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="dimension"><option value="">Select...</option>${fidelityDimensions.map(d => `<option value="${d}" ${component.dimension === d ? 'selected' : ''}>${d}</option>`).join('')}</select></div><div><label class="block text-sm font-medium text-gray-700">Measurement Method</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.measurement}" data-id="${component.id}" data-field="measurement" placeholder="e.g., Checklist, Observation"></div><div><label class="block text-sm font-medium text-gray-700">Fidelity Target</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.target}" data-id="${component.id}" data-field="target" placeholder="e.g., >90% of steps completed"></div></div></div>`;
+                container.appendChild(componentEl);
+            });
+            container.querySelectorAll('input, textarea, select').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const componentId = parseInt(e.target.dataset.id);
+                    const field = e.target.dataset.field;
+                    const value = e.target.value;
+                    const component = projectData.ebp.coreComponents.find(c => c.id === componentId);
+                    if (component) {
+                        component[field] = value;
+                        const summaryRow = e.target.closest('.fidelity-component-row');
+                        if (summaryRow) {
+                            if(field === 'func') summaryRow.querySelector('.func-display').textContent = value || 'Not set';
+                            if(field === 'dimension') summaryRow.querySelector('.dim-display').textContent = value || 'Not set';
+                            if(field === 'target') summaryRow.querySelector('.target-display').textContent = value || 'Not set';
+                        }
+                    }
+                });
+            });
+        }
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tools4impsci</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        :root {
+            --brown-dark: #4E3629; --brown-light: #7A5C4F; --red-cardinal: #C00404;
+            --gold-light: #FFC72C; --yellow-bright: #FFD700; --off-white: #F7F6F1; --gray-text: #555;
+        }
+        .bg-brown-dark { background-color: var(--brown-dark); } .bg-red-cardinal { background-color: var(--red-cardinal); }
+        .text-brown-dark { color: var(--brown-dark); } .text-red-cardinal { color: var(--red-cardinal); }
+        .border-red-cardinal { border-color: var(--red-cardinal); } .hover-text-gold-light:hover { color: var(--gold-light); }
+        
+        .nav-link { transition: all 0.3s ease; cursor: pointer; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none; }
+
+        .tool-card-button {
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding: 1.5rem; background-color: white; border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%; position: relative;
+        }
+        .tool-card-button:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .tool-card-button .tool-title { font-size: 1.25rem; font-weight: 600; color: var(--brown-dark); }
+        .tool-card-button .tool-description { font-size: 0.875rem; color: var(--gray-text); flex-grow: 1; margin-top: 0.5rem; }
+        
+        /* --- REBUILT CPD STYLES --- */
+        #cpd-container { display: flex; flex-direction: column; gap: 1rem; }
+        @media (min-width: 1024px) { #cpd-container { flex-direction: row; } }
+        #cpd-toolbar { flex: 0 0 auto; background-color: #f8f9fa; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        @media (min-width: 1024px) { #cpd-toolbar { flex: 0 0 220px; } }
+        #cpd-toolbar h3 { font-size: 1.1rem; font-weight: 600; color: var(--brown-dark); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0; }
+        .cpd-tool-btn { display: flex; align-items: center; width: 100%; padding: 0.6rem 0.75rem; margin-bottom: 0.5rem; border-radius: 0.375rem; background-color: white; border: 1px solid #dee2e6; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
+        .cpd-tool-btn:hover { background-color: var(--gold-light); border-color: var(--brown-light); color: var(--brown-dark); }
+        #cpd-canvas-wrapper { flex-grow: 1; position: relative; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; background-color: #fdfdfd; }
+        #cpd-canvas-svg { width: 100%; height: 700px; cursor: grab; }
+        .cpd-node { cursor: move; } .cpd-node:active { cursor: grabbing; }
+        .cpd-node-shape { stroke-width: 2px; stroke: var(--brown-dark); fill: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); transition: stroke 0.2s ease, stroke-width 0.2s ease, fill 0.2s ease; }
         .cpd-node-text { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; fill: var(--brown-dark); pointer-events: none; text-anchor: middle; dominant-baseline: middle; }
         .cpd-link { stroke: var(--brown-dark); stroke-width: 2px; marker-end: url(#arrow); transition: stroke 0.2s ease; fill: none; }
         .cpd-link-hitbox { stroke: transparent; stroke-width: 12px; cursor: pointer; fill: none; }
