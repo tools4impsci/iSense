@@ -33,82 +33,58 @@
         .tool-card-button .tool-title { font-size: 1.25rem; font-weight: 600; color: var(--brown-dark); }
         .tool-card-button .tool-description { font-size: 0.875rem; color: var(--gray-text); flex-grow: 1; margin-top: 0.5rem; }
         
-        #ecosystem-canvas { position: relative; width: 100%; min-height: 600px; background-color: white; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; }
-        
         /* --- REBUILT CPD STYLES --- */
-        #cpd-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        #cpd-container { display: flex; flex-direction: column; gap: 1rem; }
         @media (min-width: 1024px) { #cpd-container { flex-direction: row; } }
-        #cpd-toolbar {
-            flex: 0 0 auto;
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
+        #cpd-toolbar { flex: 0 0 auto; background-color: #f8f9fa; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         @media (min-width: 1024px) { #cpd-toolbar { flex: 0 0 220px; } }
-        #cpd-toolbar h3 {
-            font-size: 1.1rem; font-weight: 600; color: var(--brown-dark);
-            margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0;
-        }
-        .cpd-tool-btn {
-            display: flex; align-items: center; width: 100%; padding: 0.6rem 0.75rem;
-            margin-bottom: 0.5rem; border-radius: 0.375rem; background-color: white;
-            border: 1px solid #dee2e6; cursor: pointer; transition: all 0.2s ease; font-weight: 500;
-        }
+        #cpd-toolbar h3 { font-size: 1.1rem; font-weight: 600; color: var(--brown-dark); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0; }
+        .cpd-tool-btn { display: flex; align-items: center; width: 100%; padding: 0.6rem 0.75rem; margin-bottom: 0.5rem; border-radius: 0.375rem; background-color: white; border: 1px solid #dee2e6; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
         .cpd-tool-btn:hover { background-color: var(--gold-light); border-color: var(--brown-light); color: var(--brown-dark); }
-        #cpd-canvas-wrapper {
-            flex-grow: 1; position: relative; border: 1px solid #ddd;
-            border-radius: 0.5rem; overflow: hidden; background-color: #fdfdfd;
-        }
+        #cpd-canvas-wrapper { flex-grow: 1; position: relative; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; background-color: #fdfdfd; }
         #cpd-canvas-svg { width: 100%; height: 700px; cursor: grab; }
-        .cpd-node { cursor: move; }
-        .cpd-node:active { cursor: grabbing; }
-        .cpd-node-shape {
-            stroke-width: 2px; stroke: var(--brown-dark); fill: white;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-            transition: stroke 0.2s ease, stroke-width 0.2s ease, fill 0.2s ease;
-        }
-        .cpd-node-text {
-            font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-            fill: var(--brown-dark); pointer-events: none; text-anchor: middle; dominant-baseline: middle;
-        }
+        .cpd-node { cursor: move; } .cpd-node:active { cursor: grabbing; }
+        .cpd-node-shape { stroke-width: 2px; stroke: var(--brown-dark); fill: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); transition: stroke 0.2s ease, stroke-width 0.2s ease, fill 0.2s ease; }
+        .cpd-node-text { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; fill: var(--brown-dark); pointer-events: none; text-anchor: middle; dominant-baseline: middle; }
         .cpd-link { stroke: var(--brown-dark); stroke-width: 2px; marker-end: url(#arrow); transition: stroke 0.2s ease; fill: none; }
         .cpd-link-hitbox { stroke: transparent; stroke-width: 12px; cursor: pointer; fill: none; }
-        .cpd-link-group:hover .cpd-link { stroke: var(--red-cardinal); }
-        .cpd-link-group:hover .cpd-link { marker-end: url(#arrow-hover); }
-        /* FIX: Changed selection style to be bolder, not colored */
-        .cpd-node.selected .cpd-node-shape {
-            stroke: var(--brown-dark);
-            stroke-width: 4px;
-        }
+        .cpd-link-group:hover .cpd-link { stroke: var(--red-cardinal); marker-end: url(#arrow-hover); }
+        .cpd-node.selected .cpd-node-shape { stroke: var(--brown-dark); stroke-width: 4px; }
         .cpd-link-group.selected .cpd-link { stroke: var(--red-cardinal); stroke-width: 3.5px; marker-end: url(#arrow-selected); }
         .cpd-delete-btn { cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
         .cpd-node:hover .cpd-delete-btn, .cpd-node.selected .cpd-delete-btn { opacity: 1; }
-        /* --- END REBUILT CPD STYLES --- */
-
+        
         .canvas-container .zoom-controls { position: absolute; bottom: 1rem; right: 1rem; z-index: 20; display: flex; gap: 0.5rem; }
         .canvas-container .clear-btn { position: absolute; top: 1rem; right: 1rem; z-index: 20; }
         
         .irlm-arrow { color: var(--brown-dark); font-size: 2rem; margin: 0 1rem; }
         .back-link { display: inline-flex; align-items: center; color: var(--red-cardinal); font-weight: 600; text-decoration: none; margin-bottom: 2rem; }
         .back-link:hover { text-decoration: underline; }
-        .timeline-row summary { cursor: pointer; }
-        .timeline-row[open] summary { background-color: var(--gold-light); color: var(--brown-dark); }
-        #eric-table th { cursor: pointer; }
-        #eric-table th:hover { background-color: #f0f0f0; }
+        .timeline-row summary, .journey-map-persona summary { cursor: pointer; list-style: none; }
+        .timeline-row[open] > summary, .journey-map-persona[open] > summary { background-color: var(--gold-light); color: var(--brown-dark); }
+        .journey-map-persona[open] > summary .summary-title, .fidelity-component-row[open] > summary .summary-title { color: var(--brown-dark); }
+        .details-caret { transition: transform 0.2s ease-in-out; }
+        details[open] > summary .details-caret { transform: rotate(90deg); }
+
+        #eric-table th { cursor: pointer; } #eric-table th:hover { background-color: #f0f0f0; }
+
         .fidelity-component-row summary { list-style: none; cursor: pointer; padding: 0.75rem; background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; transition: background-color 0.2s; }
         .fidelity-component-row summary:hover { background-color: #f3f4f6; }
-        .fidelity-component-row[open] summary { background-color: var(--gold-light); border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: var(--brown-light); }
+        .fidelity-component-row[open] > summary { background-color: var(--gold-light); border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: var(--brown-light); }
         .fidelity-component-row .summary-grid { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
-        .fidelity-component-row .summary-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem 1rem; font-size: 0.8rem; color: var(--gray-text); margin-top: 0.5rem; }
+        .fidelity-component-row .summary-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem 1rem; font-size: 0.8rem; color: var(--gray-text); }
         .fidelity-component-row .summary-details > div > strong { font-size: 0.75rem; color: var(--brown-dark); display: block; }
         .fidelity-component-row .details-content { padding: 1rem; border: 1px solid var(--brown-light); border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
         
         .d3-tooltip { position: absolute; text-align: center; padding: 8px; font: 12px sans-serif; background: rgba(0,0,0,0.7); color: white; border: 0px; border-radius: 8px; pointer-events: none; max-width: 200px; word-wrap: break-word; }
+
+        /* --- New Ecosystem Map Styles --- */
+        #ecosystem-canvas { background-color: white; border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; }
+        .actor-node.selected .actor-circle { stroke: var(--red-cardinal); stroke-width: 4px; }
+        .actor-delete-btn { cursor: pointer; opacity: 0; transition: opacity 0.2s ease; }
+        .actor-node:hover .actor-delete-btn, .actor-node.selected .actor-delete-btn { opacity: 1; }
+        .actor-list-item.selected { background-color: var(--gold-light) !important; border-left: 4px solid var(--red-cardinal); }
+
     </style>
 </head>
 <body class="bg-off-white text-gray-text">
@@ -162,7 +138,7 @@
         // --- DATA & STATE MANAGEMENT ---
         let projectData = {
             name: "Co-Design and Micro-randomized Trial of a WhatsApp-based JITAI to Promote Adolescent Mental Health in Sierra Leone",
-            description: "This project will develop, implement, and evaluate a culturally adapted, WhatsApp-based just-in-time adaptive intervention (JITAI) to promote emotional regulation and stress management skills in Sierra Leonean adolescents. Informed by principles of behavioral neuroscience and co-designed with local youth, the research leverages innovative mobile technology and advanced quantitative methods to assess the JITAI’s effect on behaviors linked to neural mechanisms. Through a micro-randomized trial, we optimized the intervention's content and delivery. The project has contributed to the development of a scalable, technology-enabled mental health intervention and provided a model for community-partnered research in low-resource settings.",
+            description: "This project successfully developed, implemented, and evaluated a culturally adapted, WhatsApp-based just-in-time adaptive intervention (JITAI) to promote emotional regulation and stress management skills in Sierra Leonean adolescents. Informed by principles of behavioral neuroscience and co-designed with local youth, the research leveraged innovative mobile technology and advanced quantitative methods to assess the JITAI’s effect on behaviors linked to neural mechanisms. Through a micro-randomized trial, we optimized the intervention's content and delivery. The project has contributed to the development of a scalable, technology-enabled mental health intervention and provided a model for community-partnered research in low-resource settings.",
             ebp: {
                 name: "EASE-informed CBT Micro-interventions via WhatsApp JITAI",
                 coreComponents: [
@@ -199,11 +175,18 @@
                 { id: 5, text: "Ensuring content is culturally resonant and not just translated", importance: 95, addressability: 90, frequency: 100, equityImpact: 90, notesImportance: "Crucial for engagement, effectiveness, and building trust. A direct translation of Western concepts would fail.", notesAddressability: "This was the core work of the co-design phase. We used local metaphors, scenarios, and visuals developed with Sierra Leonean youth.", notesFrequency: "Every single piece of content must be considered through this lens.", notesEquityImpact: "Lack of resonance could alienate and harm marginalized groups. Getting this right is the top equity priority." },
                 { id: 6, text: "Participant fatigue and engagement drop-off over 8 weeks", importance: 85, addressability: 75, frequency: 70, equityImpact: 20, notesImportance: "High risk for any digital health intervention. Sustaining engagement is a major challenge.", notesAddressability: "Mitigated with content variation, gamification (badges), personalized feedback, and social-support features. The MRT helps identify what keeps users engaged.", notesFrequency: "Becomes a bigger issue after the first 2-3 weeks as novelty wears off.", notesEquityImpact: "Less of an equity issue, more of a universal challenge in digital health." }
             ],
-            journeyStages: [ 
-                { title: "Stressful Event", actions: "Experiences a conflict at school or home. Receives a poor grade. Feels social pressure.", mindsets: "'This is too much to handle.' 'No one understands what I'm going through.' 'I'm going to fail.'", emotions: "Anger, anxiety, frustration, hopelessness, shame.", opportunities: "Receive a 'just-in-time' prompt from the WhatsApp intervention, triggered by self-report or time of day (e.g., post-school)."},
-                { title: "Receives JITAI", actions: "Opens WhatsApp. Reads a message with a coping tip (e.g., a 2-minute breathing exercise GIF, a prompt to challenge a negative thought).", mindsets: "'What is this? Maybe this could help. It's private, so no one will know I'm using it.' 'This seems simple enough.'", emotions: "Curiosity, skepticism, slight relief, intrigue.", opportunities: "Message must be simple, visual, and immediately actionable. Use of local slang or images increases relevance immediately."},
-                { title: "Practices Skill", actions: "Tries the breathing exercise. Engages with the cognitive restructuring chatbot. Listens to a short audio guide.", mindsets: "'I can actually do this. I feel a little calmer.' 'That thought wasn't really true.' 'This is better than just worrying.'", emotions: "Calm, a sense of control, empowerment, self-awareness.", opportunities: "Reinforce the positive feeling with an automated follow-up message ('Great job trying that! How do you feel now?'). Link the skill to a personal goal."},
-                { title: "Reflection & Feedback", actions: "Briefly rates their mood or replies to the follow-up message. Earns a badge for consistent practice.", mindsets: "'That wasn't so hard. Maybe I can use this again.' 'It's cool that it tracks my progress.'", emotions: "Hopeful, proud, more self-aware.", opportunities: "Collect data on skill uptake and emotional shift to adapt future messages. Use feedback to build a sense of progress and mastery." }
+            personas: [
+                { 
+                    id: 1, 
+                    name: "Fatmata", 
+                    summary: "A 16-year-old student in a busy Freetown school.",
+                    journeyStages: [ 
+                        { title: "Stressful Event", actions: "Experiences a conflict at school or home. Receives a poor grade. Feels social pressure.", mindsets: "'This is too much to handle.' 'No one understands what I'm going through.' 'I'm going to fail.'", emotions: "Anger, anxiety, frustration, hopelessness, shame.", opportunities: "Receive a 'just-in-time' prompt from the WhatsApp intervention, triggered by self-report or time of day (e.g., post-school)."},
+                        { title: "Receives JITAI", actions: "Opens WhatsApp. Reads a message with a coping tip (e.g., a 2-minute breathing exercise GIF, a prompt to challenge a negative thought).", mindsets: "'What is this? Maybe this could help. It's private, so no one will know I'm using it.' 'This seems simple enough.'", emotions: "Curiosity, skepticism, slight relief, intrigue.", opportunities: "Message must be simple, visual, and immediately actionable. Use of local slang or images increases relevance immediately."},
+                        { title: "Practices Skill", actions: "Tries the breathing exercise. Engages with the cognitive restructuring chatbot. Listens to a short audio guide.", mindsets: "'I can actually do this. I feel a little calmer.' 'That thought wasn't really true.' 'This is better than just worrying.'", emotions: "Calm, a sense of control, empowerment, self-awareness.", opportunities: "Reinforce the positive feeling with an automated follow-up message ('Great job trying that! How do you feel now?'). Link the skill to a personal goal."},
+                        { title: "Reflection & Feedback", actions: "Briefly rates their mood or replies to the follow-up message. Earns a badge for consistent practice.", mindsets: "'That wasn't so hard. Maybe I can use this again.' 'It's cool that it tracks my progress.'", emotions: "Hopeful, proud, more self-aware.", opportunities: "Collect data on skill uptake and emotional shift to adapt future messages. Use feedback to build a sense of progress and mastery." }
+                    ]
+                }
             ],
             cpdNodes: [
                 { id: 1, type: 'implementation_strategy', text: 'Co-design workshops with youth', x: 150, y: 150, width: 160, height: 80 },
@@ -255,10 +238,11 @@
         let barrierTooltip = null;
         let activeLineStart = null;
         let tempLine = null;
+        let selectedActorId = null;
 
         const toolModules = [
-            { id: 'problem-identifier', title: 'Identify Problem(s)', description: 'Use an equity-focused framework to define, analyze, and articulate complex problems.', phase: 'Explore & Plan' },
-            { id: 'barrier-prioritizer', title: 'Prioritize Barriers', description: 'Systematically identify and prioritize implementation barriers to focus your efforts.', phase: 'Explore & Plan' },
+            { id: 'problem-identifier', title: 'Define Problem(s)', description: 'Use an equity-focused framework to define, analyze, and articulate complex problems.', phase: 'Explore & Plan' },
+            { id: 'barrier-prioritizer', title: 'Prioritize Barrier(s)', description: 'Systematically identify and prioritize implementation barriers to focus your efforts.', phase: 'Explore & Plan' },
             { id: 'tmf-generator', title: 'Generate TMF / Logic Model', description: 'Select and generate Theory, Model, Framework, or Logic Model diagrams for your project.', phase: 'Explore & Plan' },
             { id: 'ecosystem-mapper', title: 'Ecosystem Map', description: 'Map the relationships and influence of different actors in your project environment.', phase: 'Explore & Plan' },
             { id: 'empathy-mapper', title: 'Empathy Map', description: 'Visually map participant experiences to build empathy and inform design.', phase: 'Explore & Plan' },
@@ -578,10 +562,10 @@
             const list = document.getElementById('timeline-list');
             list.innerHTML = projectData.timeline.map((item, index) => `
                 <details class="timeline-row bg-gray-50 rounded-md">
-                    <summary class="p-3 list-none">
+                    <summary class="p-3">
                         <div class="flex justify-between items-center">
                             <span><strong>${new Date(item.date).toLocaleDateString()}:</strong> ${item.desc}</span>
-                            <span class="text-sm font-semibold text-gray-600">Expand</span>
+                            <svg class="details-caret h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
                         </div>
                     </summary>
                     <div class="p-4 border-t border-gray-200 bg-white">
@@ -606,236 +590,195 @@
         function renderTmfGenerator(){ const container = document.getElementById('page-tmf-generator'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Generate TMF & Logic Model</h1><div class="max-w-5xl mx-auto"><div class="flex justify-center space-x-4 mb-8"><label class="block"><span class="text-lg font-medium text-brown-dark">Select a Model:</span><select id="tmf-select" class="mt-1 block w-full pl-3 pr-10 py-2 border rounded-md"></select></label></div><div id="tmf-output" class="p-1 bg-white rounded-lg shadow-lg"></div></div>`; const e=document.getElementById("tmf-select");e&&(e.innerHTML=Object.keys(tmfData).map(t=>`<option value="${t}" ${t === 'irlm' ? 'selected' : ''}>${tmfData[t].title}</option>`).join(""),e.addEventListener("change",generateTmfContent),generateTmfContent())}
         function generateTmfContent(){const e=document.getElementById("tmf-select"),t=document.getElementById("tmf-output");if(e&&t){const n=tmfData[e.value];let o=`<div class="p-6"><h2 class="text-2xl font-bold text-red-cardinal mb-2">${n.title}</h2><p class="text-gray-600 mb-6">${n.description}</p>`;"logic-model"===n.type?(o+='<div class="overflow-x-auto"><div class="flex items-center justify-center flex-nowrap min-w-max">',o+=Object.entries(n.components).map(([key,val])=>{ let content = ""; if (key === 'determinants') content = "Facilitators:\n- High mobile phone penetration & WhatsApp use among youth.\n- Existing WHO EASE curriculum.\n\nBarriers:\n- Lack of trained mental health professionals.\n- Cultural stigma around mental health.\n- Intermittent internet connectivity & data costs."; if (key === 'strategies') content = "- Conduct co-design workshops with adolescents (ERIC: Involve Consumers).\n- Use WhatsApp for delivery (ERIC: Tailor Strategies).\n- Train local facilitators for light-touch support (Task-sharing).\n- Partner with community leaders to reduce stigma (ERIC: Identify and prepare champions)."; if (key === 'mechanisms') content = "- Increased self-awareness of emotional triggers.\n- Improved access to and application of coping skills in real-time.\n- Reduced perceived stigma through normalization.\n- Enhanced user ownership and cultural resonance."; if (key === 'outcomes') content = "Implementation:\n- High engagement (>75% weekly active users).\n- High acceptability (AIM > 4/5).\n- High feasibility (FIM > 4/5).\n\nClinical:\n- Reduced self-reported stress (PSS scores).\n- Improved emotional regulation (DERS scores)."; return `<div class="bg-gold-light/10 p-4 rounded-lg m-2 flex-grow text-center w-64"><h3 class="font-bold text-brown-dark capitalize mb-2">${key}</h3><textarea class="w-full h-48 p-2 border rounded-md" placeholder="${val}">${content}</textarea></div>` }).join('<div class="irlm-arrow">&rightarrow;</div>'),o+="</div></div>"):(o+='<div class="space-y-6">',n.domains.forEach(domain=>{o+=`<div><h3 class="text-xl font-bold text-brown-dark mb-3 pb-2 border-b-2 border-gray-200">${domain.name}</h3><ul class="space-y-4 list-none">`,Object.entries(domain.constructs).forEach(([constructName,constructDesc])=>{o+=`<li class="construct-box border-gold-light p-4 rounded-r-md bg-gray-50"><label class="block text-md font-semibold text-gray-700 mb-2">${constructName}</label><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><textarea rows="4" class="w-full p-2 border rounded-md" placeholder="${constructDesc}"></textarea><div><label class="block text-sm font-medium text-gray-700">Rating</label><div class="flex justify-between items-center mt-1 text-sm"><span class="text-red-cardinal/70">Barrier</span><span class="text-green-600/70">Facilitator</span></div><div class="flex justify-around mt-1">${[-2,-1,0,1,2].map(val => `<label class="text-center"><input type="radio" name="cfir-${constructName.replace(/\s/g,'')}" value="${val}" class="accent-red-cardinal"><br>${val}</label>`).join('')}</div></div></div></li>`}),o+="</ul></div>"}),o+="</div>"),o+="</div>",t.innerHTML=o}}
         
-        function renderEcosystemMapper(){
+        // --- ECOSYSTEM MAPPER (REBUILT) ---
+        function renderEcosystemMapper() {
             const container = document.getElementById('page-ecosystem-mapper');
-            container.innerHTML = `${createBackLink('tools')}
+            container.innerHTML = `
+                ${createBackLink('tools')}
                 <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Ecosystem Map</h1>
-                <div class="grid lg:grid-cols-5 gap-8">
-                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-red-cardinal mb-4">Add Actor/Group</h3>
-                        <div class="space-y-4">
-                            <input type="text" id="new-actor-name" placeholder="Actor/Group Name" class="w-full p-2 border rounded-md">
-                            <div><label>Actor Type</label><select id="new-actor-type" class="w-full p-2 border rounded-md"><option value="group">Group</option><option value="individual">Individual</option></select></div>
-                            <div id="group-size-container"><label>Group Size (Total Individuals)</label><input type="number" id="new-actor-group-size" value="10" class="w-full p-2 border rounded-md"></div>
-                            <div><label>Influence (Power)</label><input type="range" id="new-actor-influence" min="0" max="100" value="50" class="w-full accent-red-cardinal"></div>
-                            <div><label>Interest (Stake)</label><input type="range" id="new-actor-interest" min="0" max="100" value="50" class="w-full accent-red-cardinal"></div>
-                            <div><label>Willingness to Engage</label><select id="new-actor-willingness" class="w-full p-2 border rounded-md"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div>
-                            <div><label>Familiarity with Project</label><input type="range" id="new-actor-familiarity" min="0" max="100" value="50" class="w-full accent-red-cardinal"></div>
-                            <button id="add-actor-btn" class="w-full bg-brown-dark text-white font-bold p-2 rounded-md">Add to Map</button>
+                <div class="grid lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-4 bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-red-cardinal">Actors & Stakeholders</h3>
+                            <button onclick="openActorModal(null)" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm hover:bg-brown-light transition-colors">Add New</button>
                         </div>
+                        <div id="ecosystem-actor-list" class="space-y-2 h-[550px] overflow-y-auto pr-2"></div>
                     </div>
-                    <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-red-cardinal mb-4">Influence / Interest Map</h3>
-                        <div id="ecosystem-canvas" class="cursor-crosshair">
+                    <div class="lg:col-span-8 bg-white p-2 rounded-lg shadow-lg relative">
+                        <div id="ecosystem-canvas" class="w-full h-[600px]">
                             <svg id="ecosystem-svg-layer" class="w-full h-full"></svg>
                         </div>
                     </div>
                 </div>`;
-            
-            const typeSelect = document.getElementById('new-actor-type');
-            const groupSizeContainer = document.getElementById('group-size-container');
-            typeSelect.addEventListener('change', () => {
-                groupSizeContainer.style.display = typeSelect.value === 'group' ? 'block' : 'none';
-            });
-
-            document.getElementById("add-actor-btn").addEventListener("click", () => {
-                const nameInput = document.getElementById("new-actor-name");
-                if (nameInput.value.trim()){
-                    projectData.ecosystemActors.push({
-                        id: Date.now(),
-                        text: nameInput.value.trim(),
-                        type: document.getElementById("new-actor-type").value,
-                        groupSize: parseInt(document.getElementById("new-actor-group-size").value) || 1,
-                        influence: parseInt(document.getElementById("new-actor-influence").value),
-                        interest: parseInt(document.getElementById("new-actor-interest").value),
-                        willingness: document.getElementById("new-actor-willingness").value,
-                        familiarity: parseInt(document.getElementById("new-actor-familiarity").value)
-                    });
-                    nameInput.value = "";
-                    renderEcosystemActors();
-                }
-            });
-            renderEcosystemActors();
+            renderEcosystemActorList();
+            requestAnimationFrame(renderEcosystemMap);
         }
 
-        function renderEcosystemActors() {
+        function renderEcosystemActorList() {
+            const listContainer = document.getElementById('ecosystem-actor-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = projectData.ecosystemActors.length === 0 
+                ? '<p class="text-sm text-gray-500 text-center mt-4">No actors added yet. Click "Add New" to start.</p>'
+                : projectData.ecosystemActors.map(actor => `
+                    <div id="actor-list-item-${actor.id}" class="actor-list-item p-3 rounded-md border border-gray-200 hover:bg-gold-light/20 flex justify-between items-center cursor-pointer ${actor.id === selectedActorId ? 'selected' : ''}" onclick="highlightActorOnMap(${actor.id})">
+                        <div>
+                            <p class="font-semibold text-brown-dark">${actor.text}</p>
+                            <p class="text-xs text-gray-500">Influence: ${Math.round(actor.influence)} | Interest: ${Math.round(actor.interest)}</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); openActorModal(${actor.id})" class="text-gray-400 hover:text-red-cardinal p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z" /></svg>
+                        </button>
+                    </div>
+                `).join('');
+        }
+        
+        function highlightActorOnMap(actorId) {
+            selectedActorId = selectedActorId === actorId ? null : actorId; // Toggle selection
+            renderEcosystemActorList();
+            renderEcosystemMap();
+        }
+
+        function renderEcosystemMap() {
             const canvas = d3.select("#ecosystem-canvas");
             if (canvas.node() === null) return;
             const svg = d3.select("#ecosystem-svg-layer");
-            svg.selectAll("*").remove(); // Clear SVG for re-render
+            svg.selectAll("*").remove();
 
             const bounds = canvas.node().getBoundingClientRect();
+            if (bounds.width === 0) { requestAnimationFrame(renderEcosystemMap); return; }
+
             const width = bounds.width;
             const height = bounds.height;
-            const margin = {top: 60, right: 60, bottom: 60, left: 60};
+            const margin = {top: 40, right: 40, bottom: 50, left: 60};
 
             const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
             const y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
-            const sizeScale = d3.scaleSqrt().domain([1, 200]).range([8, 50]);
-            const opacityScale = d3.scaleLinear().domain([0, 100]).range([0.3, 1.0]);
+            const sizeScale = d3.scaleSqrt().domain([1, 200]).range([8, 40]);
+            const opacityScale = d3.scaleLinear().domain([0, 100]).range([0.4, 1.0]);
+            const color = d3.scaleOrdinal().domain(["high", "medium", "low"]).range(["#4CAF50", "#FFC107", "#F44336"]);
             
-            // Draw axes
             svg.append("g").attr("transform", `translate(0, ${height - margin.bottom})`).call(d3.axisBottom(x).ticks(5));
             svg.append("g").attr("transform", `translate(${margin.left}, 0)`).call(d3.axisLeft(y).ticks(5));
-            svg.append("text").attr("text-anchor", "middle").attr("x", width / 2).attr("y", height - 20).text("Interest / Stake in Project →");
+            svg.append("text").attr("text-anchor", "middle").attr("x", width / 2).attr("y", height - 10).text("Interest / Stake in Project →");
             svg.append("text").attr("text-anchor", "middle").attr("transform", "rotate(-90)").attr("y", 20).attr("x", -height / 2).text("Influence / Power →");
 
-            const color = d3.scaleOrdinal().domain(["high", "medium", "low"]).range(["#4CAF50", "#FFC107", "#F44336"]);
-
-            // Draw connections first (so they are behind nodes)
             const lines = svg.append("g").attr("class", "connections");
-            lines.selectAll("line").data(projectData.ecosystemConnections).enter().append("line")
-                .attr("class", "connection-line")
-                .attr("x1", d => x(projectData.ecosystemActors.find(a => a.id === d.from).interest))
-                .attr("y1", d => y(projectData.ecosystemActors.find(a => a.id === d.from).influence))
-                .attr("x2", d => x(projectData.ecosystemActors.find(a => a.id === d.to).interest))
-                .attr("y2", d => y(projectData.ecosystemActors.find(a => a.id === d.to).influence))
-                .attr("stroke", "#aaa").attr("stroke-width", 2);
+            const actors = svg.append("g").attr("class", "actors");
 
-            // Define drag behavior
             const drag = d3.drag()
                 .on("start", function(event, d) {
-                        d3.select(this).raise();
-                        if(event.sourceEvent.shiftKey) {
-                            activeLineStart = d;
-                            const startPos = d3.select(this).attr("transform").match(/translate\((.*?),(.*?)\)/);
-                            tempLine = svg.append("line").attr("x1", startPos[1]).attr("y1", startPos[2]).attr("x2", event.x).attr("y2", event.y).attr("stroke", "black").attr("stroke-dasharray", "5,5");
-                        }
+                    highlightActorOnMap(d.id);
+                    d3.select(this).raise().style("cursor", "grabbing");
                 })
                 .on("drag", function(event, d) {
-                    if (activeLineStart) {
-                        tempLine.attr("x2", event.x).attr("y2", event.y);
-                    } else {
-                        d.interest = Math.max(0, Math.min(100, Math.round(x.invert(event.x))));
-                        d.influence = Math.max(0, Math.min(100, Math.round(y.invert(event.y))));
-                        d3.select(this).attr("transform", `translate(${x(d.interest)}, ${y(d.influence)})`);
-                        // Update connections on drag
-                        svg.selectAll(".connection-line")
-                           .filter(conn => conn.from === d.id)
-                           .attr("x1", x(d.interest))
-                           .attr("y1", y(d.influence));
-                        svg.selectAll(".connection-line")
-                           .filter(conn => conn.to === d.id)
-                           .attr("x2", x(d.interest))
-                           .attr("y2", y(d.influence));
-                    }
+                    d.interest = Math.max(0, Math.min(100, x.invert(event.x)));
+                    d.influence = Math.max(0, Math.min(100, y.invert(event.y)));
+                    d3.select(this).attr('transform', `translate(${x(d.interest)}, ${y(d.influence)})`);
+                    updateEcosystemLinks();
                 })
-                .on("end", function(event, d) {
-                    if (tempLine) {
-                        tempLine.remove();
-                        tempLine = null;
-                        if(ecosystemTooltip) ecosystemTooltip.style("opacity", 0);
-                        
-                        const endNodeElement = document.elementFromPoint(event.sourceEvent.clientX, event.sourceEvent.clientY);
-                        const endNodeGroup = endNodeElement ? endNodeElement.closest('.actor-node') : null;
-
-                        if (endNodeGroup) {
-                            const endNode = d3.select(endNodeGroup).datum();
-                            if (activeLineStart && endNode && activeLineStart.id !== endNode.id) {
-                                const exists = projectData.ecosystemConnections.some(
-                                    c => (c.from === activeLineStart.id && c.to === endNode.id) || (c.from === endNode.id && c.to === activeLineStart.id)
-                                );
-                                if (!exists) {
-                                    projectData.ecosystemConnections.push({ from: activeLineStart.id, to: endNode.id });
-                                    renderEcosystemActors(); // Re-render to draw the new line
-                                }
-                            }
-                        }
-                    }
-                    activeLineStart = null;
+                .on("end", function() {
+                    d3.select(this).style("cursor", "grab");
+                    renderEcosystemActorList();
                 });
 
-            // Draw actor nodes
-            const actors = svg.append("g").attr("class", "actors");
-            const actorGroups = actors.selectAll("g")
-                .data(projectData.ecosystemActors, d => d.id)
-                .enter().append("g")
-                .attr("class", "actor-node")
+            const actorGroups = actors.selectAll("g.actor-node")
+                .data(projectData.ecosystemActors, d => d.id).join("g")
+                .attr("class", d => `actor-node ${d.id === selectedActorId ? 'selected' : ''}`)
                 .attr("transform", d => `translate(${x(d.interest)}, ${y(d.influence)})`)
                 .style("opacity", d => opacityScale(d.familiarity))
                 .call(drag);
 
             actorGroups.append("circle")
-                .attr("r", d => d.type === 'group' ? sizeScale(d.groupSize) : 6)
+                .attr("class", "actor-circle")
+                .attr("r", d => d.type === 'group' ? sizeScale(d.groupSize) : 8)
                 .attr("fill", d => d.type === 'individual' ? d3.color(color(d.willingness)).darker(0.7) : color(d.willingness))
                 .attr("stroke", d => d3.color(color(d.willingness)).darker(0.7))
-                .attr("stroke-width", d => d.type === 'individual' ? 0 : 2)
-                .style("cursor", "grab");
+                .attr("stroke-width", 2).style("cursor", "grab");
             
-            // Add interaction handlers
-            actorGroups
-                .on("mouseover", (event, d) => {
-                    if (!activeLineStart) { // Don't show tooltip while drawing a line
-                        ecosystemTooltip.transition().duration(200).style("opacity", .9);
-                        ecosystemTooltip.html(d.text)
-                            .style("left", (event.pageX + 15) + "px")
-                            .style("top", (event.pageY - 28) + "px");
-                    }
-                })
-                .on("mouseout", () => {
-                    ecosystemTooltip.transition().duration(500).style("opacity", 0);
-                })
-                .on("click", (event, d) => {
-                    if (!event.shiftKey && !event.defaultPrevented) { // defaultPrevented is true after a drag
-                        openActorModal(d.id);
-                    }
-                });
+            const deleteBtn = actorGroups.append('g')
+                .attr('class', 'actor-delete-btn')
+                .on('click', (event, d) => { event.stopPropagation(); deleteActor(d.id); });
+            deleteBtn.append('circle').attr('r', 9).attr('fill', 'var(--red-cardinal)').attr('stroke', 'white').attr('stroke-width', 1.5);
+            deleteBtn.append('text').attr('fill', 'white').attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('font-size', '12px').attr('font-weight', 'bold').text('×');
+            deleteBtn.attr('transform', d => {
+                const radius = (d.type === 'group' ? sizeScale(d.groupSize) : 8) + 2;
+                return `translate(${radius * 0.707}, ${-radius * 0.707})`;
+            });
+
+            actorGroups.on("mouseover", (event, d) => {
+                ecosystemTooltip.transition().duration(200).style("opacity", .9);
+                ecosystemTooltip.html(`<strong>${d.text}</strong>`)
+                    .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
+            }).on("mouseout", () => {
+                ecosystemTooltip.transition().duration(500).style("opacity", 0);
+            }).on("click", (event, d) => {
+                highlightActorOnMap(d.id);
+            });
+            
+            function getLinkEdgePoint(sourceCenter, targetCenter, sourceRadius) {
+                const dx = targetCenter.x - sourceCenter.x;
+                const dy = targetCenter.y - sourceCenter.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist === 0) return sourceCenter;
+                return { x: sourceCenter.x + (dx * sourceRadius) / dist, y: sourceCenter.y + (dy * sourceRadius) / dist };
+            }
+
+            function updateEcosystemLinks() {
+                const linksData = projectData.ecosystemConnections.filter(c => 
+                    projectData.ecosystemActors.some(a => a.id === c.from) && projectData.ecosystemActors.some(a => a.id === c.to)
+                );
+                lines.selectAll("line.connection-line").data(linksData).join("line")
+                    .attr("class", "connection-line")
+                    .each(function(d) {
+                        const sourceNode = projectData.ecosystemActors.find(a => a.id === d.from);
+                        const targetNode = projectData.ecosystemActors.find(a => a.id === d.to);
+                        const sourceCenter = { x: x(sourceNode.interest), y: y(sourceNode.influence) };
+                        const targetCenter = { x: x(targetNode.interest), y: y(targetNode.influence) };
+                        const sourceRadius = sourceNode.type === 'group' ? sizeScale(sourceNode.groupSize) : 8;
+                        const targetRadius = targetNode.type === 'group' ? sizeScale(targetNode.groupSize) : 8;
+                        
+                        const sourcePoint = getLinkEdgePoint(sourceCenter, targetCenter, sourceRadius);
+                        const targetPoint = getLinkEdgePoint(targetCenter, sourceCenter, targetRadius);
+
+                        d3.select(this).attr("x1", sourcePoint.x).attr("y1", sourcePoint.y)
+                                     .attr("x2", targetPoint.x).attr("y2", targetPoint.y);
+                    })
+                    .attr("stroke", "#aaa").attr("stroke-width", 2);
+            }
+            updateEcosystemLinks();
         }
 
         function openActorModal(actorId) {
-            const actor = projectData.ecosystemActors.find(a => a.id === actorId);
-            if (!actor) return;
+            const isNew = actorId === null;
+            const actor = isNew 
+                ? { id: null, text: "", type: 'group', groupSize: 10, influence: 50, interest: 50, willingness: 'medium', familiarity: 50 }
+                : projectData.ecosystemActors.find(a => a.id === actorId);
+
+            if (!actor && !isNew) return;
             
-            const createSliderRow = (criterion, label, value) => {
-                return `<div>
-                            <label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="actor-${criterion}-value">${value}</span></label>
-                            <input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('actor-${criterion}-value').textContent = this.value">
-                        </div>`;
-            };
+            const createSliderRow = (criterion, label, value) => `<div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="actor-${criterion}-value">${value}</span></label><input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('actor-${criterion}-value').textContent = this.value"></div>`;
 
             const modalHTML = `
             <div id="actor-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
-                <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-full overflow-y-auto">
-                     <div class="p-6 border-b flex justify-between items-center">
-                        <h2 id="actor-modal-title" class="text-2xl font-bold text-red-cardinal">Actor Details</h2>
-                        <input type="hidden" id="current-actor-id" value="${actorId}">
-                    </div>
-                    <div id="actor-form-container" class="p-6 space-y-4">
-                        <div>
-                            <label class="block font-semibold">Actor Name</label>
-                            <input type="text" id="actor-text-input" class="w-full p-2 border rounded-md" value="${actor.text}">
-                        </div>
-                        <div>
-                            <label>Actor Type</label>
-                            <select id="edit-actor-type" class="w-full p-2 border rounded-md">
-                                <option value="group" ${actor.type === 'group' ? 'selected' : ''}>Group</option>
-                                <option value="individual" ${actor.type === 'individual' ? 'selected' : ''}>Individual</option>
-                            </select>
-                        </div>
-                        <div id="edit-group-size-container" class="${actor.type === 'group' ? '' : 'hidden'}">
-                            <label>Group Size</label>
-                            <input type="number" id="edit-actor-group-size" value="${actor.groupSize}" class="w-full p-2 border rounded-md">
-                        </div>
-                        ${createSliderRow('influence', 'Influence (Power)', actor.influence)}
-                        ${createSliderRow('interest', 'Interest (Stake)', actor.interest)}
-                        ${createSliderRow('familiarity', 'Familiarity', actor.familiarity)}
-                         <div>
-                            <label>Willingness to Engage</label>
-                            <select id="edit-actor-willingness" class="w-full p-2 border rounded-md">
-                                <option value="high" ${actor.willingness === 'high' ? 'selected' : ''}>High</option>
-                                <option value="medium" ${actor.willingness === 'medium' ? 'selected' : ''}>Medium</option>
-                                <option value="low" ${actor.willingness === 'low' ? 'selected' : ''}>Low</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
-                        <button onclick="closeModal('actor-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
-                        <button onclick="saveActorDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">Save Details</button>
-                    </div>
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto">
+                     <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${isNew ? 'Add New Actor' : 'Edit Actor'}</h2></div>
+                     <div class="p-6 space-y-4">
+                         <input type="hidden" id="current-actor-id" value="${actorId || ''}">
+                         <div><label class="block font-semibold">Actor Name</label><input type="text" id="actor-text-input" class="w-full p-2 border rounded-md" value="${actor.text}"></div>
+                         <div><label>Actor Type</label><select id="edit-actor-type" class="w-full p-2 border rounded-md"><option value="group" ${actor.type === 'group' ? 'selected' : ''}>Group</option><option value="individual" ${actor.type === 'individual' ? 'selected' : ''}>Individual</option></select></div>
+                         <div id="edit-group-size-container" class="${actor.type === 'group' ? '' : 'hidden'}"><label>Group Size</label><input type="number" id="edit-actor-group-size" value="${actor.groupSize}" class="w-full p-2 border rounded-md"></div>
+                         ${createSliderRow('influence', 'Influence (Power)', Math.round(actor.influence))}
+                         ${createSliderRow('interest', 'Interest (Stake)', Math.round(actor.interest))}
+                         ${createSliderRow('familiarity', 'Familiarity', Math.round(actor.familiarity))}
+                         <div><label>Willingness to Engage</label><select id="edit-actor-willingness" class="w-full p-2 border rounded-md"><option value="high" ${actor.willingness === 'high' ? 'selected' : ''}>High</option><option value="medium" ${actor.willingness === 'medium' ? 'selected' : ''}>Medium</option><option value="low" ${actor.willingness === 'low' ? 'selected' : ''}>Low</option></select></div>
+                     </div>
+                     <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
+                         <button onclick="closeModal('actor-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
+                         <button onclick="saveActorDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">${isNew ? 'Add Actor' : 'Save Changes'}</button>
+                     </div>
                 </div>
             </div>`;
             document.getElementById('modal-container').innerHTML = modalHTML;
-            
             document.getElementById('edit-actor-type').addEventListener('change', (e) => {
                 document.getElementById('edit-group-size-container').style.display = e.target.value === 'group' ? 'block' : 'none';
             });
@@ -843,10 +786,12 @@
 
         function saveActorDetails() {
             const actorId = document.getElementById('current-actor-id').value;
-            const actor = projectData.ecosystemActors.find(a => a.id == actorId);
+            const isNew = actorId === '';
+            let actor = isNew ? { id: Date.now() } : projectData.ecosystemActors.find(a => a.id == actorId);
             if (!actor) return;
 
             actor.text = document.getElementById('actor-text-input').value;
+            if (!actor.text.trim()) { alert("Please enter a name for the actor."); return; }
             actor.type = document.getElementById('edit-actor-type').value;
             actor.groupSize = parseInt(document.getElementById('edit-actor-group-size').value) || 1;
             actor.influence = parseInt(document.querySelector('input[name="influence"]').value);
@@ -854,16 +799,105 @@
             actor.familiarity = parseInt(document.querySelector('input[name="familiarity"]').value);
             actor.willingness = document.getElementById('edit-actor-willingness').value;
 
+            if (isNew) projectData.ecosystemActors.push(actor);
             closeModal('actor-modal');
-            renderEcosystemActors();
+            renderEcosystemActorList();
+            renderEcosystemMap();
+        }
+        
+        function deleteActor(actorId) {
+            projectData.ecosystemActors = projectData.ecosystemActors.filter(a => a.id !== actorId);
+            projectData.ecosystemConnections = projectData.ecosystemConnections.filter(c => c.from !== actorId && c.to !== actorId);
+            selectedActorId = null;
+            renderEcosystemActorList();
+            renderEcosystemMap();
         }
 
         function renderEmpathyMapper(){ const container = document.getElementById('page-empathy-mapper'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Empathy Map</h1><div class="mb-6"><label class="block text-lg font-medium text-brown-dark mb-2">Participant / Persona:</label><input type="text" class="w-full p-2 border rounded-md" placeholder="e.g., Primary Care Physicians, Patients with Type 2 Diabetes" value="Fatmata, a 16-year-old student in Freetown"></div><div class="grid md:grid-cols-2 gap-4"><div class="bg-gold-light/20 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">SAYS</h3><p class="text-sm text-gray-600 mb-3">What are common things they say?</p><textarea class="w-full h-40 p-2 border rounded-md">"I feel so stressed about exams."\n"It's hard to talk about my feelings with my parents."\n"Everyone uses WhatsApp, it's easy."\n"Sometimes I just want to be left alone."</textarea></div><div class="bg-red-cardinal/10 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">THINKS</h3><p class="text-sm text-gray-600 mb-3">What might they be thinking?</p><textarea class="w-full h-40 p-2 border rounded-md">"I don't want my friends to think I'm weak or crazy."\n"How can I handle all this pressure?"\n"I wish I had someone to talk to who understands, without it being a big deal."\n"Maybe this feeling will just go away on its own."</textarea></div><div class="bg-brown-light/20 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">DOES</h3><p class="text-sm text-gray-600 mb-3">What actions do you observe?</p><textarea class="w-full h-40 p-2 border rounded-md">Spends a lot of time on her phone, often just scrolling.\nSometimes withdraws from friends when stressed.\nTries to act tough and hide her worries.\nListens to music to escape.\nProcrastinates on schoolwork when feeling overwhelmed.</textarea></div><div class="bg-gray-200 p-4 rounded-lg"><h3 class="text-xl font-bold text-brown-dark mb-2">FEELS</h3><p class="text-sm text-gray-600 mb-3">What is their emotional state?</p><textarea class="w-full h-40 p-2 border rounded-md">Overwhelmed\nAnxious\nIsolated\nHopeful for a private way to get help.\nConfused about her feelings.</textarea></div></div>`; }
-        function renderJourneyMapper(){ const container = document.getElementById('page-journey-mapper'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Journey Map</h1><div class="flex justify-between items-end mb-6"><div><label class="block text-lg font-medium text-brown-dark mb-2">Participant / Persona:</label><input type="text" class="p-2 border rounded-md" placeholder="e.g., A patient seeking a diagnosis" value="An adolescent experiencing a stressful event"></div><button id="add-stage-btn" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add Stage</button></div><div class="overflow-x-auto pb-4"><div id="journey-stages-container" class="flex space-x-4"></div></div>`; document.getElementById("add-stage-btn").addEventListener("click",()=>{const e=prompt("Enter new stage title:",`Stage ${projectData.journeyStages.length+1}`);e&&projectData.journeyStages.push({title:e,actions:"",mindsets:"",emotions:"",opportunities:""})&&renderJourneyStages()}); renderJourneyStages()}
-        function renderJourneyStages(){const e=document.getElementById("journey-stages-container");e&&(e.innerHTML=projectData.journeyStages.map((e,t)=>`<div class="journey-stage bg-gray-50 p-4 rounded-lg border flex-shrink-0 w-72"><input class="text-lg font-bold text-brown-dark bg-transparent w-full mb-4" value="${e.title}" onchange="updateJourneyStage(${t},'title',this.value)"><div class="space-y-3"><div><label class="font-semibold text-sm">Actions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${t},'actions',this.value)">${e.actions}</textarea></div><div><label class="font-semibold text-sm">Mindsets:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${t},'mindsets',this.value)">${e.mindsets}</textarea></div><div><label class="font-semibold text-sm">Emotions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${t},'emotions',this.value)">${e.emotions}</textarea></div><div><label class="font-semibold text-sm">Opportunities:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${t},'opportunities',this.value)">${e.opportunities}</textarea></div></div></div>`).join(""))}
-        window.updateJourneyStage=(e,t,n)=>{projectData.journeyStages[e][t]=n};
         
-        // --- Barrier Prioritizer (REBUILT) ---
+        function renderJourneyMapper() {
+            const container = document.getElementById('page-journey-mapper');
+            container.innerHTML = `
+                ${createBackLink('tools')}
+                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Journey Maps</h1>
+                <div class="mb-6">
+                    <button onclick="addNewPersona()" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add New Person</button>
+                </div>
+                <div id="persona-journey-list" class="space-y-4"></div>`;
+            renderPersonaList();
+        }
+
+        function renderPersonaList() {
+            const container = document.getElementById('persona-journey-list');
+            if (!container) return;
+            if (!projectData.personas || projectData.personas.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No people added yet. Click the button above to add one.</p>';
+                return;
+            }
+            container.innerHTML = projectData.personas.map(persona => `
+                <details class="bg-white rounded-lg shadow journey-map-persona">
+                    <summary class="p-4 hover:bg-gray-50 flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-lg text-brown-dark summary-title">${persona.name}</p>
+                            <p class="text-sm text-gray-600">${persona.summary}</p>
+                        </div>
+                        <svg class="details-caret h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                    </summary>
+                    <div class="p-4 border-t border-gray-200">
+                        <div class="flex justify-end mb-4">
+                             <button onclick="addJourneyStage(${persona.id})" class="bg-brown-dark text-white font-bold py-1 px-3 rounded-lg text-sm">Add Stage</button>
+                        </div>
+                        <div class="overflow-x-auto pb-4">
+                            <div id="journey-stages-container-${persona.id}" class="flex space-x-4">
+                                ${renderJourneyStages(persona.journeyStages, persona.id)}
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            `).join('');
+        }
+        
+        function addNewPersona() {
+            const name = prompt("Enter the new person's name:");
+            if (!name || name.trim() === '') return;
+            const summary = prompt("Enter a brief summary for this person (e.g., role, key characteristic):");
+            const newPersona = { id: Date.now(), name: name, summary: summary || "", journeyStages: [] };
+            projectData.personas.push(newPersona);
+            renderPersonaList();
+        }
+
+        function addJourneyStage(personaId) {
+            const title = prompt("Enter new stage title (e.g., 'Awareness', 'First Use'):");
+            if (title && title.trim() !== '') {
+                const persona = projectData.personas.find(p => p.id === personaId);
+                if (persona) {
+                    persona.journeyStages.push({ title: title, actions: "", mindsets: "", emotions: "", opportunities: "" });
+                    renderPersonaList();
+                }
+            }
+        }
+
+        function renderJourneyStages(stages, personaId){
+            if(!stages || stages.length === 0) return '<p class="text-gray-500 w-full text-center">No journey stages defined for this person yet. Click "Add Stage" to begin.</p>';
+            return stages.map((stage, index) =>`
+                <div class="journey-stage bg-gray-50 p-4 rounded-lg border flex-shrink-0 w-72">
+                    <input class="text-lg font-bold text-brown-dark bg-transparent w-full mb-4" value="${stage.title}" onchange="updateJourneyStage(${personaId}, ${index}, 'title', this.value)">
+                    <div class="space-y-3">
+                        <div><label class="font-semibold text-sm">Actions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'actions', this.value)">${stage.actions}</textarea></div>
+                        <div><label class="font-semibold text-sm">Mindsets:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'mindsets', this.value)">${stage.mindsets}</textarea></div>
+                        <div><label class="font-semibold text-sm">Emotions:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'emotions', this.value)">${stage.emotions}</textarea></div>
+                        <div><label class="font-semibold text-sm">Opportunities:</label><textarea class="w-full p-1 border rounded h-24" onchange="updateJourneyStage(${personaId}, ${index}, 'opportunities', this.value)">${stage.opportunities}</textarea></div>
+                    </div>
+                </div>`).join("");
+        }
+        
+        window.updateJourneyStage = (personaId, stageIndex, field, value) => {
+            const persona = projectData.personas.find(p => p.id === personaId);
+            if (persona && persona.journeyStages[stageIndex]) {
+                persona.journeyStages[stageIndex][field] = value;
+            }
+        };
+        
         function renderBarrierPrioritizer() {
             const container = document.getElementById('page-barrier-prioritizer');
             container.innerHTML = `${createBackLink('tools')}
@@ -884,14 +918,9 @@
                     </div>
                 </div>`;
             
-            // FIX: Changed "Add Barrier" button to open a modal for a new barrier
-            document.getElementById("add-barrier-btn").addEventListener("click", () => {
-                openBarrierModal(null); // Pass null to indicate a new barrier
-            });
-
+            document.getElementById("add-barrier-btn").addEventListener("click", () => { openBarrierModal(null); });
             renderBarrierList();
-            // FIX: Use setTimeout to ensure the container is visible before rendering the plot
-            setTimeout(renderBarrierPlot, 0);
+            requestAnimationFrame(renderBarrierPlot);
         }
 
         function renderBarrierList() {
@@ -908,7 +937,7 @@
             if (container.empty()) return;
             
             const bounds = container.node().getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) return; 
+            if (bounds.width === 0) { requestAnimationFrame(renderBarrierPlot); return; } 
 
             const svg = container.select("svg");
             svg.selectAll("*").remove();
@@ -919,9 +948,7 @@
 
             const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
             const y = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top]);
-            const frequencyScale = d3.scaleSqrt().domain([0, 100]).range([8, 25]);
-            
-            // FIX: Use the provided hex codes for the color scale.
+            const frequencyScale = d3.scaleSqrt().domain([1, 100]).range([4, 30]);
             const equityColorPalette = ["#313695","#34439D","#3850A5","#3B5DAE","#3F6AB6","#4277BF","#4575B4","#4E80B9","#578ABD","#6095C2","#699FC7","#72AACB","#74ADD1","#7EBAD6","#88C2DA","#92C9DE","#9DD1E2","#A7D8E6","#ABD9E9","#B3DDEB","#BCE1EE","#C4E5F0","#CCECF3","#D5F0F6","#DDF2F7","#E0F3F8","#E2F3F6","#E5F3F3","#E8F4F1","#EBF4EE","#EEF5EC","#F1F5E9","#F3F6E7","#F6F7E4","#F8F8E2","#FBF9DF","#FDFADD","#FFFFBF","#FEFDB9","#FEFBB3","#FEF8AD","#FEF6A7","#FEF3A1","#FEF19B","#FEEF95","#FEED8F","#FEE090","#FEDD8C","#FEDB88","#FED884","#FED680","#FED37C","#FED178","#FECD74","#FECA70","#FDC86C","#FDC568","#FDAE61","#FCA95E","#FCA35B","#FB9E58","#FB9955","#FA9452","#FA8E4F","#F9894C","#F88449","#F77E46","#F67944","#F46D43","#F36642","#F15E41","#EF5740","#EE4F3F","#EC483E","#EA403D","#E8393C","#E7313B","#E52A3A","#D73027","#D42C26","#D12825","#CE2424","#CB2023","#C81C22","#C51821","#C21420","#BF101F","#BC0C1E","#B9081D","#A50026","#A40026","#A30026","#A20026","#A10026","#A00026","#9F0026","#9E0026","#9D0026","#9C0026","#A50026"];
             const equityColorScale = d3.scaleQuantile().domain([0, 100]).range(equityColorPalette);
 
@@ -931,16 +958,8 @@
                 { x: x(0), y: y(50), width: x(50) - x(0), height: y(0) - y(50), color: 'rgba(108, 117, 125, 0.05)', label: 'Low Priority', textColor: '#475569' },
                 { x: x(50), y: y(50), width: x(100) - x(50), height: y(0) - y(50), color: 'rgba(244, 67, 54, 0.1)', label: 'Target for Innovation', textColor: '#9f1239' }
             ];
-            svg.selectAll('.quadrant-bg').data(quadrants).enter().append('rect')
-                .attr('class', 'quadrant-bg')
-                .attr('x', d => d.x).attr('y', d => d.y)
-                .attr('width', d => d.width).attr('height', d => d.height)
-                .attr('fill', d => d.color);
-            
-            svg.selectAll('.quadrant-label').data(quadrants).enter().append('text')
-                .attr('class', 'quadrant-label')
-                .attr('x', d => d.x + 10).attr('y', d => d.y + 20)
-                .text(d => d.label).attr('fill', d=> d.textColor).style('font-weight', '600');
+            svg.selectAll('.quadrant-bg').data(quadrants).enter().append('rect').attr('class', 'quadrant-bg').attr('x', d => d.x).attr('y', d => d.y).attr('width', d => d.width).attr('height', d => d.height).attr('fill', d => d.color);
+            svg.selectAll('.quadrant-label').data(quadrants).enter().append('text').attr('class', 'quadrant-label').attr('x', d => d.x + 10).attr('y', d => d.y + 20).text(d => d.label).attr('fill', d=> d.textColor).style('font-weight', '600');
 
             const xAxis = d3.axisBottom(x).ticks(5);
             const yAxis = d3.axisLeft(y).ticks(5);
@@ -954,46 +973,29 @@
             const drag = d3.drag()
                 .on("start", function(event) { d3.select(this).raise().style('cursor', 'grabbing'); })
                 .on("drag", function(event, d) {
-                    const newImportance = Math.max(0, Math.min(100, x.invert(event.x)));
-                    const newAddressability = Math.max(0, Math.min(100, y.invert(event.y)));
-                    d.importance = newImportance;
-                    d.addressability = newAddressability;
+                    d.importance = Math.max(0, Math.min(100, x.invert(event.x)));
+                    d.addressability = Math.max(0, Math.min(100, y.invert(event.y)));
                     d3.select(this).attr("transform", `translate(${x(d.importance)}, ${y(d.addressability)})`);
                 })
                 .on("end", function(event, d) {
                     d3.select(this).style('cursor', 'grab');
-                    renderBarrierList(); // To reflect potential changes
-                    updateDashboard();
+                    renderBarrierList(); updateDashboard();
                 });
 
-            const nodes = svg.selectAll(".barrier-node")
-                .data(ratedBarriers, d => d.id)
-                .enter().append("g")
-                .attr("class", "barrier-node")
-                .attr("transform", d => `translate(${x(d.importance)}, ${y(d.addressability)})`)
-                .style('cursor', 'grab')
-                .call(drag);
+            const nodes = svg.selectAll(".barrier-node").data(ratedBarriers, d => d.id).enter().append("g")
+                .attr("class", "barrier-node").attr("transform", d => `translate(${x(d.importance)}, ${y(d.addressability)})`)
+                .style('cursor', 'grab').call(drag);
             
-            nodes.append("circle")
-                .attr("r", d => frequencyScale(d.frequency))
-                .attr("fill", d => equityColorScale(d.equityImpact))
-                .attr("stroke", d => d3.color(equityColorScale(d.equityImpact)).darker(0.7))
-                .attr("stroke-width", 1.5)
-                .attr("fill-opacity", 0.7);
-
-            nodes
-                .on("mouseover", (event, d) => {
-                    barrierTooltip.transition().duration(200).style("opacity", .9);
-                    barrierTooltip.html(`<strong>${d.text}</strong><br/>Equity Impact: ${d.equityImpact}<br/>Frequency: ${d.frequency}`)
-                        .style("left", (event.pageX + 15) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                })
-                .on("mouseout", () => {
-                    barrierTooltip.transition().duration(500).style("opacity", 0);
-                })
-                .on("click", (event, d) => {
-                    if (!event.defaultPrevented) { openBarrierModal(d.id); }
-                });
+            nodes.append("circle").attr("r", d => frequencyScale(d.frequency)).attr("fill", d => equityColorScale(d.equityImpact)).attr("stroke", d => d3.color(equityColorScale(d.equityImpact)).darker(0.7)).attr("stroke-width", 1.5).attr("fill-opacity", 0.7);
+            nodes.on("mouseover", (event, d) => {
+                barrierTooltip.transition().duration(200).style("opacity", .9);
+                barrierTooltip.html(`<strong>${d.text}</strong><br/>Equity Impact: ${d.equityImpact}<br/>Frequency: ${d.frequency}`)
+                    .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 28) + "px");
+            }).on("mouseout", () => {
+                barrierTooltip.transition().duration(500).style("opacity", 0);
+            }).on("click", (event, d) => {
+                if (!event.defaultPrevented) { openBarrierModal(d.id); }
+            });
         }
 
         function openBarrierModal(barrierId) {
@@ -1004,43 +1006,24 @@
             
             if (!barrier) return;
             
-            const createSliderRow = (criterion, label, value, notes) => {
-                const noteKey = `notes${criterion.charAt(0).toUpperCase() + criterion.slice(1)}`;
-                return `<div class="p-3 bg-gray-50 rounded-md">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="${criterion}-value">${value}</span></label>
-                                    <input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('${criterion}-value').textContent = this.value">
-                                </div>
-                                <div>
-                                    <label class="block font-semibold text-sm mb-1">Notes for ${label}</label>
-                                    <textarea name="${noteKey}" rows="2" class="w-full p-1 border rounded-md text-sm">${notes || ''}</textarea>
-                                </div>
-                            </div>
-                        </div>`;
-            };
+            const createSliderRow = (criterion, label, value, notes) => `<div class="p-3 bg-gray-50 rounded-md"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block font-semibold">${label} <span class="font-normal text-gray-500" id="${criterion}-value">${value}</span></label><input type="range" min="1" max="100" value="${value}" name="${criterion}" class="w-full mt-1 accent-red-cardinal" oninput="document.getElementById('${criterion}-value').textContent = this.value"></div><div><label class="block font-semibold text-sm mb-1">Notes for ${label}</label><textarea name="notes${criterion.charAt(0).toUpperCase() + criterion.slice(1)}" rows="2" class="w-full p-1 border rounded-md text-sm">${notes || ''}</textarea></div></div></div>`;
 
             const modalHTML = `
             <div id="barrier-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
                 <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-full overflow-y-auto">
-                     <div class="p-6 border-b flex justify-between items-center">
-                        <h2 id="barrier-modal-title" class="text-2xl font-bold text-red-cardinal">${isNew ? 'Add New' : 'Edit'} Barrier</h2>
-                        <input type="hidden" id="current-barrier-id" value="${barrierId || ''}">
-                    </div>
-                    <div id="barrier-form-container" class="p-6 space-y-4">
-                        <div>
-                            <label class="block font-semibold">Barrier</label>
-                            <textarea id="barrier-text-input" rows="2" class="w-full p-2 border rounded-md" placeholder="Describe the barrier...">${barrier.text}</textarea>
-                        </div>
-                        ${createSliderRow('importance', 'Importance', barrier.importance, barrier.notesImportance)}
-                        ${createSliderRow('addressability', 'Addressability', barrier.addressability, barrier.notesAddressability)}
-                        ${createSliderRow('frequency', 'Frequency', barrier.frequency, barrier.notesFrequency)}
-                        ${createSliderRow('equityImpact', 'Equity Impact', barrier.equityImpact, barrier.notesEquityImpact)}
-                    </div>
-                    <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
-                        <button onclick="closeModal('barrier-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
-                        <button onclick="saveBarrierDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">Save Details</button>
-                    </div>
+                     <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${isNew ? 'Add New' : 'Edit'} Barrier</h2></div>
+                     <div class="p-6 space-y-4">
+                         <input type="hidden" id="current-barrier-id" value="${barrierId || ''}">
+                         <div><label class="block font-semibold">Barrier</label><textarea id="barrier-text-input" rows="2" class="w-full p-2 border rounded-md" placeholder="Describe the barrier...">${barrier.text}</textarea></div>
+                         ${createSliderRow('importance', 'Importance', barrier.importance, barrier.notesImportance)}
+                         ${createSliderRow('addressability', 'Addressability', barrier.addressability, barrier.notesAddressability)}
+                         ${createSliderRow('frequency', 'Frequency', barrier.frequency, barrier.notesFrequency)}
+                         ${createSliderRow('equityImpact', 'Equity Impact', barrier.equityImpact, barrier.notesEquityImpact)}
+                     </div>
+                     <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
+                         <button onclick="closeModal('barrier-modal')" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Cancel</button>
+                         <button onclick="saveBarrierDetails()" class="bg-brown-dark text-white font-bold py-2 px-4 rounded-lg">Save Details</button>
+                     </div>
                 </div>
             </div>`;
             document.getElementById('modal-container').innerHTML = modalHTML;
@@ -1049,22 +1032,10 @@
         function saveBarrierDetails() {
             const barrierId = document.getElementById('current-barrier-id').value;
             const isNew = barrierId === '';
-
-            let barrier;
-            if (isNew) {
-                barrier = { id: Date.now() };
-            } else {
-                barrier = projectData.barriers.find(b => b.id == barrierId);
-            }
-
+            let barrier = isNew ? { id: Date.now() } : projectData.barriers.find(b => b.id == barrierId);
             if (!barrier) return;
-
             barrier.text = document.getElementById('barrier-text-input').value;
-            if (!barrier.text.trim()) {
-                alert("Please enter a description for the barrier.");
-                return;
-            }
-            
+            if (!barrier.text.trim()) { alert("Please enter a description for the barrier."); return; }
             const criteria = ['importance', 'addressability', 'frequency', 'equityImpact'];
             criteria.forEach(c => {
                 const slider = document.querySelector(`input[name="${c}"]`);
@@ -1073,11 +1044,7 @@
                 const noteInput = document.querySelector(`textarea[name="${noteKey}"]`);
                 if (noteInput) { barrier[noteKey] = noteInput.value; }
             });
-
-            if (isNew) {
-                projectData.barriers.push(barrier);
-            }
-
+            if (isNew) projectData.barriers.push(barrier);
             closeModal('barrier-modal');
             renderBarrierList();
             renderBarrierPlot();
@@ -1087,7 +1054,6 @@
         function renderStrategySelector(){ const container = document.getElementById('page-strategy-selector'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Strategy Selector</h1><div class="grid lg:grid-cols-3 gap-8"><div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Prioritized Barriers</h3><p class="text-sm text-gray-600 mb-4">Barriers from the 'High Priority' quadrant appear here. Select one to see relevant strategies.</p><div id="selector-barrier-list" class="space-y-2"></div></div><div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-red-cardinal mb-4">Suggested Strategies (ERIC)</h3><div id="strategy-list" class="space-y-4"></div></div></div>`; const e=document.getElementById("selector-barrier-list"); const highPriorityBarriers = projectData.barriers.filter(b => b.importance >= 50 && b.addressability >= 50); if(e){ if(highPriorityBarriers.length === 0){e.innerHTML='<p class="text-sm text-gray-500">No high-priority barriers identified. Use the Barrier Prioritizer tool first.</p>',document.getElementById("strategy-list").innerHTML=""}else{e.innerHTML=highPriorityBarriers.map(b=>`<div class="p-2 border rounded-md cursor-pointer hover:bg-gold-light/20" onclick="selectBarrierForStrategies(this, '${b.text}')">${b.text}</div>`).join(""),selectBarrierForStrategies(e.querySelector('div'), highPriorityBarriers[0].text)}} }
         window.selectBarrierForStrategies=(e,t)=>{document.querySelectorAll("#selector-barrier-list > div").forEach(e=>e.classList.remove("bg-gold-light/50","border-red-cardinal")),e.classList.add("bg-gold-light/50","border-red-cardinal");const n=document.getElementById("strategy-list");let o=[];const a=ericStrategiesData.reduce((e,t)=>(e[t.domain]?e[t.domain].push(t.name):e[t.domain]=[t.name],e),{});t.toLowerCase().includes("cultur")||t.toLowerCase().includes("content")?o=a["Adapt and Tailor to the Context"].concat(a["Engage Consumers"]):t.toLowerCase().includes("engag")||t.toLowerCase().includes("fatigue")?o=a["Use Evaluative and Iterative Strategies"].concat(a["Support Clinicians"]):t.toLowerCase().includes("knowledg")||t.toLowerCase().includes("train")?o=a["Train and Educate Stakeholders"]:t.toLowerCase().includes("resourc")||t.toLowerCase().includes("cost")?o=a["Develop and Organize Resources"]:o=[...a["Develop Stakeholder Interrelationships"],...a["Use Financial Strategies"]],n.innerHTML=o.map(e=>`<div class="p-3 bg-gray-50 rounded-md border">${e}</div>`).join("")};
         
-        // --- Causal Pathway Diagrammer (REBUILT) ---
         function renderCpdDiagrammer() {
             const container = document.getElementById('page-causal-pathway-diagrammer');
             container.innerHTML = `${createBackLink('tools')}
@@ -1101,26 +1067,19 @@
                     <div id="cpd-canvas-wrapper" class="canvas-container">
                         <svg id="cpd-canvas-svg"></svg>
                         <div class="zoom-controls">
-                             <button onclick="fitCpdView()" title="Fit to View" class="bg-gray-200 w-8 h-8 rounded-full font-bold flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                  <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"/>
-                                </svg>
-                            </button>
+                             <button onclick="fitCpdView()" title="Fit to View" class="bg-gray-200 w-8 h-8 rounded-full font-bold flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"/></svg></button>
                             <button onclick="cpdZoom.scaleBy(cpdSvg.transition().duration(250), 1.2)" title="Zoom In" class="bg-gray-200 w-8 h-8 rounded-full font-bold text-lg">+</button>
                             <button onclick="cpdZoom.scaleBy(cpdSvg.transition().duration(250), 0.8)" title="Zoom Out" class="bg-gray-200 w-8 h-8 rounded-full font-bold text-lg">-</button>
                         </div>
                         <button onclick="clearCpdCanvas()" class="clear-btn bg-gray-200 text-gray-700 font-bold py-1 px-3 rounded-lg text-sm">Clear</button>
                     </div>
                 </div>`;
-
             renderCpdPalette();
             initializeCpdCanvas();
             document.addEventListener('keydown', handleCpdKeyDown);
         }
 
-        function cleanupCpdListeners() {
-            document.removeEventListener('keydown', handleCpdKeyDown);
-        }
+        function cleanupCpdListeners() { document.removeEventListener('keydown', handleCpdKeyDown); }
         
         function deleteCpdNode(nodeId) {
             projectData.cpdNodes = projectData.cpdNodes.filter(n => n.id !== nodeId);
@@ -1133,21 +1092,18 @@
             if (document.getElementById('page-causal-pathway-diagrammer').classList.contains('hidden')) return;
             if (event.key === 'Delete' || event.key === 'Backspace') {
                 event.preventDefault();
-                if (selectedCpdNodeId) {
-                    deleteCpdNode(selectedCpdNodeId);
-                } else if (selectedCpdLinkId) {
+                if (selectedCpdNodeId) { deleteCpdNode(selectedCpdNodeId); } 
+                else if (selectedCpdLinkId) {
                     projectData.cpdConnections = projectData.cpdConnections.filter(l => l.id !== selectedCpdLinkId);
                     selectedCpdLinkId = null;
                     updateCpdDiagram();
                 }
             }
         }
-
+        
         function renderCpdPalette() {
             const palette = document.getElementById('cpd-palette');
-            palette.innerHTML = Object.entries(cpdNodeTypes).map(([type, {label}]) =>
-                `<button class="cpd-tool-btn" onclick="addCpdNode('${type}')" title="${cpdLearningModules[type]?.definition || ''}">${label}</button>`
-            ).join('');
+            palette.innerHTML = Object.entries(cpdNodeTypes).map(([type, {label}]) => `<button class="cpd-tool-btn" onclick="addCpdNode('${type}')" title="${cpdLearningModules[type]?.definition || ''}">${label}</button>`).join('');
         }
 
         function addCpdNode(type) {
@@ -1162,7 +1118,6 @@
         }
 
         function clearCpdCanvas() {
-            // A simple confirmation dialog. In a real app, a custom modal would be better.
             if (window.confirm("Are you sure you want to clear the entire canvas? This cannot be undone.")) {
                 projectData.cpdNodes = [];
                 projectData.cpdConnections = [];
@@ -1180,44 +1135,28 @@
             projectData.cpdNodes.forEach(d => {
                 const halfWidth = (d.width || cpdNodeTypes[d.type].width) / 2;
                 const halfHeight = (d.height || cpdNodeTypes[d.type].height) / 2;
-                minX = Math.min(minX, d.x - halfWidth);
-                minY = Math.min(minY, d.y - halfHeight);
-                maxX = Math.max(maxX, d.x + halfWidth);
-                maxY = Math.max(maxY, d.y + halfHeight);
+                minX = Math.min(minX, d.x - halfWidth); minY = Math.min(minY, d.y - halfHeight);
+                maxX = Math.max(maxX, d.x + halfWidth); maxY = Math.max(maxY, d.y + halfHeight);
             });
 
             if (!isFinite(minX)) return;
-
             const padding = 80;
             const viewBoxWidth = (maxX - minX) + padding;
             const viewBoxHeight = (maxY - minY) + padding;
             const scale = Math.min(svgWidth / viewBoxWidth, svgHeight / viewBoxHeight, 1.5);
-            const transform = d3.zoomIdentity
-                .translate(svgWidth / 2, svgHeight / 2)
-                .scale(scale)
-                .translate(-(minX + (maxX - minX) / 2), -(minY + (maxY - minY) / 2));
+            const transform = d3.zoomIdentity.translate(svgWidth / 2, svgHeight / 2).scale(scale).translate(-(minX + (maxX - minX) / 2), -(minY + (maxY - minY) / 2));
             cpdSvg.transition().duration(750).call(cpdZoom.transform, transform);
         }
 
         function initializeCpdCanvas() {
             cpdSvg = d3.select("#cpd-canvas-svg");
-            cpdSvg.html(`<defs>
-                <marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--brown-dark)"></path></marker>
-                <marker id="arrow-hover" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker>
-                <marker id="arrow-selected" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker>
-            </defs>`);
-
+            cpdSvg.html(`<defs><marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--brown-dark)"></path></marker><marker id="arrow-hover" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker><marker id="arrow-selected" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,-5L10,0L0,5" fill="var(--red-cardinal)"></path></marker></defs>`);
             cpdG = cpdSvg.append("g");
             cpdG.append("g").attr("class", "links");
             cpdG.append("g").attr("class", "nodes");
-            
             cpdZoom = d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => cpdG.attr("transform", event.transform));
             cpdSvg.call(cpdZoom).on("dblclick.zoom", null);
-            
-            cpdSvg.on('click', (event) => {
-                 if (event.target === cpdSvg.node()) { deselectAllCpdElements(); }
-            });
-
+            cpdSvg.on('click', (event) => { if (event.target === cpdSvg.node()) { deselectAllCpdElements(); } });
             updateCpdDiagram();
             setTimeout(fitCpdView, 100);
         }
@@ -1230,72 +1169,34 @@
 
         function updateCpdDiagram() {
             if (!cpdG) return;
-            
-            // Ensure all connections have a unique ID
-            projectData.cpdConnections.forEach(l => {
-                if (!l.id) l.id = `link-${l.source}-${l.target}-${Math.random()}`;
-            });
-
-            // --- LINKS ---
+            projectData.cpdConnections.forEach(l => { if (!l.id) l.id = `link-${l.source}-${l.target}-${Math.random()}`; });
             const link = cpdG.select(".links").selectAll(".cpd-link-group").data(projectData.cpdConnections, d => d.id);
             link.exit().remove();
-            
             const linkEnter = link.enter().append("g").attr("class", "cpd-link-group");
             linkEnter.append("path").attr("class", "cpd-link");
             linkEnter.append("path").attr("class", "cpd-link-hitbox");
-            
             const linkUpdate = link.merge(linkEnter);
-            linkUpdate.on("click", function (event, d) {
-                event.stopPropagation();
-                deselectAllCpdElements();
-                selectedCpdLinkId = d.id;
-                d3.select(this).classed('selected', true);
-            });
-            
-            // --- NODES ---
+            linkUpdate.on("click", function (event, d) { event.stopPropagation(); deselectAllCpdElements(); selectedCpdLinkId = d.id; d3.select(this).classed('selected', true); });
             const node = cpdG.select(".nodes").selectAll(".cpd-node").data(projectData.cpdNodes, d => d.id);
             node.exit().remove();
-            
-            const nodeEnter = node.enter().append("g")
-                .attr("class", "cpd-node")
-                .on('click', function(event, d) {
-                    event.stopPropagation();
-                    deselectAllCpdElements();
-                    selectedCpdNodeId = d.id;
-                    d3.select(this).classed('selected', true);
-                }).on('dblclick', (event, d) => {
-                    // FIX: Make text editing work
-                    event.stopPropagation();
-                    const newText = prompt("Edit element text:", d.text);
-                    if (newText !== null) { // Allow empty text
-                        d.text = newText;
-                        updateCpdDiagram();
-                    }
-                });
-
+            const nodeEnter = node.enter().append("g").attr("class", "cpd-node")
+                .on('click', function(event, d) { event.stopPropagation(); deselectAllCpdElements(); selectedCpdNodeId = d.id; d3.select(this).classed('selected', true); })
+                .on('dblclick', (event, d) => { event.stopPropagation(); const newText = prompt("Edit element text:", d.text); if (newText !== null) { d.text = newText; updateCpdDiagram(); } });
             nodeEnter.append("path").attr("class", "cpd-node-shape");
             nodeEnter.append("text").attr("class", "cpd-node-text");
-            const deleteBtn = nodeEnter.append('g').attr('class', 'cpd-delete-btn')
-                .on('click', (event, d) => { event.stopPropagation(); deleteCpdNode(d.id); });
+            const deleteBtn = nodeEnter.append('g').attr('class', 'cpd-delete-btn').on('click', (event, d) => { event.stopPropagation(); deleteCpdNode(d.id); });
             deleteBtn.append('circle').attr('r', 9).attr('fill', 'var(--red-cardinal)').attr('stroke', 'white');
-            deleteBtn.append('text').attr('x', 0).attr('y', 0.5)
-                .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-                .attr('fill', 'white').style('font-size', '14px').style('font-weight', 'bold').text('×');
-
+            deleteBtn.append('text').attr('x', 0).attr('y', 0.5).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('fill', 'white').style('font-size', '14px').style('font-weight', 'bold').text('×');
             const allNodes = node.merge(nodeEnter);
             allNodes.attr('transform', d => `translate(${d.x},${d.y})`);
             allNodes.select(".cpd-node-shape").attr("d", d => getNodePath(d));
             allNodes.select(".cpd-delete-btn").attr('transform', d => `translate(${d.width/2}, ${-d.height/2})`);
             allNodes.select(".cpd-node-text").each(function(d) {
-                    const text = d3.select(this);
-                    text.selectAll("tspan").remove();
-                    const lines = wrapText(d.text, d.width);
-                    lines.forEach((line, i) => {
-                        text.append("tspan").attr("x", 0).attr("dy", i === 0 ? `-${(lines.length-1)*0.6}em` : '1.2em').text(line);
-                    });
-                });
-
-            // --- DRAG BEHAVIOR (NO SIMULATION) ---
+                const text = d3.select(this);
+                text.selectAll("tspan").remove();
+                const lines = wrapText(d.text, d.width);
+                lines.forEach((line, i) => { text.append("tspan").attr("x", 0).attr("dy", i === 0 ? `-${(lines.length-1)*0.6}em` : '1.2em').text(line); });
+            });
             let dragStartNode = null;
             let tempLinkPath = null;
             allNodes.call(d3.drag()
@@ -1303,12 +1204,8 @@
                     d3.select(this).raise();
                     if (event.sourceEvent.shiftKey) {
                         dragStartNode = d;
-                        const startPoint = getAnchorPoint(d, 'right'); // Default start
-                        tempLinkPath = cpdG.select(".links").append("path")
-                            .attr("class", "cpd-link")
-                            .style("stroke-dasharray", "5, 5")
-                            .attr("marker-end", "url(#arrow)")
-                            .attr("d", `M${startPoint.x},${startPoint.y}L${startPoint.x},${startPoint.y}`);
+                        const startPoint = getAnchorPoint(d, 'right');
+                        tempLinkPath = cpdG.select(".links").append("path").attr("class", "cpd-link").style("stroke-dasharray", "5, 5").attr("marker-end", "url(#arrow)").attr("d", `M${startPoint.x},${startPoint.y}L${startPoint.x},${startPoint.y}`);
                     }
                 })
                 .on("drag", function(event, d) {
@@ -1316,31 +1213,24 @@
                         const startPoint = getAnchorPoint(dragStartNode, 'right');
                         tempLinkPath.attr("d", `M${startPoint.x},${startPoint.y}L${event.x},${event.y}`);
                     } else {
-                        d.x = event.x;
-                        d.y = event.y;
-                        updateCpdDiagram(); // Redraw everything on drag
+                        d.x = event.x; d.y = event.y;
+                        updateCpdDiagram();
                     }
                 })
                 .on("end", function(event, d) {
                     if (tempLinkPath) {
-                        tempLinkPath.remove();
-                        tempLinkPath = null;
+                        tempLinkPath.remove(); tempLinkPath = null;
                         const endNodeEl = event.sourceEvent.target.closest('.cpd-node');
                         if (endNodeEl) {
                             const endNode = d3.select(endNodeEl).datum();
                             if (endNode && endNode.id !== dragStartNode.id) {
                                 const linkExists = projectData.cpdConnections.some(l => (l.source === dragStartNode.id && l.target === endNode.id));
-                                if (!linkExists) {
-                                    projectData.cpdConnections.push({ source: dragStartNode.id, target: endNode.id });
-                                    updateCpdDiagram();
-                                }
+                                if (!linkExists) { projectData.cpdConnections.push({ source: dragStartNode.id, target: endNode.id }); updateCpdDiagram(); }
                             }
                         }
                     }
                     dragStartNode = null;
                 }));
-            
-            // --- REDRAW LINKS WITH NEW ANCHOR LOGIC ---
             linkUpdate.selectAll('.cpd-link, .cpd-link-hitbox').attr('d', d => {
                 const sourceNode = projectData.cpdNodes.find(n => n.id === d.source);
                 const targetNode = projectData.cpdNodes.find(n => n.id === d.target);
@@ -1351,18 +1241,11 @@
         }
         
         function getNodePath(node) {
-            const w = node.width, h = node.height;
-            const x = -w / 2, y = -h / 2;
-            const r = 12;
-
+            const w = node.width, h = node.height; const x = -w / 2, y = -h / 2; const r = 12;
             switch(cpdNodeTypes[node.type].shape) {
                 case 'rectangle': return `M${x+r},${y} h${w-2*r} a${r},${r} 0 0 1 ${r},${r} v${h-2*r} a${r},${r} 0 0 1 -${r},${r} h-${w-2*r} a${r},${r} 0 0 1 -${r},-${r} v-${h-2*r} a${r},${r} 0 0 1 ${r},-${r} z`;
                 case 'diamond': return `M0,${y} L${x+w},0 L0,${y+h} L${x},0 Z`;
-                case 'octagon': 
-                    const octSideRatio = 0.4142;
-                    const cornerX = w / 2 * octSideRatio;
-                    const cornerY = h / 2 * octSideRatio;
-                    return `M ${x+cornerX},${y} L ${x+w-cornerX},${y} L ${x+w},${y+cornerY} L ${x+w},${y+h-cornerY} L ${x+w-cornerX},${y+h} L ${x+cornerX},${y+h} L ${x},${y+h-cornerY} L ${x},${y+cornerY} Z`;
+                case 'octagon': const octSideRatio = 0.4142; const cornerX = w / 2 * octSideRatio; const cornerY = h / 2 * octSideRatio; return `M ${x+cornerX},${y} L ${x+w-cornerX},${y} L ${x+w},${y+cornerY} L ${x+w},${y+h-cornerY} L ${x+w-cornerX},${y+h} L ${x+cornerX},${y+h} L ${x},${y+h-cornerY} L ${x},${y+cornerY} Z`;
                 case 'ellipse': return `M${x},0 a${w/2},${h/2} 0 1,0 ${w},0 a${w/2},${h/2} 0 1,0 -${w},0`;
                 case 'square': return `M${x},${y} h${w} v${h} h-${w} z`;
                 case 'trapezoid': return `M${x},${y+h} l${w*0.15},-${h} h${w*0.7} l${w*0.15},${h} z`;
@@ -1376,62 +1259,31 @@
                 case 'bottom': return { x: node.x, y: node.y + node.height / 2 };
                 case 'left': return { x: node.x - node.width / 2, y: node.y };
                 case 'right': return { x: node.x + node.width / 2, y: node.y };
-                default: return { x: node.x, y: node.y }; // center
+                default: return { x: node.x, y: node.y };
             }
         }
 
         function getLinkEndPoints(source, target) {
             let startDir = 'right', endDir = 'left';
-
-            // Logic based on example diagram
-            if (source.type === 'moderator' || source.type === 'precondition') {
-                startDir = 'bottom';
-            }
-            if (target.type === 'moderator' || target.type === 'precondition') {
-                endDir = 'top';
-            }
-            if ((source.type === 'implementation_strategy' && target.type === 'moderator') ||
-                (source.type === 'moderator' && target.type === 'implementation_strategy')) {
-                startDir = 'top'; endDir = 'bottom';
-            }
-
-            // Default horizontal flow
-            if (source.x > target.x) {
-                [startDir, endDir] = ['left', 'right'];
-            }
-
-            // Special cases for vertical alignment
+            if (source.type === 'moderator' || source.type === 'precondition') { startDir = 'bottom'; }
+            if (target.type === 'moderator' || target.type === 'precondition') { endDir = 'top'; }
+            if ((source.type === 'implementation_strategy' && target.type === 'moderator') || (source.type === 'moderator' && target.type === 'implementation_strategy')) { startDir = 'top'; endDir = 'bottom'; }
+            if (source.x > target.x) { [startDir, endDir] = ['left', 'right']; }
             const verticalThreshold = 50;
-            if (Math.abs(source.x - target.x) < verticalThreshold) {
-                if (source.y < target.y) {
-                    [startDir, endDir] = ['bottom', 'top'];
-                } else {
-                    [startDir, endDir] = ['top', 'bottom'];
-                }
-            }
-
+            if (Math.abs(source.x - target.x) < verticalThreshold) { if (source.y < target.y) { [startDir, endDir] = ['bottom', 'top']; } else { [startDir, endDir] = ['top', 'bottom']; } }
             return { start: getAnchorPoint(source, startDir), end: getAnchorPoint(target, endDir) };
         }
 
         function wrapText(text, width) {
             if (!text) return [""];
-            const words = text.split(/\s+/).reverse();
-            let word;
-            const lines = [];
-            let line = [];
-            // FIX: Reduce maxWidth for better wrapping
+            const words = text.split(/\s+/).reverse(); let word; const lines = []; let line = [];
             const maxWidth = width * 0.8; 
             const svg = d3.select(document.createElementNS("http://www.w3.org/2000/svg", "svg"));
             const textEl = svg.append("text").attr("class", "cpd-node-text");
-            
             while (word = words.pop()) {
                 line.push(word);
                 textEl.text(line.join(" "));
-                if (textEl.node().getComputedTextLength() > maxWidth && line.length > 1) {
-                    line.pop();
-                    lines.push(line.join(" "));
-                    line = [word];
-                }
+                if (textEl.node().getComputedTextLength() > maxWidth && line.length > 1) { line.pop(); lines.push(line.join(" ")); line = [word]; }
             }
             lines.push(line.join(" "));
             return lines;
@@ -1446,16 +1298,12 @@
         function renderAdaptationLog() {
             const logContainer = document.getElementById("adaptation-log");
             if(!logContainer) return;
-            if(projectData.adaptations.length === 0) {
-                logContainer.innerHTML = '<p class="text-gray-500 text-center">No adaptations logged yet.</p>';
-            } else {
+            if(projectData.adaptations.length === 0) { logContainer.innerHTML = '<p class="text-gray-500 text-center">No adaptations logged yet.</p>'; } 
+            else {
                 logContainer.innerHTML = projectData.adaptations.map(e => `
                     <div class="p-4 bg-white rounded-lg shadow cursor-pointer hover:shadow-md" onclick="viewAdaptation(${e.id})">
                         <div class="flex justify-between items-start">
-                            <div>
-                                <p class="font-bold text-brown-dark">${adaptationFrameworks[e.framework].title}</p>
-                                <p class="text-sm text-gray-500">Logged on: ${new Date(e.date).toLocaleDateString()}</p>
-                            </div>
+                            <div><p class="font-bold text-brown-dark">${adaptationFrameworks[e.framework].title}</p><p class="text-sm text-gray-500">Logged on: ${new Date(e.date).toLocaleDateString()}</p></div>
                             <span class="text-sm text-red-cardinal">View Details</span>
                         </div>
                     </div>`).join('');
@@ -1465,56 +1313,36 @@
         function viewAdaptation(adaptationId) { openAdaptationModal(adaptationId); }
 
         function openAdaptationModal(adaptationId = null){
-            let adaptation = null;
-            if (adaptationId) {
-                adaptation = projectData.adaptations.find(a => a.id === adaptationId);
-            }
+            let adaptation = adaptationId ? projectData.adaptations.find(a => a.id === adaptationId) : null;
             const frameworkKey = adaptation ? adaptation.framework : 'frame';
             const framework = adaptationFrameworks[frameworkKey];
             const data = adaptation ? adaptation.data : {};
-
-            let formHTML = framework.sections.map(section => `
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold text-brown-dark border-b mb-2 pb-1">${section.name}</h3>
-                    <div class="space-y-3">${section.fields.map(field => {
-                        let value = data[field.label] || (field.type === 'date' ? new Date().toISOString().split('T')[0] : '');
-                        let inputHtml = "";
-                         if (field.id === 'what' || field.id === 'strategy') {
-                            const coreComponentOptions = projectData.ebp.coreComponents.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-                            const strategyOptions = (projectData.cpdNodes.filter(n => n.type === 'implementation_strategy').map(n => n.text) || []).map(s => `<option value="${s}">${s}</option>`).join('');
-                            const staticOptions = field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("");
-                            
-                            let finalOptions = '';
-                            if (field.id === 'what') finalOptions = `<optgroup label="General">${staticOptions}</optgroup><optgroup label="Core Components">${coreComponentOptions}</optgroup>`;
-                            else finalOptions = `<optgroup label="Defined Strategies">${strategyOptions}</optgroup>`;
-                            inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${finalOptions}</select>`;
-                        } else {
-                            switch(field.type){
-                                case "date": inputHtml = `<input type="date" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" value="${value}">`; break;
-                                case "select": inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("")}</select>`; break;
-                                case "textarea": inputHtml = `<textarea name="${field.label}" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}">${value}</textarea>`; break;
-                                default: inputHtml = `<input type="text" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}" value="${value}">`;
-                            }
-                        }
-                        return`<label class="block"><span class="text-sm font-medium">${field.label}</span>${inputHtml}</label>`
-                    }).join("")}</div>
-                </div>`).join("");
+            let formHTML = framework.sections.map(section => `<div class="mb-4"><h3 class="text-lg font-semibold text-brown-dark border-b mb-2 pb-1">${section.name}</h3><div class="space-y-3">${section.fields.map(field => {
+                let value = data[field.label] || (field.type === 'date' ? new Date().toISOString().split('T')[0] : '');
+                let inputHtml = "";
+                if (field.id === 'what' || field.id === 'strategy') {
+                    const coreComponentOptions = projectData.ebp.coreComponents.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+                    const strategyOptions = (projectData.cpdNodes.filter(n => n.type === 'implementation_strategy').map(n => n.text) || []).map(s => `<option value="${s}">${s}</option>`).join('');
+                    const staticOptions = field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("");
+                    let finalOptions = field.id === 'what' ? `<optgroup label="General">${staticOptions}</optgroup><optgroup label="Core Components">${coreComponentOptions}</optgroup>` : `<optgroup label="Defined Strategies">${strategyOptions}</optgroup>`;
+                    inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${finalOptions}</select>`;
+                } else {
+                    switch(field.type){
+                        case "date": inputHtml = `<input type="date" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" value="${value}">`; break;
+                        case "select": inputHtml = `<select name="${field.label}" class="w-full mt-1 p-2 border rounded-md">${field.options.map(opt => `<option value="${opt}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join("")}</select>`; break;
+                        case "textarea": inputHtml = `<textarea name="${field.label}" rows="3" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}">${value}</textarea>`; break;
+                        default: inputHtml = `<input type="text" name="${field.label}" class="w-full mt-1 p-2 border rounded-md" placeholder="${field.placeholder||""}" value="${value}">`;
+                    }
+                }
+                return`<label class="block"><span class="text-sm font-medium">${field.label}</span>${inputHtml}</label>`
+            }).join("")}</div></div>`).join("");
 
             const modalHTML = `
             <div id="adaptation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
                 <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-full overflow-y-auto">
-                    <div class="p-6 border-b flex justify-between items-center">
-                        <h2 id="adaptation-modal-title" class="text-2xl font-bold text-red-cardinal">${adaptationId ? 'View/Edit' : 'Log'} Adaptation</h2>
-                        <input type="hidden" id="current-adaptation-id" value="${adaptationId || ''}">
-                    </div>
+                    <div class="p-6 border-b"><h2 class="text-2xl font-bold text-red-cardinal">${adaptationId ? 'View/Edit' : 'Log'} Adaptation</h2></div>
                     <div class="p-6">
-                        <label class="block mb-4"><span class="font-semibold">Framework:</span>
-                            <select id="adaptation-framework-select" class="w-full mt-1 p-2 border rounded-md">
-                                <option value="frame" ${frameworkKey === 'frame' ? 'selected': ''}>FRAME</option>
-                                <option value="frame-is" ${frameworkKey === 'frame-is' ? 'selected': ''}>FRAME-IS</option>
-                                <option value="adapt-itt" ${frameworkKey === 'adapt-itt' ? 'selected': ''}>ADAPT-ITT</option>
-                            </select>
-                        </label>
+                        <label class="block mb-4"><span class="font-semibold">Framework:</span><select id="adaptation-framework-select" class="w-full mt-1 p-2 border rounded-md"><option value="frame" ${frameworkKey === 'frame' ? 'selected': ''}>FRAME</option><option value="frame-is" ${frameworkKey === 'frame-is' ? 'selected': ''}>FRAME-IS</option><option value="adapt-itt" ${frameworkKey === 'adapt-itt' ? 'selected': ''}>ADAPT-ITT</option></select></label>
                         <div id="adaptation-form-container"><form id="adaptation-form">${formHTML}</form></div>
                     </div>
                     <div class="p-4 bg-gray-50 border-t flex justify-end space-x-2">
@@ -1540,48 +1368,24 @@
             } else {
                 projectData.adaptations.push({ id: Date.now(), framework: frameworkKey, date: new Date().toISOString(), data: data });
             }
-            if (document.getElementById('page-adaptations-tracker').classList.contains('hidden') === false) { renderAdaptationLog(); }
-            if (document.getElementById('dashboard').classList.contains('hidden') === false) { updateDashboard(); }
+            if (!document.getElementById('page-adaptations-tracker').classList.contains('hidden')) { renderAdaptationLog(); }
+            if (!document.getElementById('dashboard').classList.contains('hidden')) { updateDashboard(); }
             closeModal('adaptation-modal');
         }
         
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) modal.remove();
-        }
+        function closeModal(modalId) { const modal = document.getElementById(modalId); if (modal) modal.remove(); }
 
         function renderOutcomeRepository(){ const container = document.getElementById('page-outcome-repository'); container.innerHTML = `${createBackLink('tools')}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Outcome Measures Repository</h1><div class="mb-6"><label class="font-semibold">Filter by Outcome (Proctor et al.):</label><select id="outcome-filter" class="w-full mt-1 p-2 border rounded-md"><option value="all">All Outcomes</option></select></div><div id="outcome-measures-list" class="space-y-4"></div>`; const e=document.getElementById("outcome-filter"),t=[...new Set(outcomeMeasures.map(e=>e.outcome))];e.innerHTML+='<option value="all">All Outcomes</option>'+t.map(e=>`<option value="${e}">${e}</option>`).join(""),e.addEventListener("change",renderOutcomeMeasures),renderOutcomeMeasures()}
-        function renderOutcomeMeasures(){const e=document.getElementById("outcome-filter").value,t=document.getElementById("outcome-measures-list"),n="all"===e?outcomeMeasures:outcomeMeasures.filter(t=>t.outcome===e);0===n.length?t.innerHTML='<p class="text-gray-500">No measures found for this outcome.</p>':t.innerHTML=n.map(e=>`<div class="p-4 border rounded-md bg-gray-50"><h3 class="font-bold text-brown-dark">${e.name}</h3><p class="text-sm text-red-cardinal">Outcome: ${e.outcome}</p><p class="text-sm mt-2">${e.description}</p></div>`).join("")}
+        function renderOutcomeMeasures(){const e=document.getElementById("outcome-filter").value,t=document.getElementById("outcome-measures-list"),n="all"===e?outcomeMeasures:outcomeMeasures.filter(t=>t.outcome===e);t.innerHTML=n.length===0?'<p class="text-gray-500">No measures found for this outcome.</p>':n.map(e=>`<div class="p-4 border rounded-md bg-gray-50"><h3 class="font-bold text-brown-dark">${e.name}</h3><p class="text-sm text-red-cardinal">Outcome: ${e.outcome}</p><p class="text-sm mt-2">${e.description}</p></div>`).join("")}
         
-        // --- Learn Page & Modules ---
         function renderLearnContent(){
             const container = document.getElementById("learn");
-            container.innerHTML = `
-            <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Hello, World!</h1>
-            <div id="learn-content" class="max-w-4xl mx-auto space-y-6">
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-2xl font-bold text-brown-dark mb-4">What is Implementation Science?</h2>
-                    <p class="text-gray-600">Implementation Science (IS) is the scientific study of methods to promote the systematic uptake of research findings and other evidence-based practices into routine practice to improve the quality and effectiveness of services. This field aims to close the "know-do gap."</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-2xl font-bold text-brown-dark mb-4">Core IS Concepts</h2>
-                    <div class="space-y-2">
-                        <details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Theories, Models, and Frameworks (TMFs)</summary><p class="mt-2 text-sm">TMFs provide structure for understanding implementation. <strong>Determinant Frameworks</strong> (like CFIR) help identify barriers. <strong>Process Models</strong> (like EPIS) guide the process. <strong>Evaluation Frameworks</strong> (like RE-AIM) help assess impact.</p><a onclick="showPage('page-tmf-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore TMFs &rarr;</a></details>
-                        <details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Implementation Strategies</summary><p class="mt-2 text-sm">These are the specific actions taken to enhance adoption and sustainment. The Expert Recommendations for Implementing Change (ERIC) project compiled 73 discrete strategies.</p><a onclick="showPage('page-eric-strategies', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore ERIC Strategies &rarr;</a></details>
-                        <details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Proctor's Research Outcomes</summary><p class="mt-2 text-sm">Implementation success is measured by a hierarchy of outcomes: Acceptability, Adoption, Appropriateness, Feasibility, Fidelity, Cost, Penetration, and Sustainability.</p><a onclick="showPage('page-proctor-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore Proctor's Framework &rarr;</a></details>
-                    </div>
-                </div>
-            </div>`;
+            container.innerHTML = `<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Learn Implementation Science</h1><div class="max-w-4xl mx-auto space-y-6"><div class="bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-brown-dark mb-4">What is Implementation Science?</h2><p class="text-gray-600">Implementation Science (IS) is the scientific study of methods to promote the systematic uptake of research findings and other evidence-based practices into routine practice to improve the quality and effectiveness of services. This field aims to close the "know-do gap."</p></div><div class="bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-brown-dark mb-4">Core IS Concepts</h2><div class="space-y-2"><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Theories, Models, and Frameworks (TMFs)</summary><p class="mt-2 text-sm">TMFs provide structure for understanding implementation. <strong>Determinant Frameworks</strong> (like CFIR) help identify barriers. <strong>Process Models</strong> (like EPIS) guide the process. <strong>Evaluation Frameworks</strong> (like RE-AIM) help assess impact.</p><a onclick="showPage('page-tmf-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore TMFs &rarr;</a></details><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Implementation Strategies</summary><p class="mt-2 text-sm">These are the specific actions taken to enhance adoption and sustainment. The Expert Recommendations for Implementing Change (ERIC) project compiled 73 discrete strategies.</p><a onclick="showPage('page-eric-strategies', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore ERIC Strategies &rarr;</a></details><details class="bg-gray-50 p-3 rounded-md"><summary class="font-semibold cursor-pointer">Proctor's Research Outcomes</summary><p class="mt-2 text-sm">Implementation success is measured by a hierarchy of outcomes: Acceptability, Adoption, Appropriateness, Feasibility, Fidelity, Cost, Penetration, and Sustainability.</p><a onclick="showPage('page-proctor-module', 'learn')" class="mt-4 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore Proctor's Framework &rarr;</a></details></div></div></div>`;
         }
 
         function renderEricStrategiesPage(fromPage) {
             const container = document.getElementById('page-eric-strategies');
-            container.innerHTML = `${createBackLink(fromPage)}
-                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">ERIC Implementation Strategies</h1>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <input type="text" id="eric-search" class="w-full p-2 border rounded-md mb-4" placeholder="Search strategies, definitions, or examples...">
-                    <div class="overflow-x-auto"><table id="eric-table" class="w-full text-left"><thead><tr class="border-b-2 border-gray-200"><th class="p-2" onclick="sortTable('eric-table', 0)">Strategy Name</th><th class="p-2" onclick="sortTable('eric-table', 1)">Domain</th><th class="p-2" onclick="sortTable('eric-table', 2)">Definition</th><th class="p-2">Example</th></tr></thead><tbody id="eric-table-body"></tbody></table></div>
-                </div>`;
+            container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">ERIC Implementation Strategies</h1><div class="bg-white p-6 rounded-lg shadow-lg"><input type="text" id="eric-search" class="w-full p-2 border rounded-md mb-4" placeholder="Search strategies..."><div class="overflow-x-auto"><table id="eric-table" class="w-full text-left"><thead><tr class="border-b-2 border-gray-200"><th class="p-2" onclick="sortTable('eric-table', 0)">Strategy Name</th><th class="p-2" onclick="sortTable('eric-table', 1)">Domain</th><th class="p-2" onclick="sortTable('eric-table', 2)">Definition</th><th class="p-2">Example</th></tr></thead><tbody id="eric-table-body"></tbody></table></div></div>`;
             const searchInput = document.getElementById('eric-search');
             searchInput.addEventListener('keyup', () => filterEricTable(searchInput.value));
             renderEricTable(ericStrategiesData);
@@ -1589,12 +1393,7 @@
         
         function filterEricTable(searchTerm) {
             const lowerCaseSearchTerm = searchTerm.toLowerCase();
-            const filteredData = ericStrategiesData.filter(s => 
-                s.name.toLowerCase().includes(lowerCaseSearchTerm) ||
-                s.domain.toLowerCase().includes(lowerCaseSearchTerm) ||
-                s.definition.toLowerCase().includes(lowerCaseSearchTerm) ||
-                s.example.toLowerCase().includes(lowerCaseSearchTerm)
-            );
+            const filteredData = ericStrategiesData.filter(s => s.name.toLowerCase().includes(lowerCaseSearchTerm) || s.domain.toLowerCase().includes(lowerCaseSearchTerm) || s.definition.toLowerCase().includes(lowerCaseSearchTerm) || s.example.toLowerCase().includes(lowerCaseSearchTerm));
             renderEricTable(filteredData);
         }
 
@@ -1607,8 +1406,7 @@
             const table = document.getElementById(tableId);
             let switching = true, dir = "asc", switchcount = 0;
             while (switching) {
-                switching = false;
-                const rows = table.rows;
+                switching = false; const rows = table.rows;
                 for (let i = 1; i < (rows.length - 1); i++) {
                     let shouldSwitch = false;
                     const x = rows[i].getElementsByTagName("TD")[colIndex];
@@ -1621,74 +1419,28 @@
             }
         }
 
-        function renderProctorModule(fromPage) {
-            const container = document.getElementById('page-proctor-module');
-            container.innerHTML = `${createBackLink(fromPage)}
-                <h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: Proctor's Implementation Outcomes</h1>
-                <div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Introduction</h2><p>In implementation science, it's critical to distinguish between the success of the <strong>implementation strategies</strong> and the effectiveness of the <strong>clinical or educational intervention</strong> itself. A brilliant intervention might fail if implemented poorly, and conversely, excellent implementation cannot save a flawed intervention. Dr. Enola Proctor's taxonomy provides a framework for conceptualizing and measuring these different facets of success. It encourages researchers and practitioners to measure outcomes at three levels: implementation, service, and client. This prevents the common mistake of conflating implementation failure with intervention failure and allows for a more precise understanding of what works, for whom, and under what conditions.</p></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">1. Implementation Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are the direct effects of the implementation strategies. They tell us how well the implementation process itself is going.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Acceptability:</strong> The perception among stakeholders that an intervention is agreeable, palatable, or satisfactory.</li><li><strong>Adoption:</strong> The intention, initial decision, or action to try or employ an innovation or evidence-based practice.</li><li><strong>Appropriateness:</strong> The perceived fit, relevance, or compatibility of the innovation for a given practice setting, provider, or consumer.</li><li><strong>Feasibility:</strong> The extent to which an evidence-based practice can be successfully used or carried out within a given agency or setting.</li><li><strong>Fidelity:</strong> The degree to which an intervention was implemented as it was prescribed in the original protocol or program model.</li><li><strong>Implementation Cost:</strong> The incremental costs incurred by the service system to implement an evidence-based practice.</li><li><strong>Penetration:</strong> The extent to which a practice or innovation is integrated within a service setting and its subsystems.</li><li><strong>Sustainability:</strong> The extent to which a newly implemented treatment is maintained or institutionalized within a service setting's ongoing, stable operations.</li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">2. Service Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are indicators of the quality of the service being delivered, which should be impacted by the implementation of the new intervention.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Efficiency:</strong> The ratio of outputs to inputs (e.g., cost per client served).</li><li><strong>Safety:</strong> The degree to which the service avoids harming the client.</li><li><strong>Effectiveness:</strong> The degree to which the service, when delivered in a real-world setting, achieves the desired outcomes.</li><li><strong>Equity:</strong> The degree to which the service is delivered without disparities based on personal characteristics like race, gender, or socioeconomic status.</li><li><strong>Patient-Centeredness:</strong> The degree to which the service is respectful of and responsive to individual patient preferences, needs, and values.</li><li><strong>Timeliness:</strong> The degree to which the service is provided to clients in a timely manner, reducing waits and harmful delays.</li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">3. Client Outcomes</h2><p class="text-sm text-gray-600 mb-3">These are the ultimate outcomes we hope to achieve for the individuals receiving the intervention. They are the "so what?" of our work.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Satisfaction:</strong> The client's level of contentment with the service received.</li><li><strong>Function:</strong> Changes in the client's ability to function in daily life (e.g., social, occupational, physical).</li><li><strong>Health Status:</strong> Changes in the client's health, including symptoms, morbidity, and mortality.</li></ul></div></div>`;
-        }
-
-        function renderTmfModule(fromPage) {
-            const container = document.getElementById('page-tmf-module');
-            container.innerHTML = `${createBackLink(fromPage)}
-                <h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: Theories, Models, & Frameworks (TMFs)</h1>
-                <div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Why use TMFs?</h2><p>TMFs are the intellectual scaffolding of implementation science. They help researchers and practitioners make sense of a complex process by providing a common language and a conceptual roadmap. They help to:</p><ul class="list-disc list-outside pl-5 mt-2 space-y-1"><li>Describe and/or guide the process of translating research into practice.</li><li>Understand and/or explain what influences implementation outcomes.</li><li>Evaluate implementation efforts.</li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">Types of TMFs</h2><div class="space-y-4"><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Determinant Frameworks</h3><p class="text-sm">Describe factors that influence implementation outcomes, such as barriers and facilitators. (e.g., <strong>CFIR</strong>)</p><a onclick="showPage('page-cfir-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore CFIR &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Process Models</h3><p class="text-sm">Describe and guide the process of implementation through stages or phases. (e.g., <strong>EPIS</strong>)</p><a onclick="showPage('page-epis-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore EPIS &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Evaluation Frameworks</h3><p class="text-sm">Specify aspects of implementation that should be evaluated to determine success. (e.g., <strong>Proctor's Outcomes</strong>)</p><a onclick="showPage('page-proctor-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore Proctor's Outcomes &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Classic/Implementation Theories</h3><p class="text-sm">Explain implementation phenomena, often focusing on mechanisms of change. (e.g., <strong>PARIHS</strong>)</p><a onclick="showPage('page-parihs-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore PARIHS &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Logic Models</h3><p class="text-sm">Visually represent the hypothesized causal pathway from strategies to outcomes. (e.g., <strong>IRLM</strong>)</p><a onclick="showPage('page-irlm-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore IRLM &rarr;</a></div></div></div></div>`;
-        }
-
+        function renderProctorModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: Proctor's Implementation Outcomes</h1><div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Introduction</h2><p>In implementation science, it's critical to distinguish between the success of the <strong>implementation strategies</strong> and the effectiveness of the <strong>clinical or educational intervention</strong> itself. A brilliant intervention might fail if implemented poorly, and conversely, excellent implementation cannot save a flawed intervention. Dr. Enola Proctor's taxonomy provides a framework for conceptualizing and measuring these different facets of success. It encourages researchers and practitioners to measure outcomes at three levels: implementation, service, and client. This prevents the common mistake of conflating implementation failure with intervention failure and allows for a more precise understanding of what works, for whom, and under what conditions.</p></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">1. Implementation Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are the direct effects of the implementation strategies. They tell us how well the implementation process itself is going.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Acceptability:</strong> The perception among stakeholders that an intervention is agreeable, palatable, or satisfactory.</li><li><strong>Adoption:</strong> The intention, initial decision, or action to try or employ an innovation or evidence-based practice.</li><li><strong>Appropriateness:</strong> The perceived fit, relevance, or compatibility of the innovation for a given practice setting, provider, or consumer.</li><li><strong>Feasibility:</strong> The extent to which an evidence-based practice can be successfully used or carried out within a given agency or setting.</li><li><strong>Fidelity:</strong> The degree to which an intervention was implemented as it was prescribed in the original protocol or program model.</li><li><strong>Implementation Cost:</strong> The incremental costs incurred by the service system to implement an evidence-based practice.</li><li><strong>Penetration:</strong> The extent to which a practice or innovation is integrated within a service setting and its subsystems.</li><li><strong>Sustainability:</strong> The extent to which a newly implemented treatment is maintained or institutionalized within a service setting's ongoing, stable operations.</li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">2. Service Outcomes</h2><p class="text-sm text-gray-600 mb-3">These outcomes are indicators of the quality of the service being delivered.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Efficiency, Safety, Effectiveness, Equity, Patient-Centeredness, Timeliness</strong></li></ul></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">3. Client Outcomes</h2><p class="text-sm text-gray-600 mb-3">These are the ultimate outcomes for individuals receiving the intervention.</p><ul class="list-disc list-outside pl-5 space-y-4"><li><strong>Satisfaction, Function, Health Status</strong></li></ul></div></div>`; }
+        function renderTmfModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">Learning Module: TMFs</h1><div class="space-y-6"><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-2">Why use TMFs?</h2><p>TMFs are the intellectual scaffolding of implementation science, providing a common language and conceptual roadmap to describe, understand, and evaluate the process of translating research into practice.</p></div><div class="bg-white p-6 rounded-lg shadow"><h2 class="text-xl font-bold text-red-cardinal mb-3">Types of TMFs</h2><div class="space-y-4"><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Determinant Frameworks</h3><p class="text-sm">Describe factors that influence implementation outcomes. (e.g., <strong>CFIR</strong>)</p><a onclick="showPage('page-cfir-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore CFIR &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Process Models</h3><p class="text-sm">Describe and guide the implementation process through stages. (e.g., <strong>EPIS</strong>)</p><a onclick="showPage('page-epis-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore EPIS &rarr;</a></div><div class="p-4 bg-gray-50 rounded-lg"><h3 class="font-bold">Logic Models</h3><p class="text-sm">Visually represent the hypothesized causal pathway. (e.g., <strong>IRLM</strong>)</p><a onclick="showPage('page-irlm-module', 'page-tmf-module')" class="mt-2 inline-block text-red-cardinal font-semibold hover:underline cursor-pointer">Explore IRLM &rarr;</a></div></div></div></div>`; }
         function renderCfirModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: CFIR</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Consolidated Framework for Implementation Research (CFIR)</strong> is a determinant framework that offers a comprehensive taxonomy of constructs likely to influence implementation. It's a "menu" of factors to consider when planning for implementation or explaining why an implementation was or was not successful.</p><p><strong>Key Use Case:</strong> Systematically identifying potential barriers and facilitators before a project begins.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open CFIR Worksheet Tool &rarr;</a></div>`; }
-        function renderEpisModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: EPIS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Exploration, Preparation, Implementation, Sustainment (EPIS)</strong> framework is a process model that describes the four common phases of an implementation project. It highlights how factors in the outer (system) and inner (organizational) contexts interact across these phases to influence outcomes.</p><p><strong>Key Use Case:</strong> Guiding the overall lifecycle of an implementation project from initial consideration to long-term sustainment.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open EPIS Worksheet Tool &rarr;</a></div>`; }
-        function renderParihsModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: PARIHS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Promoting Action on Research Implementation in Health Services (PARIHS)</strong> framework posits that successful implementation (SI) is a function of the interplay between three core elements: <strong>Evidence (E)</strong>, <strong>Context (C)</strong>, and <strong>Facilitation (F)</strong>. SI = f(E, C, F). It emphasizes that evidence alone is not enough; it must be considered in relation to the context and actively facilitated.</p><p><strong>Key Use Case:</strong> Diagnosing implementation challenges by assessing the strength and weaknesses of the evidence, context, and facilitation components.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open PARIHS Worksheet Tool &rarr;</a></div>`; }
-        function renderIrlmModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: IRLM</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Implementation Research Logic Model (IRLM)</strong> is a specialized logic model designed to help researchers clearly specify the hypothesized causal pathways in their projects. It links implementation strategies to the mechanisms through which they are expected to work, leading to implementation and clinical outcomes. It helps articulate the "how" and "why" of an implementation effort.</p><p><strong>Key Use Case:</strong> Planning an implementation research study and clearly articulating the theory of change.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open IRLM Tool &rarr;</a></div>`; }
+        function renderEpisModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: EPIS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Exploration, Preparation, Implementation, Sustainment (EPIS)</strong> framework is a process model that describes the four common phases of an implementation project. It highlights how factors in the outer (system) and inner (organizational) contexts interact across these phases to influence outcomes.</p><p><strong>Key Use Case:</strong> Guiding the overall lifecycle of an implementation project.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open EPIS Worksheet Tool &rarr;</a></div>`; }
+        function renderParihsModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: PARIHS</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Promoting Action on Research Implementation in Health Services (PARIHS)</strong> framework posits that successful implementation (SI) is a function of the interplay between <strong>Evidence (E)</strong>, <strong>Context (C)</strong>, and <strong>Facilitation (F)</strong>. It emphasizes that evidence alone is not enough; it must be considered in relation to the context and actively facilitated.</p><p><strong>Key Use Case:</strong> Diagnosing implementation challenges by assessing the E, C, and F components.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open PARIHS Worksheet Tool &rarr;</a></div>`; }
+        function renderIrlmModule(fromPage) { container.innerHTML = `${createBackLink(fromPage)}<h1 class="text-3xl font-bold text-brown-dark mb-6">TMF Deep Dive: IRLM</h1><div class="bg-white p-6 rounded-lg shadow space-y-4"><p>The <strong>Implementation Research Logic Model (IRLM)</strong> helps researchers specify the hypothesized causal pathways in their projects. It links strategies to mechanisms to outcomes, articulating the "how" and "why" of an implementation effort.</p><p><strong>Key Use Case:</strong> Planning an implementation study and articulating the theory of change.</p><a onclick="showPage('page-tmf-generator')" class="inline-block bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Open IRLM Tool &rarr;</a></div>`; }
 
-        // --- Dashboard ---
         function updateDashboard(){
             const container = document.getElementById('dashboard');
             const highPriorityBarriers = projectData.barriers.filter(b => b.importance >= 50 && b.addressability >= 50).length;
-            container.innerHTML = `
-                <h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Project Dashboard</h1>
-                <div id="dashboard-summary" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Actors Mapped</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.ecosystemActors.length}</p></div>
-                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Barriers Identified</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.barriers.length}</p></div>
-                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">High-Priority Barriers</h3><p class="text-3xl font-bold text-red-cardinal">${highPriorityBarriers}</p></div>
-                    <div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Adaptations Logged</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.adaptations.length}</p></div>
-                </div>
-                <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Barrier Prioritization Overview</h2>
-                    <div id="dashboard-barrier-chart" class="w-full h-64"></div>
-                </div>
-                 <div class="mt-8 bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-2xl font-bold text-red-cardinal mb-4">Adaptation Log Summary</h2>
-                    <div id="dashboard-adaptation-log"></div>
-                </div>`;
-
+            container.innerHTML = `<h1 class="text-4xl font-bold text-center text-brown-dark mb-10">Project Dashboard</h1><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Actors Mapped</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.ecosystemActors.length}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Barriers Identified</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.barriers.length}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">High-Priority Barriers</h3><p class="text-3xl font-bold text-red-cardinal">${highPriorityBarriers}</p></div><div class="bg-white p-4 rounded-lg shadow"><h3 class="font-semibold text-gray-500">Adaptations Logged</h3><p class="text-3xl font-bold text-red-cardinal">${projectData.adaptations.length}</p></div></div><div class="mt-8 bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-red-cardinal mb-4">Barrier Prioritization Overview</h2><div id="dashboard-barrier-chart" class="w-full h-64"></div></div><div class="mt-8 bg-white p-6 rounded-lg shadow-lg"><h2 class="text-2xl font-bold text-red-cardinal mb-4">Adaptation Log Summary</h2><div id="dashboard-adaptation-log"></div></div>`;
             const barrierChartContainer = document.getElementById("dashboard-barrier-chart");
             if(barrierChartContainer) {
-                const chartData = [
-                    { quadrant: "High Priority", count: highPriorityBarriers },
-                    { quadrant: "Target for Innovation", count: projectData.barriers.filter(b => b.importance >= 50 && b.addressability < 50).length },
-                    { quadrant: "Strategic Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability >= 50).length },
-                    { quadrant: "Low Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability < 50).length }
-                ];
-                const width = barrierChartContainer.getBoundingClientRect().width;
-                const height = barrierChartContainer.getBoundingClientRect().height;
+                const chartData = [{ quadrant: "High Priority", count: highPriorityBarriers }, { quadrant: "Target for Innovation", count: projectData.barriers.filter(b => b.importance >= 50 && b.addressability < 50).length }, { quadrant: "Strategic Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability >= 50).length }, { quadrant: "Low Priority", count: projectData.barriers.filter(b => b.importance < 50 && b.addressability < 50).length }];
+                const {width, height} = barrierChartContainer.getBoundingClientRect();
                 const radius = Math.min(width, height) / 2 - 20;
-                
-                const svg = d3.select(barrierChartContainer).append("svg").attr("width", width).attr("height", height)
-                    .append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
-                
+                const svg = d3.select(barrierChartContainer).append("svg").attr("width", width).attr("height", height).append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
                 const color = d3.scaleOrdinal().domain(chartData.map(d => d.quadrant)).range(["#166534", "#9f1239", "#854d0e", "#475569"]);
                 const pie = d3.pie().value(d => d.count).sort(null);
                 const data_ready = pie(chartData);
-                
-                svg.selectAll('path').data(data_ready).enter().append('path')
-                    .attr('d', d3.arc().innerRadius(radius * 0.5).outerRadius(radius))
-                    .attr('fill', d => color(d.data.quadrant))
-                    .attr("stroke", "white").style("stroke-width", "2px");
-                
-                svg.selectAll('text').data(data_ready).enter().append('text')
-                    .text(d => d.data.count > 0 ? `${d.data.count}` : "")
-                    .attr("transform", d => `translate(${d3.arc().innerRadius(radius).outerRadius(radius).centroid(d)})`)
-                    .style("text-anchor", "middle").style("font-size", "12px").style("fill", "white").style("font-weight", "bold");
+                svg.selectAll('path').data(data_ready).enter().append('path').attr('d', d3.arc().innerRadius(radius * 0.5).outerRadius(radius)).attr('fill', d => color(d.data.quadrant)).attr("stroke", "white").style("stroke-width", "2px");
+                svg.selectAll('text').data(data_ready).enter().append('text').text(d => d.data.count > 0 ? `${d.data.count}` : "").attr("transform", d => `translate(${d3.arc().innerRadius(radius).outerRadius(radius).centroid(d)})`).style("text-anchor", "middle").style("font-size", "12px").style("fill", "white").style("font-weight", "bold");
             }
             renderAdaptationLogForDashboard();
         }
@@ -1696,31 +1448,13 @@
         function renderAdaptationLogForDashboard() {
             const container = document.getElementById('dashboard-adaptation-log');
             if (!container) return;
-            if (projectData.adaptations.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 text-center">No adaptations have been logged yet.</p>';
-            } else {
-                container.innerHTML = `<div class="space-y-4">${projectData.adaptations.map(adapt => `
-                            <div class="p-4 bg-gray-50 rounded-lg border cursor-pointer hover:bg-gray-100" onclick="viewAdaptation(${adapt.id})">
-                                <p class="font-bold text-brown-dark">${adaptationFrameworks[adapt.framework].title} Adaptation on ${new Date(adapt.date).toLocaleDateString()}</p>
-                                <ul class="mt-2 text-sm list-disc list-outside pl-5 space-y-1 text-gray-600">
-                                    <li><strong>Modification:</strong> ${adapt.data['Nature of the content modification'] || adapt.data['What was modified for the implementation strategy?'] || 'Details not specified.'}</li>
-                                    <li><strong>Reason:</strong> ${adapt.data['What were the reasons for the modification?'] || adapt.data['What were the reasons for the implementation strategy modification?'] || 'Details not specified.'}</li>
-                                </ul>
-                            </div>`).join('')}</div>`;
-            }
+            container.innerHTML = projectData.adaptations.length === 0 ? '<p class="text-gray-500 text-center">No adaptations have been logged yet.</p>' : `<div class="space-y-4">${projectData.adaptations.map(adapt => `<div class="p-4 bg-gray-50 rounded-lg border cursor-pointer hover:bg-gray-100" onclick="viewAdaptation(${adapt.id})"><p class="font-bold text-brown-dark">${adaptationFrameworks[adapt.framework].title} Adaptation on ${new Date(adapt.date).toLocaleDateString()}</p><ul class="mt-2 text-sm list-disc list-outside pl-5 space-y-1 text-gray-600"><li><strong>Modification:</strong> ${adapt.data['Nature of the content modification'] || adapt.data['What was modified for the implementation strategy?'] || 'Details not specified.'}</li><li><strong>Reason:</strong> ${adapt.data['What were the reasons for the modification?'] || adapt.data['What were the reasons for the implementation strategy modification?'] || 'Details not specified.'}</li></ul></div>`).join('')}</div>`;
         }
 
-        // --- Fidelity Planner ---
         function renderFidelityPlanner() {
             const container = document.getElementById('page-fidelity-planner');
             if (!container) return;
-            container.innerHTML = `${createBackLink('tools')}
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-3xl font-bold text-brown-dark mb-2">Fidelity Plan</h3>
-                    <p class="text-gray-600 mb-6">Specify the core components of the EBP and plan how to measure if they are delivered as intended. Fidelity is the degree to which an intervention is implemented as prescribed by the original protocol.</p>
-                    <div id="fidelity-plan-container" class="space-y-4"></div>
-                    <div class="mt-6"><button onclick="addNewCoreComponent()" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add Core Component</button></div>
-                </div>`;
+            container.innerHTML = `${createBackLink('tools')}<div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-3xl font-bold text-brown-dark mb-2">Fidelity Plan</h3><p class="text-gray-600 mb-6">Specify the core components of the EBP and plan how to measure if they are delivered as intended.</p><div id="fidelity-plan-container" class="space-y-4"></div><div class="mt-6"><button onclick="addNewCoreComponent()" class="bg-red-cardinal text-white font-bold py-2 px-4 rounded-lg">Add Core Component</button></div></div>`;
             renderFidelityComponentRows();
         }
 
@@ -1728,36 +1462,12 @@
             const container = document.getElementById('fidelity-plan-container');
             if (!container) return;
             container.innerHTML = ''; 
-            if (!projectData.ebp.coreComponents || projectData.ebp.coreComponents.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center py-4">No core components defined yet. Click "Add Core Component" to start.</p>`;
-                return;
-            }
+            if (!projectData.ebp.coreComponents || projectData.ebp.coreComponents.length === 0) { container.innerHTML = `<p class="text-gray-500 text-center py-4">No core components defined yet. Click "Add Core Component" to start.</p>`; return; }
             const fidelityDimensions = ["Adherence", "Dose", "Quality", "Participant Responsiveness", "Program Differentiation"];
             projectData.ebp.coreComponents.forEach(component => {
                 const componentEl = document.createElement('details');
                 componentEl.className = 'fidelity-component-row';
-                componentEl.innerHTML = `
-                    <summary>
-                        <div class="summary-grid">
-                            <div>
-                                <input type="text" class="text-lg font-semibold text-brown-dark bg-transparent w-full focus:outline-none" value="${component.name}" data-id="${component.id}" data-field="name" placeholder="Core Component Name">
-                                <div class="summary-details">
-                                    <div><strong>Function:</strong> <span class="func-display">${component.func || 'Not set'}</span></div>
-                                    <div><strong>Dimension:</strong> <span class="dim-display">${component.dimension || 'Not set'}</span></div>
-                                    <div><strong>Target:</strong> <span class="target-display">${component.target || 'Not set'}</span></div>
-                                </div>
-                            </div>
-                            <button onclick="event.stopPropagation(); deleteCoreComponent(${component.id}, 'page-fidelity-planner')" class="text-red-cardinal hover:text-red-800 font-bold text-xl">&times;</button>
-                        </div>
-                    </summary>
-                    <div class="details-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="block text-sm font-medium text-gray-700">Core Function</label><textarea rows="3" class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="func" placeholder="The purpose or 'active ingredient' of this component.">${component.func}</textarea></div>
-                            <div><label class="block text-sm font-medium text-gray-700">Fidelity Dimension</label><select class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="dimension"><option value="">Select Dimension...</option>${fidelityDimensions.map(d => `<option value="${d}" ${component.dimension === d ? 'selected' : ''}>${d}</option>`).join('')}</select></div>
-                            <div><label class="block text-sm font-medium text-gray-700">Measurement Method</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.measurement}" data-id="${component.id}" data-field="measurement" placeholder="e.g., Checklist, Observation"></div>
-                            <div><label class="block text-sm font-medium text-gray-700">Fidelity Target</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.target}" data-id="${component.id}" data-field="target" placeholder="e.g., >90% of steps completed"></div>
-                        </div>
-                    </div>`;
+                componentEl.innerHTML = `<summary><div class="summary-grid"><div><input type="text" class="text-lg font-semibold text-brown-dark bg-transparent w-full focus:outline-none summary-title" value="${component.name}" data-id="${component.id}" data-field="name" placeholder="Core Component Name"><div class="summary-details"><div><strong>Function:</strong> <span class="func-display">${component.func || 'Not set'}</span></div><div><strong>Dimension:</strong> <span class="dim-display">${component.dimension || 'Not set'}</span></div><div><strong>Target:</strong> <span class="target-display">${component.target || 'Not set'}</span></div></div></div><button onclick="event.stopPropagation(); deleteCoreComponent(${component.id}, 'page-fidelity-planner')" class="text-red-cardinal hover:text-red-800 font-bold text-xl">&times;</button></div></summary><div class="details-content"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block text-sm font-medium text-gray-700">Core Function</label><textarea rows="3" class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="func" placeholder="The purpose or 'active ingredient' of this component.">${component.func}</textarea></div><div><label class="block text-sm font-medium text-gray-700">Fidelity Dimension</label><select class="w-full mt-1 p-2 border rounded-md" data-id="${component.id}" data-field="dimension"><option value="">Select...</option>${fidelityDimensions.map(d => `<option value="${d}" ${component.dimension === d ? 'selected' : ''}>${d}</option>`).join('')}</select></div><div><label class="block text-sm font-medium text-gray-700">Measurement Method</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.measurement}" data-id="${component.id}" data-field="measurement" placeholder="e.g., Checklist, Observation"></div><div><label class="block text-sm font-medium text-gray-700">Fidelity Target</label><input type="text" class="w-full mt-1 p-2 border rounded-md" value="${component.target}" data-id="${component.id}" data-field="target" placeholder="e.g., >90% of steps completed"></div></div></div>`;
                 container.appendChild(componentEl);
             });
             container.querySelectorAll('input, textarea, select').forEach(input => {
